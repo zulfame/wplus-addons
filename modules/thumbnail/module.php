@@ -106,19 +106,12 @@ function wplus_addons_thumbnail_default_logo() {
 }
 
 /**
- * Load the scripts and styles on the Thumbnail page only.
+ * Font list for the scripts: CSS stack and the files to load.
  *
- * @param string $hook Admin page hook.
+ * @return array<string,array{stack:string,files:array<int,array{weight:string,url:string}>}>
  */
-function wplus_addons_thumbnail_assets( $hook ) {
-	if ( 'tools_page_wplus-thumbnail' !== $hook ) {
-		return;
-	}
-	$base = WPLUS_ADDONS_URL . 'modules/thumbnail/';
-	wp_enqueue_media();
-	wp_enqueue_style( 'wplus-addons-thumbnail', $base . 'assets/admin.css', array(), WPLUS_ADDONS_VERSION );
-	wp_enqueue_script( 'wplus-addons-thumbnail-renderer', $base . 'assets/renderer.js', array(), WPLUS_ADDONS_VERSION, true );
-	wp_enqueue_script( 'wplus-addons-thumbnail-admin', $base . 'assets/admin.js', array( 'wplus-addons-thumbnail-renderer', 'media-editor', 'wp-api-fetch' ), WPLUS_ADDONS_VERSION, true );
+function wplus_addons_thumbnail_font_config() {
+	$base  = WPLUS_ADDONS_URL . 'modules/thumbnail/';
 	$fonts = array();
 	foreach ( wplus_addons_thumbnail_fonts() as $key => $font ) {
 		$fonts[ $key ] = array(
@@ -134,27 +127,53 @@ function wplus_addons_thumbnail_assets( $hook ) {
 			),
 		);
 	}
+	return $fonts;
+}
+
+/**
+ * Starting values of the generator (every one can be changed on the page).
+ *
+ * @return array<string,string>
+ */
+function wplus_addons_thumbnail_defaults() {
+	return array(
+		'layout'      => 'minimal',
+		'align'       => 'left',
+		'title'       => __( '10 things I learned while doing nothing', 'wplus-addons' ),
+		'description' => __( 'A fun list of lessons from doing absolutely nothing.', 'wplus-addons' ),
+		'org'         => wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ),
+		'logo'        => wplus_addons_thumbnail_default_logo(),
+		'tag1'        => '',
+		'tag2'        => '',
+		'accent'      => '#2563eb',
+		'mode'        => 'light',
+		'font'        => 'dm-sans',
+		'ratio'       => '1200x630',
+		'format'      => 'webp',
+	);
+}
+
+/**
+ * Load the scripts and styles on the Thumbnail page only.
+ *
+ * @param string $hook Admin page hook.
+ */
+function wplus_addons_thumbnail_assets( $hook ) {
+	if ( 'tools_page_wplus-thumbnail' !== $hook ) {
+		return;
+	}
+	$base = WPLUS_ADDONS_URL . 'modules/thumbnail/';
+	wp_enqueue_media();
+	wp_enqueue_style( 'wplus-addons-thumbnail', $base . 'assets/admin.css', array(), WPLUS_ADDONS_VERSION );
+	wp_enqueue_script( 'wplus-addons-thumbnail-renderer', $base . 'assets/renderer.js', array(), WPLUS_ADDONS_VERSION, true );
+	wp_enqueue_script( 'wplus-addons-thumbnail-admin', $base . 'assets/admin.js', array( 'wplus-addons-thumbnail-renderer', 'media-editor', 'wp-api-fetch' ), WPLUS_ADDONS_VERSION, true );
 	wp_localize_script(
 		'wplus-addons-thumbnail-admin',
 		'wplusThumb',
 		array(
-			'fonts'    => $fonts,
+			'fonts'    => wplus_addons_thumbnail_font_config(),
 			'editUrl'  => admin_url( 'post.php' ),
-			'defaults' => array(
-				'layout'      => 'minimal',
-				'align'       => 'left',
-				'title'       => __( '10 things I learned while doing nothing', 'wplus-addons' ),
-				'description' => __( 'A fun list of lessons from doing absolutely nothing.', 'wplus-addons' ),
-				'org'         => wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ),
-				'logo'        => wplus_addons_thumbnail_default_logo(),
-				'tag1'        => '',
-				'tag2'        => '',
-				'accent'      => '#2563eb',
-				'mode'        => 'light',
-				'font'        => 'dm-sans',
-				'ratio'       => '1200x630',
-				'format'      => 'webp',
-			),
+			'defaults' => wplus_addons_thumbnail_defaults(),
 			'i18n'     => array(
 				'chooseLogo'   => __( 'Choose a logo', 'wplus-addons' ),
 				'useLogo'      => __( 'Use this logo', 'wplus-addons' ),
@@ -172,6 +191,75 @@ function wplus_addons_thumbnail_assets( $hook ) {
 	);
 }
 add_action( 'admin_enqueue_scripts', 'wplus_addons_thumbnail_assets' );
+
+/**
+ * The panel in the block editor sidebar (Post tab > Thumbnail), for post types that have a featured image.
+ */
+function wplus_addons_thumbnail_editor_assets() {
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+	if ( ! $screen || empty( $screen->post_type ) || ! post_type_supports( $screen->post_type, 'thumbnail' ) || ! current_user_can( 'upload_files' ) ) {
+		return;
+	}
+	$base = WPLUS_ADDONS_URL . 'modules/thumbnail/';
+	wp_enqueue_script( 'wplus-addons-thumbnail-renderer', $base . 'assets/renderer.js', array(), WPLUS_ADDONS_VERSION, true );
+	wp_enqueue_script(
+		'wplus-addons-thumbnail-editor',
+		$base . 'assets/editor.js',
+		array( 'wplus-addons-thumbnail-renderer', 'wp-plugins', 'wp-editor', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-data', 'wp-core-data', 'wp-api-fetch' ),
+		WPLUS_ADDONS_VERSION,
+		true
+	);
+	wp_localize_script(
+		'wplus-addons-thumbnail-editor',
+		'wplusThumbEditor',
+		array(
+			'fonts'    => wplus_addons_thumbnail_font_config(),
+			'defaults' => wplus_addons_thumbnail_defaults(),
+			'toolsUrl' => admin_url( 'tools.php?page=wplus-thumbnail' ),
+			'layouts'  => array(
+				array(
+					'value' => 'minimal',
+					'label' => __( 'Minimal (frame)', 'wplus-addons' ),
+				),
+				array(
+					'value' => 'dots',
+					'label' => __( 'Dots (3D ring)', 'wplus-addons' ),
+				),
+				array(
+					'value' => 'panel',
+					'label' => __( 'Panel', 'wplus-addons' ),
+				),
+			),
+			'modes'    => array(
+				array(
+					'value' => 'light',
+					'label' => __( 'Light', 'wplus-addons' ),
+				),
+				array(
+					'value' => 'dark',
+					'label' => __( 'Dark', 'wplus-addons' ),
+				),
+			),
+			'ratios'   => wplus_addons_thumbnail_ratios(),
+			'i18n'     => array(
+				'panel'        => __( 'Thumbnail', 'wplus-addons' ),
+				'layout'       => __( 'Layout', 'wplus-addons' ),
+				'mode'         => __( 'Mode', 'wplus-addons' ),
+				'ratio'        => __( 'Ratio', 'wplus-addons' ),
+				'color'        => __( 'Theme color', 'wplus-addons' ),
+				'make'         => __( 'Make the featured image', 'wplus-addons' ),
+				'replace'      => __( 'Replace the featured image', 'wplus-addons' ),
+				'working'      => __( 'Working…', 'wplus-addons' ),
+				'needTitle'    => __( 'Write a title first.', 'wplus-addons' ),
+				'done'         => __( 'The picture was saved and set as the featured image. Update the post to keep it.', 'wplus-addons' ),
+				'webpFallback' => __( 'This browser cannot make WebP, so a PNG was used.', 'wplus-addons' ),
+				'failed'       => __( 'The picture could not be made:', 'wplus-addons' ),
+				'more'         => __( 'More options (logo, font, alignment)', 'wplus-addons' ),
+			),
+		)
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'wplus_addons_thumbnail_editor_assets' );
 
 /**
  * One labelled form row.
