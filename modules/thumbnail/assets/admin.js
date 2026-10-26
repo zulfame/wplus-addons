@@ -152,25 +152,45 @@
 		return String( text || 'thumbnail' ).toLowerCase().replace( /[^a-z0-9]+/g, '-' ).replace( /^-+|-+$/g, '' ).slice( 0, 60 ) || 'thumbnail';
 	}
 
+	function download( blob, ext ) {
+		var url = URL.createObjectURL( blob );
+		var link = document.createElement( 'a' );
+		link.href = url;
+		link.download = slug( state.title ) + '-thumbnail.' + ext;
+		document.body.appendChild( link );
+		link.click();
+		document.body.removeChild( link );
+		setTimeout( function () {
+			URL.revokeObjectURL( url );
+		}, 1000 );
+	}
+
+	/* WebP is the default (lighter, better for page speed and SEO); a browser that cannot make it gets a PNG instead. */
 	function exportPicture() {
 		draw();
-		var type = 'webp' === state.format ? 'image/webp' : 'image/png';
+		var wantWebp = 'webp' === state.format;
 		canvas.toBlob( function ( blob ) {
-			if ( ! blob || blob.type !== type ) {
-				say( cfg.i18n.exportFail );
+			if ( blob && wantWebp && 'image/webp' === blob.type ) {
+				download( blob, 'webp' );
 				return;
 			}
-			var url = URL.createObjectURL( blob );
-			var link = document.createElement( 'a' );
-			link.href = url;
-			link.download = slug( state.title ) + '-thumbnail.' + ( 'webp' === state.format ? 'webp' : 'png' );
-			document.body.appendChild( link );
-			link.click();
-			document.body.removeChild( link );
-			setTimeout( function () {
-				URL.revokeObjectURL( url );
-			}, 1000 );
-		}, type, 0.92 );
+			if ( blob && ! wantWebp && 'image/png' === blob.type ) {
+				download( blob, 'png' );
+				return;
+			}
+			if ( wantWebp ) {
+				canvas.toBlob( function ( png ) {
+					if ( png ) {
+						say( cfg.i18n.webpFallback );
+						download( png, 'png' );
+					} else {
+						say( cfg.i18n.exportFail );
+					}
+				}, 'image/png' );
+				return;
+			}
+			say( cfg.i18n.exportFail );
+		}, wantWebp ? 'image/webp' : 'image/png', 0.9 );
 	}
 
 	fields.forEach( function ( k ) {

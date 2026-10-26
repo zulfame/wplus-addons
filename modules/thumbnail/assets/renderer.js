@@ -4,7 +4,7 @@
  * admin page now and by the editor panel later.
  *
  * WPlusThumb.render( canvas, options ) options:
- *   layout 'minimal' | 'panel', align 'left' | 'center' | 'right', mode 'light' | 'dark', accent '#rrggbb',
+ *   layout 'minimal' | 'dots' | 'panel', align 'left' | 'center' | 'right', mode 'light' | 'dark', accent '#rrggbb',
  *   width, height, title, description, org, logo (loaded Image or null), tag1, tag2, font (CSS font stack).
  */
 ( function ( global ) {
@@ -229,43 +229,98 @@
 		};
 	}
 
-	/* Layout "minimal": a soft tint of the accent colour, a thin frame, brand on top, text below. */
-	function layoutMinimal( ctx, o, p, u ) {
-		var W = o.width, H = o.height, pad = 72 * u;
+	/*
+	 * Dots made from a ring in 3D, tilted and partly outside the corner: the "Dots" layout background.
+	 * Far dots are small and faint, near dots larger and darker.
+	 */
+	function drawMesh( ctx, o, p, u, flip ) {
+		var W = o.width;
 		var dark = 'dark' === o.mode;
+		var cx = flip ? 70 * u : W - 70 * u, cy = 50 * u, R = 200 * u, r = 86 * u;
+		var ax = 1.05, ay = 0.55;
+		var cax = Math.cos( ax ), sax = Math.sin( ax ), cay = Math.cos( ay ), say = Math.sin( ay );
+		var pts = [];
+		var NU = 170, NV = 56, i, j;
+		for ( i = 0; i < NU; i++ ) {
+			var th = i / NU * Math.PI * 2;
+			for ( j = 0; j < NV; j++ ) {
+				var ph = j / NV * Math.PI * 2;
+				var x = ( R + r * Math.cos( ph ) ) * Math.cos( th );
+				var y = ( R + r * Math.cos( ph ) ) * Math.sin( th );
+				var z = r * Math.sin( ph );
+				var y1 = y * cax - z * sax, z1 = y * sax + z * cax;
+				var x2 = x * cay + z1 * say, z2 = -x * say + z1 * cay;
+				var persp = 900 * u / ( 900 * u - z2 );
+				pts.push( [ flip ? 2 * cx - ( cx + x2 * persp ) : cx + x2 * persp, cy + y1 * persp, z2 / ( R + r ) ] );
+			}
+		}
+		pts.sort( function ( m, n ) {
+			return m[ 2 ] - n[ 2 ];
+		} );
+		var ink = dark ? [ 205, 214, 235 ] : [ 38, 48, 68 ];
+		pts.forEach( function ( q ) {
+			if ( q[ 0 ] < -10 || q[ 0 ] > W + 10 || q[ 1 ] < -10 || q[ 1 ] > o.height + 10 ) {
+				return;
+			}
+			var depth = ( q[ 2 ] + 1 ) / 2;
+			ctx.fillStyle = rgba( ink, 0.18 + 0.7 * depth );
+			ctx.beginPath();
+			ctx.arc( q[ 0 ], q[ 1 ], ( 0.9 + 1.5 * depth ) * u, 0, Math.PI * 2 );
+			ctx.fill();
+		} );
+	}
+
+	/*
+	 * Layouts "minimal" (a thin frame; text sits on the frame lines) and "dots" (a 3D dotted ring in the corner):
+	 * a soft tint of the accent colour, brand on top, tags, title and description below.
+	 */
+	function layoutMinimal( ctx, o, p, u, variant ) {
+		var W = o.width, H = o.height;
+		var dark = 'dark' === o.mode;
+		var framed = 'dots' !== variant;
+		var left = framed ? W * 0.075 : 72 * u;
+		var right = W - left;
+		var topY = framed ? H * 0.134 + 14 * u : 72 * u;
+		var bottomY = framed ? H - H * 0.134 - 14 * u : H - 72 * u;
 		ctx.fillStyle = rgb( mix( p.bg, p.accent, dark ? 0.1 : 0.07 ) );
 		ctx.fillRect( 0, 0, W, H );
-		var glow = ctx.createRadialGradient( pad + 40 * u, pad, 0, pad + 40 * u, pad, 300 * u );
+		var flip = ! framed && 'right' === o.align; // the ring moves to the left when the text is right-aligned
+		var gx = flip ? right - 52 * u : left + 52 * u, gy = topY + 26 * u;
+		var glow = ctx.createRadialGradient( gx, gy, 0, gx, gy, 280 * u );
 		glow.addColorStop( 0, rgba( p.accent, dark ? 0.3 : 0.2 ) );
 		glow.addColorStop( 1, rgba( p.accent, 0 ) );
 		ctx.fillStyle = glow;
 		ctx.fillRect( 0, 0, W, H );
-		ctx.strokeStyle = rgba( p.accent, dark ? 0.2 : 0.12 );
-		ctx.lineWidth = 1.5 * u;
-		[ pad * 0.55, W - pad * 0.55 ].forEach( function ( x ) {
-			ctx.beginPath();
-			ctx.moveTo( x, 0 );
-			ctx.lineTo( x, H );
-			ctx.stroke();
-		} );
-		[ pad * 0.55, H - pad * 0.55 ].forEach( function ( y ) {
-			ctx.beginPath();
-			ctx.moveTo( 0, y );
-			ctx.lineTo( W, y );
-			ctx.stroke();
-		} );
+		if ( framed ) {
+			ctx.strokeStyle = rgba( p.accent, dark ? 0.22 : 0.13 );
+			ctx.lineWidth = 1.5 * u;
+			[ left, right ].forEach( function ( x ) {
+				ctx.beginPath();
+				ctx.moveTo( x, 0 );
+				ctx.lineTo( x, H );
+				ctx.stroke();
+			} );
+			[ H * 0.134, H - H * 0.134 ].forEach( function ( y ) {
+				ctx.beginPath();
+				ctx.moveTo( 0, y );
+				ctx.lineTo( W, y );
+				ctx.stroke();
+			} );
+		} else {
+			drawMesh( ctx, o, p, u, flip );
+		}
 
-		var left = pad, right = W - pad, maxW = right - left;
+		var maxW = framed ? right - left : Math.min( right - left, Math.round( W * 0.68 ) ); // text stays clear of the ring
 		var brandH = brandRow( ctx, o, u, 0, 0, false, maxW );
 		var brandX = anchorX( o.align, left, right, brandH.width );
 		if ( ! brandH.empty ) {
-			brandRow( ctx, o, u, brandX, pad + brandH.height / 2, true, maxW );
+			brandRow( ctx, o, u, brandX, topY + brandH.height / 2, true, maxW );
 		}
 
 		var tags = tagText( o );
 		var tagH = tags ? 26 * u : 0;
-		var top = pad + ( brandH.empty ? 0 : brandH.height + 28 * u );
-		var avail = H - pad - top;
+		var top = topY + ( brandH.empty ? 0 : brandH.height + 28 * u );
+		var avail = bottomY - top;
 		var c = compose( ctx, o, u, maxW, avail, { tMax: 76, tMin: 40, tLines: 3, lh: 1.14, dMax: 28, dMin: 22, dLines: 2, head: tags ? 50 : 0, dGap: 18 } );
 		var title = c.title, desc = c.desc, titleLH = c.titleLH, descLH = c.descLH;
 		var y = top + Math.max( 0, avail - c.height ) * 0.62;
@@ -403,7 +458,7 @@
 		if ( 'panel' === o.layout ) {
 			layoutPanel( ctx, o, p, u );
 		} else {
-			layoutMinimal( ctx, o, p, u );
+			layoutMinimal( ctx, o, p, u, o.layout );
 		}
 	}
 

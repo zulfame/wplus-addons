@@ -152,14 +152,15 @@ function wplus_addons_thumbnail_assets( $hook ) {
 				'mode'        => 'light',
 				'font'        => 'dm-sans',
 				'ratio'       => '1200x630',
-				'format'      => 'png',
+				'format'      => 'webp',
 			),
 			'i18n'     => array(
-				'chooseLogo' => __( 'Choose a logo', 'wplus-addons' ),
-				'useLogo'    => __( 'Use this logo', 'wplus-addons' ),
-				'noLogo'     => __( 'No logo', 'wplus-addons' ),
-				'logoFailed' => __( 'The logo could not be drawn. Choose a picture from the Media Library of this site.', 'wplus-addons' ),
-				'exportFail' => __( 'The picture could not be created. Try another format.', 'wplus-addons' ),
+				'chooseLogo'   => __( 'Choose a logo', 'wplus-addons' ),
+				'useLogo'      => __( 'Use this logo', 'wplus-addons' ),
+				'noLogo'       => __( 'No logo', 'wplus-addons' ),
+				'logoFailed'   => __( 'The logo could not be drawn. Choose a picture from the Media Library of this site.', 'wplus-addons' ),
+				'exportFail'   => __( 'The picture could not be created. Try another format.', 'wplus-addons' ),
+				'webpFallback' => __( 'This browser cannot make WebP, so the picture was saved as PNG.', 'wplus-addons' ),
 			),
 		)
 	);
@@ -213,7 +214,8 @@ function wplus_addons_thumbnail_render_page() {
 		wplus_addons_thumbnail_select(
 			'wpa-layout',
 			array(
-				'minimal' => __( 'Minimal', 'wplus-addons' ),
+				'minimal' => __( 'Minimal (frame)', 'wplus-addons' ),
+				'dots'    => __( 'Dots (3D ring)', 'wplus-addons' ),
 				'panel'   => __( 'Panel', 'wplus-addons' ),
 			)
 		),
@@ -264,8 +266,8 @@ function wplus_addons_thumbnail_render_page() {
 		wplus_addons_thumbnail_select(
 			'wpa-format',
 			array(
+				'webp' => __( 'WebP (lighter, good for SEO)', 'wplus-addons' ),
 				'png'  => 'PNG',
-				'webp' => 'WebP',
 			)
 		),
 		'half'
