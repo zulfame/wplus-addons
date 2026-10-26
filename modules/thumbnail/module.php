@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once __DIR__ . '/presets.php';
+
 /**
  * Add the page under Tools.
  */
@@ -136,7 +138,7 @@ function wplus_addons_thumbnail_font_config() {
  * @return array<string,string>
  */
 function wplus_addons_thumbnail_defaults() {
-	return array(
+	$base    = array(
 		'layout'      => 'minimal',
 		'align'       => 'left',
 		'title'       => __( '10 things I learned while doing nothing', 'wplus-addons' ),
@@ -145,12 +147,19 @@ function wplus_addons_thumbnail_defaults() {
 		'logo'        => wplus_addons_thumbnail_default_logo(),
 		'tag1'        => '',
 		'tag2'        => '',
-		'accent'      => '#2563eb',
+		'accent'      => wplus_addons_thumbnail_theme_accent(),
 		'mode'        => 'light',
 		'font'        => 'dm-sans',
 		'ratio'       => '1200x630',
 		'format'      => 'webp',
 	);
+	$presets = wplus_addons_thumbnail_presets();
+	foreach ( $presets['items'] as $item ) {
+		if ( $presets['default'] === $item['id'] ) {
+			return array_merge( $base, $item['settings'] );
+		}
+	}
+	return $base;
 }
 
 /**
@@ -171,10 +180,12 @@ function wplus_addons_thumbnail_assets( $hook ) {
 		'wplus-addons-thumbnail-admin',
 		'wplusThumb',
 		array(
-			'fonts'    => wplus_addons_thumbnail_font_config(),
-			'editUrl'  => admin_url( 'post.php' ),
-			'defaults' => wplus_addons_thumbnail_defaults(),
-			'i18n'     => array(
+			'fonts'     => wplus_addons_thumbnail_font_config(),
+			'editUrl'   => admin_url( 'post.php' ),
+			'defaults'  => wplus_addons_thumbnail_defaults(),
+			'presets'   => wplus_addons_thumbnail_presets(),
+			'canManage' => current_user_can( 'manage_options' ),
+			'i18n'      => array(
 				'chooseLogo'   => __( 'Choose a logo', 'wplus-addons' ),
 				'useLogo'      => __( 'Use this logo', 'wplus-addons' ),
 				'noLogo'       => __( 'No logo', 'wplus-addons' ),
@@ -186,6 +197,14 @@ function wplus_addons_thumbnail_assets( $hook ) {
 				'edit'         => __( 'Edit', 'wplus-addons' ),
 				'view'         => __( 'View', 'wplus-addons' ),
 				'saveFailed'   => __( 'The picture could not be saved:', 'wplus-addons' ),
+				'custom'       => __( '— Custom —', 'wplus-addons' ),
+				'defaultTag'   => __( '(default)', 'wplus-addons' ),
+				'needName'     => __( 'Give the preset a name first.', 'wplus-addons' ),
+				'presetSaved'  => __( 'Preset saved.', 'wplus-addons' ),
+				'presetGone'   => __( 'Preset deleted.', 'wplus-addons' ),
+				'presetFailed' => __( 'The preset could not be saved:', 'wplus-addons' ),
+				'tooMany'      => __( 'There are too many presets. Delete one first.', 'wplus-addons' ),
+				'confirmGone'  => __( 'Delete this preset?', 'wplus-addons' ),
 			),
 		)
 	);
@@ -215,6 +234,7 @@ function wplus_addons_thumbnail_editor_assets() {
 		array(
 			'fonts'    => wplus_addons_thumbnail_font_config(),
 			'defaults' => wplus_addons_thumbnail_defaults(),
+			'presets'  => wplus_addons_thumbnail_presets(),
 			'toolsUrl' => admin_url( 'tools.php?page=wplus-thumbnail' ),
 			'layouts'  => array(
 				array(
@@ -243,6 +263,9 @@ function wplus_addons_thumbnail_editor_assets() {
 			'ratios'   => wplus_addons_thumbnail_ratios(),
 			'i18n'     => array(
 				'panel'        => __( 'Thumbnail', 'wplus-addons' ),
+				'preset'       => __( 'Preset', 'wplus-addons' ),
+				'custom'       => __( '— Custom —', 'wplus-addons' ),
+				'defaultTag'   => __( '(default)', 'wplus-addons' ),
 				'layout'       => __( 'Layout', 'wplus-addons' ),
 				'mode'         => __( 'Mode', 'wplus-addons' ),
 				'ratio'        => __( 'Ratio', 'wplus-addons' ),
@@ -302,6 +325,14 @@ function wplus_addons_thumbnail_render_page() {
 	echo '<div class="wrap wpa-thumb"><h1>' . esc_html__( 'Thumbnail generator', 'wplus-addons' ) . '</h1>';
 	echo '<p class="description">' . esc_html__( 'Make a cover picture for a post. It is drawn in your browser; nothing is sent to another site.', 'wplus-addons' ) . '</p>';
 	echo '<div class="wpa-layout"><div class="wpa-form">';
+	wplus_addons_thumbnail_row( 'wpa-preset', __( 'Preset', 'wplus-addons' ), '<select id="wpa-preset"></select>' );
+	if ( current_user_can( 'manage_options' ) ) {
+		echo '<details class="wpa-field wpa-manage"><summary>' . esc_html__( 'Manage presets', 'wplus-addons' ) . '</summary>';
+		echo '<p class="description">' . esc_html__( 'A preset keeps the design choices (layout, alignment, color, mode, font, size, logo, organization), not the texts. Everyone who makes thumbnails on this site can use it.', 'wplus-addons' ) . '</p>';
+		echo '<p><input type="text" id="wpa-preset-name" class="widefat" maxlength="60" placeholder="' . esc_attr__( 'Preset name', 'wplus-addons' ) . '" /></p>';
+		echo '<p class="wpa-preset-buttons"><button type="button" class="button" id="wpa-preset-new">' . esc_html__( 'Save as new', 'wplus-addons' ) . '</button> <button type="button" class="button" id="wpa-preset-update">' . esc_html__( 'Update selected', 'wplus-addons' ) . '</button> <button type="button" class="button" id="wpa-preset-default">' . esc_html__( 'Make default', 'wplus-addons' ) . '</button> <button type="button" class="button-link button-link-delete" id="wpa-preset-delete">' . esc_html__( 'Delete', 'wplus-addons' ) . '</button></p>';
+		echo '</details>';
+	}
 	wplus_addons_thumbnail_row(
 		'wpa-layout',
 		__( 'Layout', 'wplus-addons' ),

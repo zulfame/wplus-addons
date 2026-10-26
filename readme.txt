@@ -24,3 +24,4 @@ Open Settings > WPlus Addons to switch each tool on or off. The plugin sends not
 * First skeleton: the settings page and the tool switches.
 * New: Tools > Thumbnail with live preview, WebP or PNG download and Save to Media Library.
 * New: Thumbnail panel in the post editor that sets the featured image.
+* New: presets shared by the site, with one as the starting point.

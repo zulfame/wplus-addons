@@ -248,6 +248,147 @@
 		el.addEventListener( 'change', change );
 	} );
 
+	/* ---------- presets: named design choices shared by the whole site ---------- */
+	var MAX_PRESETS = 20;
+	var presets = cfg.presets || { 'default': '', items: [] };
+	var presetSel = $( 'wpa-preset' );
+
+	function designOf() {
+		var design = {};
+		KEEP.forEach( function ( k ) {
+			design[ k ] = state[ k ];
+		} );
+		return design;
+	}
+
+	function findPreset( id ) {
+		return presets.items.filter( function ( p ) {
+			return p.id === id;
+		} )[ 0 ] || null;
+	}
+
+	function sameDesign( a, b ) {
+		return KEEP.every( function ( k ) {
+			return String( a[ k ] ) === String( b[ k ] );
+		} );
+	}
+
+	function renderPresets( selectedId ) {
+		presetSel.innerHTML = '';
+		var none = document.createElement( 'option' );
+		none.value = '';
+		none.textContent = cfg.i18n.custom;
+		presetSel.appendChild( none );
+		presets.items.forEach( function ( p ) {
+			var opt = document.createElement( 'option' );
+			opt.value = p.id;
+			opt.textContent = p.name + ( p.id === presets[ 'default' ] ? ' ' + cfg.i18n.defaultTag : '' );
+			presetSel.appendChild( opt );
+		} );
+		presetSel.value = findPreset( selectedId ) ? selectedId : '';
+		[ 'wpa-preset-update', 'wpa-preset-default', 'wpa-preset-delete' ].forEach( function ( id ) {
+			if ( $( id ) ) {
+				$( id ).disabled = ! presetSel.value;
+			}
+		} );
+	}
+
+	function savePresets( next, selectedId, doneText ) {
+		window.wp.apiFetch( { path: '/wp/v2/settings', method: 'POST', data: { wplus_addons_thumbnail_presets: next } } ).then( function ( response ) {
+			presets = response.wplus_addons_thumbnail_presets || next;
+			renderPresets( selectedId );
+			say( doneText );
+		} ).catch( function ( err ) {
+			say( cfg.i18n.presetFailed + ' ' + ( err && err.message ? err.message : '' ) );
+		} );
+	}
+
+	function presetCopy() {
+		return JSON.parse( JSON.stringify( presets ) );
+	}
+
+	function idFromName( name, taken ) {
+		var base = String( name ).toLowerCase().replace( /[^a-z0-9]+/g, '-' ).replace( /^-+|-+$/g, '' ).slice( 0, 36 ) || 'preset';
+		var id = base;
+		var n = 2;
+		while ( taken.indexOf( id ) >= 0 ) {
+			id = base + '-' + n++;
+		}
+		return id;
+	}
+
+	presetSel.addEventListener( 'change', function () {
+		var p = findPreset( presetSel.value );
+		if ( p ) {
+			apply( Object.assign( {}, state, p.settings ) );
+			change();
+		}
+		renderPresets( presetSel.value );
+	} );
+
+	if ( cfg.canManage && $( 'wpa-preset-new' ) ) {
+		$( 'wpa-preset-new' ).addEventListener( 'click', function () {
+			var name = $( 'wpa-preset-name' ).value.trim();
+			if ( ! name ) {
+				say( cfg.i18n.needName );
+				return;
+			}
+			if ( presets.items.length >= MAX_PRESETS ) {
+				say( cfg.i18n.tooMany );
+				return;
+			}
+			var next = presetCopy();
+			var id = idFromName( name, next.items.map( function ( p ) {
+				return p.id;
+			} ) );
+			next.items.push( { id: id, name: name, settings: designOf() } );
+			$( 'wpa-preset-name' ).value = '';
+			savePresets( next, id, cfg.i18n.presetSaved );
+		} );
+		$( 'wpa-preset-update' ).addEventListener( 'click', function () {
+			var next = presetCopy();
+			var id = presetSel.value;
+			var rename = $( 'wpa-preset-name' ).value.trim();
+			next.items.forEach( function ( p ) {
+				if ( p.id === id ) {
+					p.settings = designOf();
+					if ( rename ) {
+						p.name = rename;
+					}
+				}
+			} );
+			$( 'wpa-preset-name' ).value = '';
+			savePresets( next, id, cfg.i18n.presetSaved );
+		} );
+		$( 'wpa-preset-default' ).addEventListener( 'click', function () {
+			var next = presetCopy();
+			next[ 'default' ] = next[ 'default' ] === presetSel.value ? '' : presetSel.value;
+			savePresets( next, presetSel.value, cfg.i18n.presetSaved );
+		} );
+		$( 'wpa-preset-delete' ).addEventListener( 'click', function () {
+			if ( ! window.confirm( cfg.i18n.confirmGone ) ) {
+				return;
+			}
+			var next = presetCopy();
+			var id = presetSel.value;
+			next.items = next.items.filter( function ( p ) {
+				return p.id !== id;
+			} );
+			if ( next[ 'default' ] === id ) {
+				next[ 'default' ] = '';
+			}
+			savePresets( next, '', cfg.i18n.presetGone );
+		} );
+	}
+
+	function matchingPreset() {
+		var design = designOf();
+		var hit = presets.items.filter( function ( p ) {
+			return sameDesign( design, Object.assign( {}, cfg.defaults, p.settings ) );
+		} )[ 0 ];
+		return hit ? hit.id : '';
+	}
+
 	$( 'wpa-logo-pick' ).addEventListener( 'click', function () {
 		if ( ! window.wp || ! window.wp.media ) {
 			return;
@@ -271,6 +412,7 @@
 		forget();
 		apply( cfg.defaults );
 		change();
+		renderPresets( presets[ 'default' ] );
 	} );
 	$( 'wpa-export' ).addEventListener( 'click', exportPicture );
 	$( 'wpa-save' ).addEventListener( 'click', saveToMedia );
@@ -278,6 +420,7 @@
 	var start = Object.assign( {}, cfg.defaults, read() );
 	apply( start );
 	collect();
+	renderPresets( matchingPreset() );
 	loadFont( state.font ).then( schedule );
 	schedule();
 }() );

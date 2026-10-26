@@ -245,6 +245,25 @@
 			Panel,
 			{ name: 'wplus-thumbnail', title: cfg.i18n.panel, className: 'wplus-thumbnail-panel', initialOpen: false },
 			el( 'canvas', { ref: canvasState[ 1 ], 'aria-hidden': 'true', style: { width: '100%', height: 'auto', display: 'block', borderRadius: '4px', border: '1px solid #dcdcde', marginBottom: '12px' } } ),
+			cfg.presets && cfg.presets.items.length ? el( SelectControl, {
+				label: cfg.i18n.preset,
+				value: '',
+				options: [ { value: '', label: cfg.i18n.custom } ].concat( cfg.presets.items.map( function ( p ) {
+					return { value: p.id, label: p.name + ( p.id === cfg.presets[ 'default' ] ? ' ' + cfg.i18n.defaultTag : '' ) };
+				} ) ),
+				onChange: function ( id ) {
+					var p = cfg.presets.items.filter( function ( x ) {
+						return x.id === id;
+					} )[ 0 ];
+					if ( p ) {
+						var next = Object.assign( {}, settings, p.settings );
+						setSettings( next );
+						writeSaved( next );
+					}
+				},
+				__nextHasNoMarginBottom: true,
+			} ) : null,
+			cfg.presets && cfg.presets.items.length ? el( 'div', { style: { height: '8px' } } ) : null,
 			el( SelectControl, { label: cfg.i18n.layout, value: settings.layout, options: cfg.layouts, onChange: function ( v ) {
 				change( 'layout', v );
 			}, __nextHasNoMarginBottom: true } ),

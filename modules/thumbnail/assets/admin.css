@@ -79,3 +79,18 @@
 		order: -1;
 	}
 }
+
+.wpa-manage {
+	grid-column: 1 / -1;
+	margin: 0 0 10px;
+}
+.wpa-manage summary {
+	cursor: pointer;
+	font-weight: 600;
+}
+.wpa-preset-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px 8px;
+}
