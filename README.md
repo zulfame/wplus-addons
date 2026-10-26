@@ -2,7 +2,7 @@
 
 Small, optional tools for [WPlus UI](https://github.com/zulfame/wplus-ui) and any other WordPress theme. Each tool can be switched off in **Settings > WPlus Addons**, and WordPress works the same without the plugin. Two tools: the thumbnail generator and light security hardening.
 
-Requires WordPress 6.3 and PHP 7.4. Licence: GPL-2.0-or-later (the bundled fonts are under the SIL Open Font License, see below).
+Requires WordPress 6.3 and PHP 7.4 (both are tested, see below). For a single site; a multisite network is not tested. Licence: GPL-2.0-or-later (the bundled fonts are under the SIL Open Font License, see below).
 
 ## Thumbnail generator
 
@@ -80,7 +80,10 @@ New versions appear under Plugins and Dashboard > Updates like any other plugin,
 
 - No request to any other site. The fonts are part of the plugin.
 - Your last design choices stay in your browser (`localStorage`). Presets are one option in the site database.
-- Deleting the plugin removes its settings and presets (the pictures you made stay in the Media Library).
+- The login limit keeps the IP address of an address with failed logins, and how many, for a short time (until the counting time is over, at most 200 addresses); no user name or password is kept. They go away when the time is over, on Unlock, and when the plugin is deleted.
+- The update check asks GitHub for the latest version and sends only the address of your site's server and the plugin version.
+- WordPress's own privacy policy guide (Settings > Privacy > Policy guide) shows suggested text for all of this.
+- Deleting the plugin removes its settings, presets, counts and stored answers (the pictures you made stay in the Media Library).
 
 ## Languages
 
@@ -97,7 +100,7 @@ bin/build-zip.sh            # dist/wplus-addons-<version>.zip
 node tests/run-all.mjs      # every test, one after the other
 ```
 
-- PHP follows the WordPress coding standards (`phpcs --standard=WordPress-Extra,WordPress-Docs`); CI runs it, builds the zip and checks the syntax on every push.
+- PHP follows the WordPress coding standards (`phpcs --standard=WordPress-Extra,WordPress-Docs --ignore=tests,dist`); CI runs it, builds the zip and checks the syntax on every push.
 - The tests drive a real WordPress with Chrome. See `tests/README.md`.
 - Strings: `bin/make-pot.sh` rebuilds `languages/wplus-addons.pot`, updates every `.po` and compiles the `.mo` files (needs gettext). Translate the new entries in `languages/wplus-addons-id_ID.po`, then run it again.
 - Releases: follow the checklist in `CONTRIBUTING.md` (it includes `tests/release-gate.sh`, which installs the zip into a new WordPress and runs everything).

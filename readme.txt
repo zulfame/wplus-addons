@@ -71,9 +71,13 @@ Only posts without a featured image that you may edit are listed, newest first, 
 
 Not yet. The fonts are DM Sans, Inter, Lora and the system font.
 
+= What does it store about people? =
+
+Only if the login limit is on: the IP address of an address with failed logins and how many, for a short time (at most 200 addresses), so that it can be locked. No user name or password is kept. The text for your privacy policy is in Settings > Privacy > Policy guide.
+
 = What happens when I delete the plugin? =
 
-Its settings and presets are removed. The pictures you made stay in the Media Library.
+Its settings, presets and the counts of failed logins are removed. The pictures you made stay in the Media Library.
 
 == Third-party notices ==
 

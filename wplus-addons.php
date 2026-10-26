@@ -29,6 +29,7 @@ define( 'WPLUS_ADDONS_URL', plugin_dir_url( __FILE__ ) );
 require_once WPLUS_ADDONS_DIR . 'includes/modules.php';
 require_once WPLUS_ADDONS_DIR . 'includes/settings.php';
 require_once WPLUS_ADDONS_DIR . 'includes/updater.php';
+require_once WPLUS_ADDONS_DIR . 'includes/privacy.php';
 
 /**
  * Load the translation files of the plugin (languages/wplus-addons-<locale>.mo).

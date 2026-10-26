@@ -15,3 +15,4 @@ delete_option( 'wplus_addons_shield' );
 delete_option( 'wplus_addons_login' );
 delete_option( 'wplus_addons_login_state' );
 delete_transient( 'wplus_addons_health_files' );
+delete_site_transient( 'wplus_addons_latest_release' );

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPlus Addons 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
-"POT-Creation-Date: 2026-10-26 18:52+0700\n"
+"POT-Creation-Date: 2026-10-26 19:33+0700\n"
 "PO-Revision-Date: 2026-10-26 17:30+0700\n"
 "Last-Translator: Zulfadli Rizal\n"
 "Language-Team: Indonesian\n"
@@ -14,8 +14,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: includes/modules.php:39 modules/thumbnail/bulk.php:161
-#: modules/thumbnail/module.php:19 modules/thumbnail/module.php:335
+#: includes/modules.php:39 includes/privacy.php:20
+#: modules/thumbnail/bulk.php:161 modules/thumbnail/module.php:19
+#: modules/thumbnail/module.php:335
 msgid "Thumbnail generator"
 msgstr "Pembuat thumbnail"
 
@@ -38,6 +39,60 @@ msgid ""
 msgstr ""
 "Saklar aman untuk menutup celah umum (lihat Pengaturan > WPlus Security "
 "setelah dinyalakan)."
+
+#: includes/privacy.php:19
+msgid ""
+"The texts below say what WPlus Addons does with data. Copy what is true for "
+"your site into your privacy policy."
+msgstr ""
+"Teks di bawah ini menjelaskan apa yang dilakukan WPlus Addons dengan data. "
+"Salin yang berlaku untuk situs Anda ke kebijakan privasi."
+
+#: includes/privacy.php:21
+msgid ""
+"The cover pictures are drawn in the browser of the person who makes them and "
+"saved in the Media Library of this site. No text or picture is sent to "
+"another site, and no visitor data is collected. The fonts are part of the "
+"plugin."
+msgstr ""
+"Gambar sampul dibuat di browser orang yang membuatnya dan disimpan di "
+"Pustaka Media situs ini. Tidak ada teks atau gambar yang dikirim ke situs "
+"lain, dan tidak ada data pengunjung yang dikumpulkan. Font adalah bagian "
+"dari plugin."
+
+#: includes/privacy.php:22
+msgid "Updates"
+msgstr "Pembaruan"
+
+#: includes/privacy.php:23
+msgid ""
+"When WordPress checks for updates, the plugin asks GitHub for the latest "
+"version. GitHub receives the address of this site's server and the version "
+"of the plugin, and nothing about your visitors or users."
+msgstr ""
+"Saat WordPress memeriksa pembaruan, plugin menanyakan versi terbaru ke "
+"GitHub. GitHub menerima alamat server situs ini dan versi plugin, dan tidak "
+"ada apa pun tentang pengunjung atau pengguna Anda."
+
+#: includes/privacy.php:24 modules/shield/settings.php:127
+msgid "Login attempts"
+msgstr "Percobaan login"
+
+#: includes/privacy.php:25
+msgid ""
+"If the limit on failed logins is on, the plugin keeps the IP address of "
+"every address with failed logins, and how many, for a short time (until the "
+"counting time is over, 15 minutes to start with, and at most 200 addresses) "
+"so that an address that tries too often can be locked. They are removed when "
+"that time is over, when an administrator presses Unlock, and when the plugin "
+"is deleted. No user name or password is kept."
+msgstr ""
+"Jika batas login gagal menyala, plugin menyimpan alamat IP dari setiap "
+"alamat dengan login gagal, dan jumlahnya, untuk waktu singkat (sampai waktu "
+"hitung berakhir, 15 menit pada awalnya, dan paling banyak 200 alamat) agar "
+"alamat yang terlalu sering mencoba bisa dikunci. Data itu dihapus saat "
+"waktunya habis, saat administrator menekan Buka kunci, dan saat plugin "
+"dihapus. Nama pengguna dan kata sandi tidak disimpan."
 
 #: includes/settings.php:47 includes/settings.php:58
 msgid "WPlus Addons"
@@ -754,10 +809,6 @@ msgstr "Nyala"
 #: modules/shield/settings.php:120
 msgid "Good to know:"
 msgstr "Perlu diketahui:"
-
-#: modules/shield/settings.php:127
-msgid "Login attempts"
-msgstr "Percobaan login"
 
 #: modules/shield/settings.php:128
 msgid ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPlus Addons 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
-"POT-Creation-Date: 2026-10-26 18:52+0700\n"
+"POT-Creation-Date: 2026-10-26 19:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Zulfadli Rizal\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: includes/modules.php:39 modules/thumbnail/bulk.php:161
-#: modules/thumbnail/module.php:19 modules/thumbnail/module.php:335
+#: includes/modules.php:39 includes/privacy.php:20
+#: modules/thumbnail/bulk.php:161 modules/thumbnail/module.php:19
+#: modules/thumbnail/module.php:335
 msgid "Thumbnail generator"
 msgstr ""
 
@@ -36,6 +37,45 @@ msgstr ""
 msgid ""
 "Safe switches that close common gaps (see Settings > WPlus Security once it "
 "is on)."
+msgstr ""
+
+#: includes/privacy.php:19
+msgid ""
+"The texts below say what WPlus Addons does with data. Copy what is true for "
+"your site into your privacy policy."
+msgstr ""
+
+#: includes/privacy.php:21
+msgid ""
+"The cover pictures are drawn in the browser of the person who makes them and "
+"saved in the Media Library of this site. No text or picture is sent to "
+"another site, and no visitor data is collected. The fonts are part of the "
+"plugin."
+msgstr ""
+
+#: includes/privacy.php:22
+msgid "Updates"
+msgstr ""
+
+#: includes/privacy.php:23
+msgid ""
+"When WordPress checks for updates, the plugin asks GitHub for the latest "
+"version. GitHub receives the address of this site's server and the version "
+"of the plugin, and nothing about your visitors or users."
+msgstr ""
+
+#: includes/privacy.php:24 modules/shield/settings.php:127
+msgid "Login attempts"
+msgstr ""
+
+#: includes/privacy.php:25
+msgid ""
+"If the limit on failed logins is on, the plugin keeps the IP address of "
+"every address with failed logins, and how many, for a short time (until the "
+"counting time is over, 15 minutes to start with, and at most 200 addresses) "
+"so that an address that tries too often can be locked. They are removed when "
+"that time is over, when an administrator presses Unlock, and when the plugin "
+"is deleted. No user name or password is kept."
 msgstr ""
 
 #: includes/settings.php:47 includes/settings.php:58
@@ -674,10 +714,6 @@ msgstr ""
 
 #: modules/shield/settings.php:120
 msgid "Good to know:"
-msgstr ""
-
-#: modules/shield/settings.php:127
-msgid "Login attempts"
 msgstr ""
 
 #: modules/shield/settings.php:128

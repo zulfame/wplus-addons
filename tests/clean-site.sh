@@ -7,7 +7,8 @@
 #   tests/clean-site.sh destroy                               # stops the server, drops the database, deletes the folder
 #
 # Needs: a WordPress folder to copy the core from (SOURCE_WP, default the WordPress this plugin sits in), `php`, `mysql` (root without
-# password on localhost), `rsync`, `unzip`. CLEAN_DIR and CLEAN_PORT can change the folder and port.
+# password on localhost), `rsync`, `unzip`. CLEAN_DIR and CLEAN_PORT can change the folder and port; NODE_MODULES says where puppeteer-core
+# is when SOURCE_WP is another WordPress (for example an older release, to test the minimum version).
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 SOURCE_WP="${SOURCE_WP:-$(cd "$HERE/../../../.." && pwd)}"
@@ -35,13 +36,13 @@ create)
 	cp "$SOURCE_WP/wp-content/index.php" "$DIR/wp-content/" 2>/dev/null || echo '<?php // Silence is golden.' > "$DIR/wp-content/index.php"
 	THEME="$(ls -d "$SOURCE_WP"/wp-content/themes/twenty* 2>/dev/null | tail -1 || true)"
 	[[ -n "$THEME" ]] && cp -R "$THEME" "$DIR/wp-content/themes/"
-	ln -s "$SOURCE_WP/node_modules" "$DIR/node_modules"
+	ln -s "${NODE_MODULES:-$SOURCE_WP/node_modules}" "$DIR/node_modules"
 	# the tests never depend on the internet: what WordPress asks wordpress.org is answered here, the rest is refused
 	mkdir -p "$DIR/wp-content/mu-plugins"
 	cat > "$DIR/wp-content/mu-plugins/wpa-offline.php" <<'PHP'
-<?php // test site only: no request leaves this machine for wordpress.org, gravatar or the like
+<?php // test site only: no request leaves this machine for wordpress.org, gravatar, github or the like (the update tests use their own fake GitHub on 127.0.0.1)
 add_filter( 'pre_http_request', function ( $pre, $args, $url ) {
-	if ( ! preg_match( '#^https?://([a-z0-9-]+\.)*(wordpress\.org|w\.org|gravatar\.com|wp\.com)/#i', $url ) ) {
+	if ( ! preg_match( '#^https?://([a-z0-9-]+\.)*(wordpress\.org|w\.org|gravatar\.com|wp\.com|github\.com|githubusercontent\.com)/#i', $url ) ) {
 		return $pre;
 	}
 	$body = array();

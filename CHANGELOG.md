@@ -6,6 +6,7 @@
 - New: light security hardening. Switch it on in Settings > WPlus Addons, then choose from six safe switches under Settings > WPlus Security: hide the WordPress version, turn off the file editor, send safety headers, give one message for a failed login, hide the list of users from visitors, and turn off XML-RPC.
 - New: a limit on failed logins. After 5 failed logins from one address that address is locked for 15 minutes, even with the right password. You can change the numbers, never lock your own addresses, see the locked addresses and unlock them, and tell the plugin that your site is behind Cloudflare or another proxy.
 - New: a Security check tab under Settings > WPlus Security. A plain list of what is fine, worth a look or needs attention, worst first, with a button to the place where you fix it: WordPress and PHP versions, updates waiting, unused plugins, an administrator called admin, open registration, https, debug mode, wp-config.php permissions, a security plugin and a backup plugin. A button checks whether secret files such as .env or debug.log can be opened by anyone.
+- New: suggested text for your privacy policy in Settings > Privacy > Policy guide.
 - Changed: the settings page lists only the tools that exist.
 - Install this version by uploading the zip once (Plugins > Add New > Upload Plugin, then Replace current with uploaded); versions after it update from the dashboard.
 
