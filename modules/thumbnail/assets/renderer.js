@@ -129,6 +129,18 @@
 		};
 	}
 
+	/* Cut text with an ellipsis so it is not wider than maxW. */
+	function ellipsize( ctx, text, maxW ) {
+		var t = String( text || '' );
+		if ( ctx.measureText( t ).width <= maxW ) {
+			return t;
+		}
+		while ( t.length > 1 && ctx.measureText( t + '\u2026' ).width > maxW ) {
+			t = t.slice( 0, -1 );
+		}
+		return t.replace( /\s+$/, '' ) + '\u2026';
+	}
+
 	function roundRect( ctx, x, y, w, h, r ) {
 		r = Math.min( r, w / 2, h / 2 );
 		ctx.beginPath();
@@ -170,13 +182,16 @@
 	}
 
 	/* Logo and organisation name in one row; returns its width and height. Drawn only when asked. */
-	function brandRow( ctx, o, u, x, cy, draw ) {
+	function brandRow( ctx, o, u, x, cy, draw, limit ) {
 		var box = 52 * u;
 		var gap = 16 * u;
 		var name = String( o.org || '' ).trim();
 		ctx.font = '700 ' + 28 * u + 'px ' + o.font;
-		var textW = name ? ctx.measureText( name ).width : 0;
 		var logoW = o.logo ? box : 0;
+		if ( name && limit ) {
+			name = ellipsize( ctx, name, Math.max( 40 * u, limit - logoW - ( logoW ? gap : 0 ) ) );
+		}
+		var textW = name ? ctx.measureText( name ).width : 0;
 		var width = logoW + ( logoW && textW ? gap : 0 ) + textW;
 		if ( draw ) {
 			var px = x;
@@ -199,7 +214,7 @@
 				ctx.fillText( name, px, cy + 1 * u );
 			}
 		}
-		return { width: width, height: o.logo ? box : 28 * u };
+		return { width: width, height: o.logo ? box : 28 * u, empty: ! logoW && ! name };
 	}
 
 	function palette( o ) {
@@ -241,13 +256,15 @@
 		} );
 
 		var left = pad, right = W - pad, maxW = right - left;
-		var brandH = brandRow( ctx, o, u, 0, 0, false );
+		var brandH = brandRow( ctx, o, u, 0, 0, false, maxW );
 		var brandX = anchorX( o.align, left, right, brandH.width );
-		brandRow( ctx, o, u, brandX, pad + brandH.height / 2, true );
+		if ( ! brandH.empty ) {
+			brandRow( ctx, o, u, brandX, pad + brandH.height / 2, true, maxW );
+		}
 
 		var tags = tagText( o );
 		var tagH = tags ? 26 * u : 0;
-		var top = pad + brandH.height + 28 * u;
+		var top = pad + ( brandH.empty ? 0 : brandH.height + 28 * u );
 		var avail = H - pad - top;
 		var c = compose( ctx, o, u, maxW, avail, { tMax: 76, tMin: 40, tLines: 3, lh: 1.14, dMax: 28, dMin: 22, dLines: 2, head: tags ? 50 : 0, dGap: 18 } );
 		var title = c.title, desc = c.desc, titleLH = c.titleLH, descLH = c.descLH;
@@ -256,6 +273,7 @@
 		ctx.textBaseline = 'top';
 		if ( tags ) {
 			ctx.font = '400 ' + 24 * u + 'px ' + o.font;
+			tags = ellipsize( ctx, tags, maxW - 36 * u );
 			var tw = ctx.measureText( tags ).width + 36 * u;
 			var tx = anchorX( o.align, left, right, tw );
 			drawTagIcon( ctx, tx, y + 1 * u, 24 * u, o.muted, 2 * u );
@@ -303,11 +321,14 @@
 		}
 		var left = pad, right = W - pad, maxW = right - left;
 		var footerH = 52 * u, footerY = H - pad - footerH;
-		ctx.fillStyle = p.line;
-		ctx.fillRect( left, footerY - 28 * u, maxW, 2 * u );
+		var hasFooter = !! ( String( o.org || '' ).trim() || o.logo || tagText( o ) );
+		if ( hasFooter ) {
+			ctx.fillStyle = p.line;
+			ctx.fillRect( left, footerY - 28 * u, maxW, 2 * u );
+		}
 
 		var barH = 10 * u;
-		var avail = footerY - 56 * u - pad;
+		var avail = hasFooter ? footerY - 56 * u - pad : H - pad * 2;
 		var c = compose( ctx, o, u, maxW * 0.92, avail, { tMax: 84, tMin: 40, tLines: 3, lh: 1.12, dMax: 30, dMin: 22, dLines: 2, head: 40, dGap: 20 } );
 		var title = c.title, desc = c.desc, titleLH = c.titleLH, descLH = c.descLH;
 		var y = pad + Math.max( 0, avail - c.height ) * 0.5;
@@ -335,15 +356,19 @@
 			} );
 		}
 
-		/* footer: brand on the left, tags as outlined pills on the right */
+		/* footer: brand on the left, tags as outlined pills on the right (nothing is drawn when both are empty) */
 		var cy = footerY + footerH / 2;
-		brandRow( ctx, o, u, left, cy, true );
 		var tagList = [ o.tag1, o.tag2 ].map( function ( t ) {
 			return String( t || '' ).trim();
 		} ).filter( Boolean );
+		var brand = brandRow( ctx, o, u, left, cy, false, tagList.length ? maxW * 0.45 : maxW );
+		brandRow( ctx, o, u, left, cy, true, tagList.length ? maxW * 0.45 : maxW );
 		var px = right;
+		var room = maxW - ( brand.empty ? 0 : brand.width + 32 * u );
+		var each = ( room - 12 * u * ( tagList.length - 1 ) ) / Math.max( 1, tagList.length );
 		ctx.font = '400 ' + 22 * u + 'px ' + o.font;
 		tagList.slice().reverse().forEach( function ( t ) {
+			t = ellipsize( ctx, t, Math.max( 30 * u, each - 32 * u ) );
 			var w = ctx.measureText( t ).width + 32 * u, h = 42 * u;
 			px -= w;
 			ctx.strokeStyle = rgba( p.accent, 0.7 );
