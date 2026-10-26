@@ -1,6 +1,6 @@
 === WPlus Addons ===
 Contributors: zulfame
-Tags: thumbnail, featured image, security, hardening
+Tags: thumbnail, featured image, webp, cover image, bulk
 Requires at least: 6.3
 Tested up to: 7.0
 Requires PHP: 7.4
@@ -12,10 +12,58 @@ Small, optional tools for WPlus UI and any WordPress site. Each tool can be swit
 
 == Description ==
 
-* Thumbnail generator (Tools > Thumbnail): make a cover picture with three layouts, your colors, logo and tags, and download it as WebP (the default, lighter and better for SEO) or PNG. Save it to the Media Library with one button, make it right inside the post editor and set it as the featured image, or make many at once for posts that have none.
-* Light security hardening (planned): safe switches, a login attempt limit and a plain-language security check.
+Small, optional tools for WPlus UI and any WordPress theme. Each tool can be switched off in Settings > WPlus Addons.
 
-Open Settings > WPlus Addons to switch each tool on or off. The plugin sends nothing to any other site.
+= Thumbnail generator =
+
+Make a cover picture for a post from its title, excerpt, tags and your site, and use it as the featured image. The picture is drawn in your browser: nothing is sent to another site.
+
+* Three layouts (Minimal, Dots, Panel), left, center or right text, light or dark, your own theme color, logo, organization, two tags, three fonts and four sizes.
+* Colors follow the theme color and the mode. Empty fields simply disappear, and long titles shrink to fit.
+* Download as WebP (the default: lighter and better for page speed and SEO) or PNG, or save it straight to the Media Library with its title, alt text and description.
+* A Thumbnail panel in the post editor makes the picture and sets the featured image with one button.
+* A Bulk tab makes the featured image of many posts that have none, with a progress bar and a Stop button. A post that already has a featured image is never changed.
+* Presets: named design choices shared by the whole site, one of them as the starting point.
+
+= Light security hardening =
+
+Planned: safe switches that close common gaps, a login attempt limit and a plain-language security check.
+
+== Installation ==
+
+1. Upload the zip in Plugins > Add New > Upload Plugin, or unpack it in `wp-content/plugins/`.
+2. Activate WPlus Addons.
+3. Open Tools > Thumbnail. The tools can be switched on or off in Settings > WPlus Addons.
+
+== Frequently Asked Questions ==
+
+= Does it send my pictures or texts anywhere? =
+
+No. The picture is drawn in your browser and saved to your own Media Library. The fonts are part of the plugin and there is no request to another site.
+
+= Who can use it? =
+
+Anyone who may upload files. Only administrators can save presets. In Bulk, authors see only their own posts.
+
+= Why WebP? =
+
+A WebP picture is several times lighter than a PNG of the same picture, which helps page speed and SEO. If a browser cannot make WebP, a PNG is made instead.
+
+= Why are some posts not in the Bulk list? =
+
+Only posts without a featured image that you may edit are listed, newest first, up to 200 at a time. Run it again for the rest.
+
+= Can I use another font or my own layout? =
+
+Not yet. The fonts are DM Sans, Inter, Lora and the system font.
+
+= What happens when I delete the plugin? =
+
+Its settings and presets are removed. The pictures you made stay in the Media Library.
+
+== Third-party notices ==
+
+The plugin includes the fonts DM Sans, Inter and Lora (Latin subset, regular and bold) under the SIL Open Font License 1.1. The licence files are in `modules/thumbnail/fonts/`.
 
 == Changelog ==
 

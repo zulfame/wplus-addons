@@ -1,0 +1,501 @@
+# Indonesian translation of WPlus Addons.
+# Copyright (C) YEAR Zulfadli Rizal
+# This file is distributed under the same license as the WPlus Addons package.
+# Zulfadli Rizal, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WPlus Addons 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
+"POT-Creation-Date: 2026-10-26 15:57+0700\n"
+"PO-Revision-Date: 2026-10-26 16:00+0700\n"
+"Last-Translator: Zulfadli Rizal\n"
+"Language-Team: Indonesian\n"
+"Language: id_ID\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: includes/modules.php:39 modules/thumbnail/bulk.php:161
+#: modules/thumbnail/module.php:19 modules/thumbnail/module.php:335
+msgid "Thumbnail generator"
+msgstr "Pembuat thumbnail"
+
+#: includes/modules.php:40
+msgid ""
+"Make a cover picture for a post from its title and description, and use it "
+"as the featured image."
+msgstr "Buat gambar sampul untuk pos dari judul dan deskripsinya, lalu pakai sebagai gambar unggulan."
+
+#: includes/modules.php:43
+msgid "Light security hardening"
+msgstr "Pengerasan keamanan ringan"
+
+#: includes/modules.php:44
+msgid ""
+"Safe switches that close common gaps, a login attempt limit and a plain-"
+"language security check."
+msgstr "Saklar aman untuk menutup celah umum, batas percobaan login, dan pemeriksaan keamanan dengan bahasa sederhana."
+
+#: includes/settings.php:47 includes/settings.php:58
+msgid "WPlus Addons"
+msgstr "WPlus Addons"
+
+#: includes/settings.php:67
+msgid "Switched on"
+msgstr "Menyala"
+
+#: includes/settings.php:67
+msgid "Coming later"
+msgstr "Segera hadir"
+
+#: modules/thumbnail/bulk.php:38
+msgid "Generator"
+msgstr "Pembuat"
+
+#: modules/thumbnail/bulk.php:39
+msgid "Bulk"
+msgstr "Massal"
+
+#: modules/thumbnail/bulk.php:41
+msgid "Thumbnail tools"
+msgstr "Alat thumbnail"
+
+#: modules/thumbnail/bulk.php:131
+msgid "My last settings"
+msgstr "Pengaturan terakhir saya"
+
+#: modules/thumbnail/bulk.php:132 modules/thumbnail/module.php:206
+#: modules/thumbnail/module.php:274
+msgid "(default)"
+msgstr "(bawaan)"
+
+#: modules/thumbnail/bulk.php:133 modules/thumbnail/module.php:281
+msgid "Working…"
+msgstr "Memproses…"
+
+#: modules/thumbnail/bulk.php:134
+msgid "Done"
+msgstr "Selesai"
+
+#: modules/thumbnail/bulk.php:135
+msgid "Skipped: it already has a featured image."
+msgstr "Dilewati: sudah punya gambar unggulan."
+
+#: modules/thumbnail/bulk.php:136
+msgid "Skipped: no title."
+msgstr "Dilewati: tanpa judul."
+
+#: modules/thumbnail/bulk.php:137
+msgid "Failed:"
+msgstr "Gagal:"
+
+#: modules/thumbnail/bulk.php:138
+msgid "Stopped. The pictures made so far are kept."
+msgstr "Dihentikan. Gambar yang sudah dibuat tetap disimpan."
+
+#: modules/thumbnail/bulk.php:139
+msgid "Finished."
+msgstr "Selesai."
+
+#: modules/thumbnail/bulk.php:140
+msgid ""
+"Make a picture for each ticked post and set it as its featured image? The "
+"posts are not changed in any other way."
+msgstr "Buat gambar untuk setiap pos yang dicentang dan pasang sebagai gambar unggulannya? Pos tidak diubah dengan cara lain."
+
+#: modules/thumbnail/bulk.php:141
+msgid "Tick at least one post."
+msgstr "Centang minimal satu pos."
+
+#: modules/thumbnail/bulk.php:142
+msgid "posts done"
+msgstr "pos selesai"
+
+#: modules/thumbnail/bulk.php:143
+msgid "WebP is not available in this browser, so PNG was used."
+msgstr "WebP tidak tersedia di browser ini, jadi dipakai PNG."
+
+#: modules/thumbnail/bulk.php:155
+msgid "Published"
+msgstr "Terbit"
+
+#: modules/thumbnail/bulk.php:156
+msgid "Scheduled"
+msgstr "Terjadwal"
+
+#: modules/thumbnail/bulk.php:157
+msgid "Draft"
+msgstr "Draf"
+
+#: modules/thumbnail/bulk.php:158
+msgid "Pending"
+msgstr "Menunggu tinjauan"
+
+#: modules/thumbnail/bulk.php:159
+msgid "Private"
+msgstr "Privat"
+
+#: modules/thumbnail/bulk.php:163
+msgid ""
+"Posts that have no featured image. Tick the ones you want; each gets its own "
+"picture made from its title, excerpt and tags, with the design you choose "
+"below. Posts that already have a featured image are never changed."
+msgstr "Pos yang belum punya gambar unggulan. Centang yang Anda mau; masing-masing mendapat gambar sendiri dari judul, ringkasan, dan tag-nya, dengan desain yang Anda pilih di bawah. Pos yang sudah punya gambar unggulan tidak pernah diubah."
+
+#: modules/thumbnail/bulk.php:165
+msgid "Every post you can edit already has a featured image."
+msgstr "Semua pos yang bisa Anda sunting sudah punya gambar unggulan."
+
+#. translators: 1: posts shown, 2: all posts without a featured image
+#: modules/thumbnail/bulk.php:170
+#, php-format
+msgid "Showing %1$d of %2$d posts. Run it again for the rest."
+msgstr "Menampilkan %1$d dari %2$d pos. Jalankan lagi untuk sisanya."
+
+#: modules/thumbnail/bulk.php:173
+msgid "Show"
+msgstr "Tampilkan"
+
+#: modules/thumbnail/bulk.php:173
+msgid "All statuses"
+msgstr "Semua status"
+
+#: modules/thumbnail/bulk.php:173
+msgid "Published only"
+msgstr "Hanya yang terbit"
+
+#: modules/thumbnail/bulk.php:173
+msgid "Drafts and others"
+msgstr "Draf dan lainnya"
+
+#: modules/thumbnail/bulk.php:174
+msgid "Tick all"
+msgstr "Centang semua"
+
+#: modules/thumbnail/bulk.php:174
+msgid "Post"
+msgstr "Pos"
+
+#: modules/thumbnail/bulk.php:174
+msgid "Status"
+msgstr "Status"
+
+#: modules/thumbnail/bulk.php:174
+msgid "Result"
+msgstr "Hasil"
+
+#: modules/thumbnail/bulk.php:177
+msgid "(no title)"
+msgstr "(tanpa judul)"
+
+#: modules/thumbnail/bulk.php:180
+msgid "Design"
+msgstr "Desain"
+
+#: modules/thumbnail/bulk.php:181
+msgid "Choose a preset, or keep your last settings from the Generator tab."
+msgstr "Pilih preset, atau pakai pengaturan terakhir dari tab Pembuat."
+
+#: modules/thumbnail/bulk.php:182
+msgid "Preview of the first ticked post"
+msgstr "Pratinjau pos pertama yang dicentang"
+
+#: modules/thumbnail/bulk.php:183
+msgid "Make the pictures"
+msgstr "Buat gambarnya"
+
+#: modules/thumbnail/bulk.php:183
+msgid "Stop"
+msgstr "Berhenti"
+
+#: modules/thumbnail/module.php:19 modules/thumbnail/module.php:271
+msgid "Thumbnail"
+msgstr "Thumbnail"
+
+#: modules/thumbnail/module.php:74
+msgid "System font"
+msgstr "Font sistem"
+
+#: modules/thumbnail/module.php:88
+msgid "Social share (1200 x 630)"
+msgstr "Berbagi sosial (1200 x 630)"
+
+#: modules/thumbnail/module.php:89
+msgid "16:9 (1280 x 720)"
+msgstr "16:9 (1280 x 720)"
+
+#: modules/thumbnail/module.php:90
+msgid "4:3 (1200 x 900)"
+msgstr "4:3 (1200 x 900)"
+
+#: modules/thumbnail/module.php:91
+msgid "1:1 (1080 x 1080)"
+msgstr "1:1 (1080 x 1080)"
+
+#: modules/thumbnail/module.php:145
+msgid "10 things I learned while doing nothing"
+msgstr "10 hal yang saya pelajari saat tidak melakukan apa-apa"
+
+#: modules/thumbnail/module.php:146
+msgid "A fun list of lessons from doing absolutely nothing."
+msgstr "Daftar pelajaran seru dari tidak melakukan apa-apa."
+
+#: modules/thumbnail/module.php:194
+msgid "Choose a logo"
+msgstr "Pilih logo"
+
+#: modules/thumbnail/module.php:195
+msgid "Use this logo"
+msgstr "Pakai logo ini"
+
+#: modules/thumbnail/module.php:196
+msgid "No logo"
+msgstr "Tanpa logo"
+
+#: modules/thumbnail/module.php:197
+msgid ""
+"The logo could not be drawn. Choose a picture from the Media Library of this "
+"site."
+msgstr "Logo tidak bisa digambar. Pilih gambar dari Pustaka Media situs ini."
+
+#: modules/thumbnail/module.php:198
+msgid "The picture could not be created. Try another format."
+msgstr "Gambar tidak bisa dibuat. Coba format lain."
+
+#: modules/thumbnail/module.php:199
+msgid "This browser cannot make WebP, so the picture was saved as PNG."
+msgstr "Browser ini tidak bisa membuat WebP, jadi gambar disimpan sebagai PNG."
+
+#: modules/thumbnail/module.php:200
+msgid "Saving…"
+msgstr "Menyimpan…"
+
+#: modules/thumbnail/module.php:201
+msgid "Saved to the Media Library."
+msgstr "Tersimpan di Pustaka Media."
+
+#: modules/thumbnail/module.php:202
+msgid "Edit"
+msgstr "Sunting"
+
+#: modules/thumbnail/module.php:203
+msgid "View"
+msgstr "Lihat"
+
+#: modules/thumbnail/module.php:204
+msgid "The picture could not be saved:"
+msgstr "Gambar tidak bisa disimpan:"
+
+#: modules/thumbnail/module.php:205 modules/thumbnail/module.php:273
+msgid "— Custom —"
+msgstr "— Kustom —"
+
+#: modules/thumbnail/module.php:207
+msgid "Give the preset a name first."
+msgstr "Beri nama preset dulu."
+
+#: modules/thumbnail/module.php:208
+msgid "Preset saved."
+msgstr "Preset tersimpan."
+
+#: modules/thumbnail/module.php:209
+msgid "Preset deleted."
+msgstr "Preset dihapus."
+
+#: modules/thumbnail/module.php:210
+msgid "The preset could not be saved:"
+msgstr "Preset tidak bisa disimpan:"
+
+#: modules/thumbnail/module.php:211
+msgid "There are too many presets. Delete one first."
+msgstr "Preset terlalu banyak. Hapus satu dulu."
+
+#: modules/thumbnail/module.php:212
+msgid "Delete this preset?"
+msgstr "Hapus preset ini?"
+
+#: modules/thumbnail/module.php:248 modules/thumbnail/module.php:353
+msgid "Minimal (frame)"
+msgstr "Minimal (bingkai)"
+
+#: modules/thumbnail/module.php:252 modules/thumbnail/module.php:354
+msgid "Dots (3D ring)"
+msgstr "Titik (cincin 3D)"
+
+#: modules/thumbnail/module.php:256 modules/thumbnail/module.php:355
+msgid "Panel"
+msgstr "Panel"
+
+#: modules/thumbnail/module.php:262 modules/thumbnail/module.php:391
+msgid "Light"
+msgstr "Terang"
+
+#: modules/thumbnail/module.php:266 modules/thumbnail/module.php:392
+msgid "Dark"
+msgstr "Gelap"
+
+#: modules/thumbnail/module.php:272 modules/thumbnail/module.php:339
+msgid "Preset"
+msgstr "Preset"
+
+#: modules/thumbnail/module.php:275 modules/thumbnail/module.php:349
+msgid "Layout"
+msgstr "Tata letak"
+
+#: modules/thumbnail/module.php:276 modules/thumbnail/module.php:387
+msgid "Mode"
+msgstr "Mode"
+
+#: modules/thumbnail/module.php:277 modules/thumbnail/module.php:398
+msgid "Ratio"
+msgstr "Rasio"
+
+#: modules/thumbnail/module.php:278 modules/thumbnail/module.php:384
+msgid "Theme color"
+msgstr "Warna tema"
+
+#: modules/thumbnail/module.php:279
+msgid "Make the featured image"
+msgstr "Buat gambar unggulan"
+
+#: modules/thumbnail/module.php:280
+msgid "Replace the featured image"
+msgstr "Ganti gambar unggulan"
+
+#: modules/thumbnail/module.php:282
+msgid "Write a title first."
+msgstr "Tulis judul dulu."
+
+#: modules/thumbnail/module.php:283
+msgid ""
+"The picture was saved and set as the featured image. Update the post to keep "
+"it."
+msgstr "Gambar disimpan dan dipasang sebagai gambar unggulan. Perbarui pos agar tersimpan."
+
+#: modules/thumbnail/module.php:284
+msgid "This browser cannot make WebP, so a PNG was used."
+msgstr "Browser ini tidak bisa membuat WebP, jadi dipakai PNG."
+
+#: modules/thumbnail/module.php:285
+msgid "The picture could not be made:"
+msgstr "Gambar tidak bisa dibuat:"
+
+#: modules/thumbnail/module.php:286
+msgid "More options (logo, font, alignment)"
+msgstr "Opsi lain (logo, font, perataan)"
+
+#: modules/thumbnail/module.php:337
+msgid ""
+"Make a cover picture for a post. It is drawn in your browser; nothing is "
+"sent to another site."
+msgstr "Buat gambar sampul untuk pos. Gambar dibuat di browser Anda; tidak ada yang dikirim ke situs lain."
+
+#: modules/thumbnail/module.php:341
+msgid "Manage presets"
+msgstr "Kelola preset"
+
+#: modules/thumbnail/module.php:342
+msgid ""
+"A preset keeps the design choices (layout, alignment, color, mode, font, "
+"size, logo, organization), not the texts. Everyone who makes thumbnails on "
+"this site can use it."
+msgstr "Preset menyimpan pilihan desain (tata letak, perataan, warna, mode, font, ukuran, logo, organisasi), bukan teksnya. Semua orang yang membuat thumbnail di situs ini bisa memakainya."
+
+#: modules/thumbnail/module.php:343
+msgid "Preset name"
+msgstr "Nama preset"
+
+#: modules/thumbnail/module.php:344
+msgid "Save as new"
+msgstr "Simpan sebagai baru"
+
+#: modules/thumbnail/module.php:344
+msgid "Update selected"
+msgstr "Perbarui yang dipilih"
+
+#: modules/thumbnail/module.php:344
+msgid "Make default"
+msgstr "Jadikan bawaan"
+
+#: modules/thumbnail/module.php:344
+msgid "Delete"
+msgstr "Hapus"
+
+#: modules/thumbnail/module.php:362
+msgid "Alignment"
+msgstr "Perataan"
+
+#: modules/thumbnail/module.php:366
+msgid "Left"
+msgstr "Kiri"
+
+#: modules/thumbnail/module.php:367
+msgid "Center"
+msgstr "Tengah"
+
+#: modules/thumbnail/module.php:368
+msgid "Right"
+msgstr "Kanan"
+
+#: modules/thumbnail/module.php:373
+msgid "Title"
+msgstr "Judul"
+
+#: modules/thumbnail/module.php:374
+msgid "Description"
+msgstr "Deskripsi"
+
+#: modules/thumbnail/module.php:375
+msgid "Organization"
+msgstr "Organisasi"
+
+#: modules/thumbnail/module.php:378
+msgid "Logo"
+msgstr "Logo"
+
+#: modules/thumbnail/module.php:379
+msgid "Choose"
+msgstr "Pilih"
+
+#: modules/thumbnail/module.php:379
+msgid "Clear"
+msgstr "Kosongkan"
+
+#: modules/thumbnail/module.php:382
+msgid "Tag 1"
+msgstr "Tag 1"
+
+#: modules/thumbnail/module.php:383
+msgid "Tag 2"
+msgstr "Tag 2"
+
+#: modules/thumbnail/module.php:397
+msgid "Font family"
+msgstr "Jenis font"
+
+#: modules/thumbnail/module.php:401
+msgid "File type"
+msgstr "Jenis berkas"
+
+#: modules/thumbnail/module.php:405
+msgid "WebP (lighter, good for SEO)"
+msgstr "WebP (lebih ringan, baik untuk SEO)"
+
+#: modules/thumbnail/module.php:411
+msgid "Preview of the thumbnail"
+msgstr "Pratinjau thumbnail"
+
+#: modules/thumbnail/module.php:412
+msgid "Reset"
+msgstr "Atur ulang"
+
+#: modules/thumbnail/module.php:412
+msgid "Export"
+msgstr "Ekspor"
+
+#: modules/thumbnail/module.php:412
+msgid "Save to Media Library"
+msgstr "Simpan ke Pustaka Media"
+

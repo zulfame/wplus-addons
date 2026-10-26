@@ -29,6 +29,14 @@ require_once WPLUS_ADDONS_DIR . 'includes/modules.php';
 require_once WPLUS_ADDONS_DIR . 'includes/settings.php';
 
 /**
+ * Load the translation files of the plugin (languages/wplus-addons-<locale>.mo).
+ */
+function wplus_addons_load_textdomain() {
+	load_plugin_textdomain( 'wplus-addons', false, dirname( plugin_basename( WPLUS_ADDONS_FILE ) ) . '/languages' );
+}
+add_action( 'init', 'wplus_addons_load_textdomain' );
+
+/**
  * Load every module that is switched on.
  */
 function wplus_addons_load_modules() {

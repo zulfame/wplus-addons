@@ -1,0 +1,499 @@
+# WPlus Addons (translation template).
+# Copyright (C) YEAR Zulfadli Rizal
+# This file is distributed under the same license as the WPlus Addons package.
+# Zulfadli Rizal, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WPlus Addons 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
+"POT-Creation-Date: 2026-10-26 15:57+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Zulfadli Rizal\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: includes/modules.php:39 modules/thumbnail/bulk.php:161
+#: modules/thumbnail/module.php:19 modules/thumbnail/module.php:335
+msgid "Thumbnail generator"
+msgstr ""
+
+#: includes/modules.php:40
+msgid ""
+"Make a cover picture for a post from its title and description, and use it "
+"as the featured image."
+msgstr ""
+
+#: includes/modules.php:43
+msgid "Light security hardening"
+msgstr ""
+
+#: includes/modules.php:44
+msgid ""
+"Safe switches that close common gaps, a login attempt limit and a plain-"
+"language security check."
+msgstr ""
+
+#: includes/settings.php:47 includes/settings.php:58
+msgid "WPlus Addons"
+msgstr ""
+
+#: includes/settings.php:67
+msgid "Switched on"
+msgstr ""
+
+#: includes/settings.php:67
+msgid "Coming later"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:38
+msgid "Generator"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:39
+msgid "Bulk"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:41
+msgid "Thumbnail tools"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:131
+msgid "My last settings"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:132 modules/thumbnail/module.php:206
+#: modules/thumbnail/module.php:274
+msgid "(default)"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:133 modules/thumbnail/module.php:281
+msgid "Working…"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:134
+msgid "Done"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:135
+msgid "Skipped: it already has a featured image."
+msgstr ""
+
+#: modules/thumbnail/bulk.php:136
+msgid "Skipped: no title."
+msgstr ""
+
+#: modules/thumbnail/bulk.php:137
+msgid "Failed:"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:138
+msgid "Stopped. The pictures made so far are kept."
+msgstr ""
+
+#: modules/thumbnail/bulk.php:139
+msgid "Finished."
+msgstr ""
+
+#: modules/thumbnail/bulk.php:140
+msgid ""
+"Make a picture for each ticked post and set it as its featured image? The "
+"posts are not changed in any other way."
+msgstr ""
+
+#: modules/thumbnail/bulk.php:141
+msgid "Tick at least one post."
+msgstr ""
+
+#: modules/thumbnail/bulk.php:142
+msgid "posts done"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:143
+msgid "WebP is not available in this browser, so PNG was used."
+msgstr ""
+
+#: modules/thumbnail/bulk.php:155
+msgid "Published"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:156
+msgid "Scheduled"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:157
+msgid "Draft"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:158
+msgid "Pending"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:159
+msgid "Private"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:163
+msgid ""
+"Posts that have no featured image. Tick the ones you want; each gets its own "
+"picture made from its title, excerpt and tags, with the design you choose "
+"below. Posts that already have a featured image are never changed."
+msgstr ""
+
+#: modules/thumbnail/bulk.php:165
+msgid "Every post you can edit already has a featured image."
+msgstr ""
+
+#. translators: 1: posts shown, 2: all posts without a featured image
+#: modules/thumbnail/bulk.php:170
+#, php-format
+msgid "Showing %1$d of %2$d posts. Run it again for the rest."
+msgstr ""
+
+#: modules/thumbnail/bulk.php:173
+msgid "Show"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:173
+msgid "All statuses"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:173
+msgid "Published only"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:173
+msgid "Drafts and others"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:174
+msgid "Tick all"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:174
+msgid "Post"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:174
+msgid "Status"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:174
+msgid "Result"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:177
+msgid "(no title)"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:180
+msgid "Design"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:181
+msgid "Choose a preset, or keep your last settings from the Generator tab."
+msgstr ""
+
+#: modules/thumbnail/bulk.php:182
+msgid "Preview of the first ticked post"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:183
+msgid "Make the pictures"
+msgstr ""
+
+#: modules/thumbnail/bulk.php:183
+msgid "Stop"
+msgstr ""
+
+#: modules/thumbnail/module.php:19 modules/thumbnail/module.php:271
+msgid "Thumbnail"
+msgstr ""
+
+#: modules/thumbnail/module.php:74
+msgid "System font"
+msgstr ""
+
+#: modules/thumbnail/module.php:88
+msgid "Social share (1200 x 630)"
+msgstr ""
+
+#: modules/thumbnail/module.php:89
+msgid "16:9 (1280 x 720)"
+msgstr ""
+
+#: modules/thumbnail/module.php:90
+msgid "4:3 (1200 x 900)"
+msgstr ""
+
+#: modules/thumbnail/module.php:91
+msgid "1:1 (1080 x 1080)"
+msgstr ""
+
+#: modules/thumbnail/module.php:145
+msgid "10 things I learned while doing nothing"
+msgstr ""
+
+#: modules/thumbnail/module.php:146
+msgid "A fun list of lessons from doing absolutely nothing."
+msgstr ""
+
+#: modules/thumbnail/module.php:194
+msgid "Choose a logo"
+msgstr ""
+
+#: modules/thumbnail/module.php:195
+msgid "Use this logo"
+msgstr ""
+
+#: modules/thumbnail/module.php:196
+msgid "No logo"
+msgstr ""
+
+#: modules/thumbnail/module.php:197
+msgid ""
+"The logo could not be drawn. Choose a picture from the Media Library of this "
+"site."
+msgstr ""
+
+#: modules/thumbnail/module.php:198
+msgid "The picture could not be created. Try another format."
+msgstr ""
+
+#: modules/thumbnail/module.php:199
+msgid "This browser cannot make WebP, so the picture was saved as PNG."
+msgstr ""
+
+#: modules/thumbnail/module.php:200
+msgid "Saving…"
+msgstr ""
+
+#: modules/thumbnail/module.php:201
+msgid "Saved to the Media Library."
+msgstr ""
+
+#: modules/thumbnail/module.php:202
+msgid "Edit"
+msgstr ""
+
+#: modules/thumbnail/module.php:203
+msgid "View"
+msgstr ""
+
+#: modules/thumbnail/module.php:204
+msgid "The picture could not be saved:"
+msgstr ""
+
+#: modules/thumbnail/module.php:205 modules/thumbnail/module.php:273
+msgid "— Custom —"
+msgstr ""
+
+#: modules/thumbnail/module.php:207
+msgid "Give the preset a name first."
+msgstr ""
+
+#: modules/thumbnail/module.php:208
+msgid "Preset saved."
+msgstr ""
+
+#: modules/thumbnail/module.php:209
+msgid "Preset deleted."
+msgstr ""
+
+#: modules/thumbnail/module.php:210
+msgid "The preset could not be saved:"
+msgstr ""
+
+#: modules/thumbnail/module.php:211
+msgid "There are too many presets. Delete one first."
+msgstr ""
+
+#: modules/thumbnail/module.php:212
+msgid "Delete this preset?"
+msgstr ""
+
+#: modules/thumbnail/module.php:248 modules/thumbnail/module.php:353
+msgid "Minimal (frame)"
+msgstr ""
+
+#: modules/thumbnail/module.php:252 modules/thumbnail/module.php:354
+msgid "Dots (3D ring)"
+msgstr ""
+
+#: modules/thumbnail/module.php:256 modules/thumbnail/module.php:355
+msgid "Panel"
+msgstr ""
+
+#: modules/thumbnail/module.php:262 modules/thumbnail/module.php:391
+msgid "Light"
+msgstr ""
+
+#: modules/thumbnail/module.php:266 modules/thumbnail/module.php:392
+msgid "Dark"
+msgstr ""
+
+#: modules/thumbnail/module.php:272 modules/thumbnail/module.php:339
+msgid "Preset"
+msgstr ""
+
+#: modules/thumbnail/module.php:275 modules/thumbnail/module.php:349
+msgid "Layout"
+msgstr ""
+
+#: modules/thumbnail/module.php:276 modules/thumbnail/module.php:387
+msgid "Mode"
+msgstr ""
+
+#: modules/thumbnail/module.php:277 modules/thumbnail/module.php:398
+msgid "Ratio"
+msgstr ""
+
+#: modules/thumbnail/module.php:278 modules/thumbnail/module.php:384
+msgid "Theme color"
+msgstr ""
+
+#: modules/thumbnail/module.php:279
+msgid "Make the featured image"
+msgstr ""
+
+#: modules/thumbnail/module.php:280
+msgid "Replace the featured image"
+msgstr ""
+
+#: modules/thumbnail/module.php:282
+msgid "Write a title first."
+msgstr ""
+
+#: modules/thumbnail/module.php:283
+msgid ""
+"The picture was saved and set as the featured image. Update the post to keep "
+"it."
+msgstr ""
+
+#: modules/thumbnail/module.php:284
+msgid "This browser cannot make WebP, so a PNG was used."
+msgstr ""
+
+#: modules/thumbnail/module.php:285
+msgid "The picture could not be made:"
+msgstr ""
+
+#: modules/thumbnail/module.php:286
+msgid "More options (logo, font, alignment)"
+msgstr ""
+
+#: modules/thumbnail/module.php:337
+msgid ""
+"Make a cover picture for a post. It is drawn in your browser; nothing is "
+"sent to another site."
+msgstr ""
+
+#: modules/thumbnail/module.php:341
+msgid "Manage presets"
+msgstr ""
+
+#: modules/thumbnail/module.php:342
+msgid ""
+"A preset keeps the design choices (layout, alignment, color, mode, font, "
+"size, logo, organization), not the texts. Everyone who makes thumbnails on "
+"this site can use it."
+msgstr ""
+
+#: modules/thumbnail/module.php:343
+msgid "Preset name"
+msgstr ""
+
+#: modules/thumbnail/module.php:344
+msgid "Save as new"
+msgstr ""
+
+#: modules/thumbnail/module.php:344
+msgid "Update selected"
+msgstr ""
+
+#: modules/thumbnail/module.php:344
+msgid "Make default"
+msgstr ""
+
+#: modules/thumbnail/module.php:344
+msgid "Delete"
+msgstr ""
+
+#: modules/thumbnail/module.php:362
+msgid "Alignment"
+msgstr ""
+
+#: modules/thumbnail/module.php:366
+msgid "Left"
+msgstr ""
+
+#: modules/thumbnail/module.php:367
+msgid "Center"
+msgstr ""
+
+#: modules/thumbnail/module.php:368
+msgid "Right"
+msgstr ""
+
+#: modules/thumbnail/module.php:373
+msgid "Title"
+msgstr ""
+
+#: modules/thumbnail/module.php:374
+msgid "Description"
+msgstr ""
+
+#: modules/thumbnail/module.php:375
+msgid "Organization"
+msgstr ""
+
+#: modules/thumbnail/module.php:378
+msgid "Logo"
+msgstr ""
+
+#: modules/thumbnail/module.php:379
+msgid "Choose"
+msgstr ""
+
+#: modules/thumbnail/module.php:379
+msgid "Clear"
+msgstr ""
+
+#: modules/thumbnail/module.php:382
+msgid "Tag 1"
+msgstr ""
+
+#: modules/thumbnail/module.php:383
+msgid "Tag 2"
+msgstr ""
+
+#: modules/thumbnail/module.php:397
+msgid "Font family"
+msgstr ""
+
+#: modules/thumbnail/module.php:401
+msgid "File type"
+msgstr ""
+
+#: modules/thumbnail/module.php:405
+msgid "WebP (lighter, good for SEO)"
+msgstr ""
+
+#: modules/thumbnail/module.php:411
+msgid "Preview of the thumbnail"
+msgstr ""
+
+#: modules/thumbnail/module.php:412
+msgid "Reset"
+msgstr ""
+
+#: modules/thumbnail/module.php:412
+msgid "Export"
+msgstr ""
+
+#: modules/thumbnail/module.php:412
+msgid "Save to Media Library"
+msgstr ""

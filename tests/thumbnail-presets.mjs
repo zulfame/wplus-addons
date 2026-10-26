@@ -1,0 +1,68 @@
+// Presets: save, update, default, delete; bad data is cleaned; an author may use but not change them; the editor panel can pick one.
+import { php, ok, summary, launch, setField, openEditor, sleep, makeUser, TOOLS } from './lib.mjs';
+
+php('delete_option("wplus_addons_thumbnail_presets");');
+const author = makeUser('wpa_author_test', 'author');
+const { browser, open, errors } = await launch();
+const opts = (p) => p.evaluate(() => [...document.querySelectorAll('#wpa-preset option')].map((o) => o.textContent));
+let postId = 0;
+try {
+  let p = await open(1, TOOLS);
+  ok('list starts with only Custom', JSON.stringify(await opts(p)) === '["— Custom —"]', JSON.stringify(await opts(p)));
+  await p.evaluate(() => { document.querySelector('.wpa-manage').open = true; });
+  await setField(p, 'layout', 'dots'); await setField(p, 'accent', '#16a34a'); await setField(p, 'mode', 'dark'); await setField(p, 'ratio', '1280x720'); await setField(p, 'preset-name', 'Hijau Gelap');
+  await p.click('#wpa-preset-new'); await p.waitForFunction(() => /Hijau/.test(document.getElementById('wpa-preset').textContent), { timeout: 20000 });
+  ok('preset saved and selected', (await p.evaluate(() => document.getElementById('wpa-preset').value)) === 'hijau-gelap');
+  let saved = JSON.parse(php('echo json_encode(get_option("wplus_addons_thumbnail_presets"));'));
+  ok('stored with clean settings', saved.items.length === 1 && saved.items[0].settings.layout === 'dots' && saved.items[0].settings.accent === '#16a34a' && saved.items[0].settings.mode === 'dark' && saved.items[0].settings.ratio === '1280x720');
+  await p.click('#wpa-preset-default'); await p.waitForFunction(() => /\(/.test(document.getElementById('wpa-preset').textContent), { timeout: 20000 });
+  await setField(p, 'layout', 'panel'); await setField(p, 'accent', '#7c3aed'); await setField(p, 'preset-name', 'Ungu Panel'); await p.click('#wpa-preset-new'); await p.waitForFunction(() => /Ungu/.test(document.getElementById('wpa-preset').textContent), { timeout: 20000 });
+  saved = JSON.parse(php('echo json_encode(get_option("wplus_addons_thumbnail_presets"));'));
+  ok('two presets, the first is the default', saved.items.length === 2 && saved.default === 'hijau-gelap');
+  await p.close();
+  p = await open(1, TOOLS);
+  await p.evaluate(() => localStorage.removeItem('wplusThumb.v1')); await p.reload({ waitUntil: 'load' }); await sleep(1200);
+  const start = await p.evaluate(() => ({ layout: document.getElementById('wpa-layout').value, accent: document.getElementById('wpa-accent').value, mode: document.getElementById('wpa-mode').value, preset: document.getElementById('wpa-preset').value }));
+  ok('a browser that remembers nothing starts from the default preset', start.layout === 'dots' && start.accent === '#16a34a' && start.mode === 'dark' && start.preset === 'hijau-gelap', JSON.stringify(start));
+  await p.evaluate(() => { const s = document.getElementById('wpa-preset'); s.value = 'ungu-panel'; s.dispatchEvent(new Event('change', { bubbles: true })); });
+  const sw = await p.evaluate(() => ({ layout: document.getElementById('wpa-layout').value, accent: document.getElementById('wpa-accent').value }));
+  ok('choosing a preset applies it', sw.layout === 'panel' && sw.accent === '#7c3aed', JSON.stringify(sw));
+  await p.click('#wpa-reset'); await sleep(500);
+  ok('Reset goes back to the default preset', (await p.evaluate(() => document.getElementById('wpa-layout').value)) === 'dots' && (await p.evaluate(() => document.getElementById('wpa-preset').value)) === 'hijau-gelap');
+  await p.evaluate(() => { document.querySelector('.wpa-manage').open = true; const s = document.getElementById('wpa-preset'); s.value = 'hijau-gelap'; s.dispatchEvent(new Event('change', { bubbles: true })); });
+  await p.click('#wpa-preset-delete'); await p.waitForFunction(() => !/Hijau/.test(document.getElementById('wpa-preset').textContent), { timeout: 20000 });
+  saved = JSON.parse(php('echo json_encode(get_option("wplus_addons_thumbnail_presets"));'));
+  ok('deleting removes it and clears the default', saved.items.length === 1 && saved.default === '');
+  const bad = await p.evaluate(async () => { const items = []; for (let i = 0; i < 25; i++) items.push({ id: 'p' + i, name: 'N' + i + '<script>x</script>', settings: { layout: 'evil', accent: 'javascript:1', mode: 'x', font: 'comic', ratio: '9x9', format: 'gif', org: '<b>Org</b>' + 'x'.repeat(200), logo: 'https://evil.example/a.png' } }); items.push({ id: '', name: 'no id', settings: {} }); items.push({ id: 'p1', name: 'twin', settings: {} });
+    const r = await wp.apiFetch({ path: '/wp/v2/settings', method: 'POST', data: { wplus_addons_thumbnail_presets: { default: 'nothing', items } } }); return r.wplus_addons_thumbnail_presets; });
+  const s0 = bad.items[0];
+  ok('at most 20 presets, no duplicates, none without an id', bad.items.length === 20, String(bad.items.length));
+  ok('invalid choices fall back; accent is a safe hex; a logo from another site is dropped', s0.settings.layout === 'minimal' && s0.settings.mode === 'light' && s0.settings.font === 'dm-sans' && s0.settings.ratio === '1200x630' && s0.settings.format === 'webp' && /^#[0-9a-f]{6}$/i.test(s0.settings.accent) && s0.settings.logo === '');
+  ok('names and organization are plain text; organization is capped at 80', !/[<>]/.test(s0.name + s0.settings.org) && s0.settings.org.length <= 80);
+  ok('an unknown default is dropped', bad.default === '');
+  await p.close();
+  php('update_option("wplus_addons_thumbnail_presets", ["default"=>"hijau","items"=>[["id"=>"hijau","name"=>"Hijau","settings"=>["layout"=>"dots","accent"=>"#16a34a","mode"=>"dark"]],["id"=>"biru","name"=>"Biru","settings"=>["layout"=>"minimal","accent"=>"#2563eb","mode"=>"light"]]]]);');
+  const a = await open(author, TOOLS);
+  const au = await a.evaluate(() => ({ list: [...document.querySelectorAll('#wpa-preset option')].map((o) => o.textContent).length, manage: !!document.querySelector('.wpa-manage'), layout: document.getElementById('wpa-layout').value }));
+  ok('an author sees the presets, starts from the default and has no manage controls', au.list === 3 && au.manage === false && au.layout === 'dots', JSON.stringify(au));
+  const deny = await a.evaluate(async () => { try { await wp.apiFetch({ path: '/wp/v2/settings', method: 'POST', data: { wplus_addons_thumbnail_presets: { default: '', items: [] } } }); return 'allowed'; } catch (e) { return e.code || e.message; } });
+  ok('an author can not change presets through REST', deny !== 'allowed', deny);
+  await a.close();
+  postId = parseInt(php('echo wp_insert_post(["post_title"=>"Preset editor test","post_status"=>"draft"]);'), 10);
+  const e = await openEditor(open, 1, postId);
+  await e.evaluate(() => { try { localStorage.removeItem('wplusThumb.v1'); } catch (x) {} });
+  await e.reload({ waitUntil: 'load' }); await e.waitForFunction(() => window.wp && wp.data && wp.data.select('core/editor') && wp.data.select('core/editor').getCurrentPostId(), { timeout: 60000 });
+  await e.evaluate(() => { wp.data.dispatch('core/preferences').set('core/edit-post', 'welcomeGuide', false); try { wp.data.dispatch('core/edit-post').openGeneralSidebar('edit-post/document'); } catch (x) {} });
+  await sleep(1500);
+  await e.evaluate(() => { const btn = [...document.querySelectorAll('.components-panel__body-title button')].find((x) => /Thumbnail/.test(x.textContent)); if (btn && btn.getAttribute('aria-expanded') === 'false') btn.click(); });
+  await sleep(1500);
+  const before = await e.evaluate(() => [...document.querySelectorAll('.wplus-thumbnail-panel select')].map((s) => s.value).join(','));
+  await e.evaluate(() => { const sel = [...document.querySelectorAll('.wplus-thumbnail-panel select')][0]; Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value').set.call(sel, 'biru'); sel.dispatchEvent(new Event('change', { bubbles: true })); });
+  await sleep(800);
+  const after = await e.evaluate(() => [...document.querySelectorAll('.wplus-thumbnail-panel select')].map((s) => s.value).join(','));
+  ok('the editor panel can pick a preset', before !== after && /minimal/.test(after) && /light/.test(after), before + ' => ' + after);
+} finally {
+  php(`delete_option("wplus_addons_thumbnail_presets"); ${postId ? `wp_delete_post(${postId},true);` : ''} require_once ABSPATH."wp-admin/includes/user.php"; wp_delete_user(${author});`);
+  await browser.close();
+}
+summary(`page errors: ${errors.length}`);
