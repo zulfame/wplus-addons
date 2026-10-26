@@ -57,7 +57,12 @@
 	overflow: hidden;
 	line-height: 0;
 }
-#wpa-canvas {
+/* a WordPress button keeps its own display value, so the hidden attribute needs help */
+.wpa-thumb [hidden] {
+	display: none !important;
+}
+#wpa-canvas,
+#wpb-canvas {
 	display: block;
 	width: 100%;
 	height: auto;
@@ -93,4 +98,38 @@
 	flex-wrap: wrap;
 	align-items: center;
 	gap: 6px 8px;
+}
+
+.wpa-tabs {
+	margin-bottom: 12px;
+}
+.wpa-bulk {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
+	gap: 24px;
+	align-items: start;
+	margin-top: 12px;
+}
+.wpa-bulk-bar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 8px;
+}
+.wpa-bulk-table .wpb-result {
+	min-width: 140px;
+}
+.wpa-bulk-side {
+	position: sticky;
+	top: 48px;
+}
+@media screen and (max-width: 900px) {
+	.wpa-bulk {
+		grid-template-columns: 1fr;
+	}
+	.wpa-bulk-side {
+		position: static;
+		order: -1;
+	}
 }

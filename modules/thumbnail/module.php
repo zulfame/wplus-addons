@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once __DIR__ . '/presets.php';
+require_once __DIR__ . '/bulk.php';
 
 /**
  * Add the page under Tools.
@@ -171,6 +172,10 @@ function wplus_addons_thumbnail_assets( $hook ) {
 	if ( 'tools_page_wplus-thumbnail' !== $hook ) {
 		return;
 	}
+	if ( wplus_addons_thumbnail_is_bulk_tab() ) {
+		wplus_addons_thumbnail_bulk_assets();
+		return;
+	}
 	$base = WPLUS_ADDONS_URL . 'modules/thumbnail/';
 	wp_enqueue_media();
 	wp_enqueue_style( 'wplus-addons-thumbnail', $base . 'assets/admin.css', array(), WPLUS_ADDONS_VERSION );
@@ -232,11 +237,12 @@ function wplus_addons_thumbnail_editor_assets() {
 		'wplus-addons-thumbnail-editor',
 		'wplusThumbEditor',
 		array(
-			'fonts'    => wplus_addons_thumbnail_font_config(),
-			'defaults' => wplus_addons_thumbnail_defaults(),
-			'presets'  => wplus_addons_thumbnail_presets(),
-			'toolsUrl' => admin_url( 'tools.php?page=wplus-thumbnail' ),
-			'layouts'  => array(
+			'fonts'           => wplus_addons_thumbnail_font_config(),
+			'defaults'        => wplus_addons_thumbnail_defaults(),
+			'presets'         => wplus_addons_thumbnail_presets(),
+			'defaultCategory' => (int) get_option( 'default_category' ),
+			'toolsUrl'        => admin_url( 'tools.php?page=wplus-thumbnail' ),
+			'layouts'         => array(
 				array(
 					'value' => 'minimal',
 					'label' => __( 'Minimal (frame)', 'wplus-addons' ),
@@ -250,7 +256,7 @@ function wplus_addons_thumbnail_editor_assets() {
 					'label' => __( 'Panel', 'wplus-addons' ),
 				),
 			),
-			'modes'    => array(
+			'modes'           => array(
 				array(
 					'value' => 'light',
 					'label' => __( 'Light', 'wplus-addons' ),
@@ -260,8 +266,8 @@ function wplus_addons_thumbnail_editor_assets() {
 					'label' => __( 'Dark', 'wplus-addons' ),
 				),
 			),
-			'ratios'   => wplus_addons_thumbnail_ratios(),
-			'i18n'     => array(
+			'ratios'          => wplus_addons_thumbnail_ratios(),
+			'i18n'            => array(
 				'panel'        => __( 'Thumbnail', 'wplus-addons' ),
 				'preset'       => __( 'Preset', 'wplus-addons' ),
 				'custom'       => __( '— Custom —', 'wplus-addons' ),
@@ -318,11 +324,16 @@ function wplus_addons_thumbnail_render_page() {
 	if ( ! current_user_can( 'upload_files' ) ) {
 		return;
 	}
+	if ( wplus_addons_thumbnail_is_bulk_tab() ) {
+		wplus_addons_thumbnail_render_bulk();
+		return;
+	}
 	$fonts = array();
 	foreach ( wplus_addons_thumbnail_fonts() as $key => $font ) {
 		$fonts[ $key ] = $font['label'];
 	}
 	echo '<div class="wrap wpa-thumb"><h1>' . esc_html__( 'Thumbnail generator', 'wplus-addons' ) . '</h1>';
+	wplus_addons_thumbnail_tabs( 'generator' );
 	echo '<p class="description">' . esc_html__( 'Make a cover picture for a post. It is drawn in your browser; nothing is sent to another site.', 'wplus-addons' ) . '</p>';
 	echo '<div class="wpa-layout"><div class="wpa-form">';
 	wplus_addons_thumbnail_row( 'wpa-preset', __( 'Preset', 'wplus-addons' ), '<select id="wpa-preset"></select>' );

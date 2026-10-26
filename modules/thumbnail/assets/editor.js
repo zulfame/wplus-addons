@@ -78,7 +78,9 @@
 			var ed = select( 'core/editor' );
 			var core = select( 'core' );
 			var tagIds = ed.getEditedPostAttribute( 'tags' ) || [];
-			var catIds = ed.getEditedPostAttribute( 'categories' ) || [];
+			var catIds = ( ed.getEditedPostAttribute( 'categories' ) || [] ).filter( function ( id ) {
+				return id !== cfg.defaultCategory; // the default category ("Uncategorized") says nothing on a picture
+			} );
 			var names = function ( taxonomy, ids ) {
 				if ( ! ids.length ) {
 					return '';
