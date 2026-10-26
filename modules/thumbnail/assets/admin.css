@@ -1,0 +1,81 @@
+.wpa-thumb .wpa-layout {
+	display: grid;
+	grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+	gap: 24px;
+	margin-top: 16px;
+	align-items: start;
+}
+.wpa-form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4px 12px;
+}
+.wpa-field {
+	grid-column: 1 / -1;
+	margin: 0 0 8px;
+}
+.wpa-field.half {
+	grid-column: auto;
+}
+.wpa-field label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+.wpa-field select,
+.wpa-field input[type="text"],
+.wpa-field textarea {
+	width: 100%;
+	max-width: none;
+}
+.wpa-field input[type="color"] {
+	width: 100%;
+	height: 32px;
+	padding: 2px;
+}
+.wpa-logo {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px 10px;
+	min-height: 32px;
+}
+#wpa-logo-name {
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.wpa-preview {
+	position: sticky;
+	top: 48px;
+}
+.wpa-canvas-wrap {
+	background: #f0f0f1;
+	border: 1px solid #c3c4c7;
+	border-radius: 6px;
+	overflow: hidden;
+	line-height: 0;
+}
+#wpa-canvas {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.wpa-actions {
+	display: flex;
+	gap: 8px;
+	margin: 12px 0 4px;
+}
+.wpa-actions .button-primary {
+	flex: 1;
+}
+@media screen and (max-width: 900px) {
+	.wpa-thumb .wpa-layout {
+		grid-template-columns: 1fr;
+	}
+	.wpa-preview {
+		position: static;
+		order: -1;
+	}
+}

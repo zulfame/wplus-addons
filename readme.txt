@@ -12,7 +12,7 @@ Small, optional tools for WPlus UI and any WordPress site. Each tool can be swit
 
 == Description ==
 
-* Thumbnail generator (in progress): make a cover picture for a post and use it as the featured image.
+* Thumbnail generator (Tools > Thumbnail): make a cover picture with two layouts, your colors, logo and tags, and download it as PNG or WebP. Saving to the Media Library and the editor panel are coming.
 * Light security hardening (planned): safe switches, a login attempt limit and a plain-language security check.
 
 Open Settings > WPlus Addons to switch each tool on or off. The plugin sends nothing to any other site.
@@ -22,3 +22,4 @@ Open Settings > WPlus Addons to switch each tool on or off. The plugin sends not
 = 0.1.0 =
 
 * First skeleton: the settings page and the tool switches.
+* New: Tools > Thumbnail with live preview and PNG or WebP download.
