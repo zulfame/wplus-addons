@@ -93,6 +93,20 @@ function wplus_addons_shield_render_page() {
 		return;
 	}
 	echo '<div class="wrap"><h1>' . esc_html__( 'WPlus Security', 'wplus-addons' ) . '</h1>';
+	$tab = isset( $_GET['tab'] ) && 'check' === sanitize_key( wp_unslash( $_GET['tab'] ) ) ? 'check' : 'settings'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only tab switch.
+	echo '<nav class="nav-tab-wrapper wpa-tabs" aria-label="' . esc_attr__( 'Security', 'wplus-addons' ) . '">';
+	foreach ( array(
+		'settings' => array( __( 'Switches', 'wplus-addons' ), admin_url( 'options-general.php?page=wplus-security' ) ),
+		'check'    => array( __( 'Security check', 'wplus-addons' ), admin_url( 'options-general.php?page=wplus-security&tab=check' ) ),
+	) as $key => $item ) {
+		echo '<a class="nav-tab' . ( $key === $tab ? ' nav-tab-active' : '' ) . '" href="' . esc_url( $item[1] ) . '"' . ( $key === $tab ? ' aria-current="page"' : '' ) . '>' . esc_html( $item[0] ) . '</a>';
+	}
+	echo '</nav>';
+	if ( 'check' === $tab ) {
+		wplus_addons_health_render();
+		echo '</div>';
+		return;
+	}
 	echo '<p class="description">' . esc_html__( 'Safe switches that close common gaps. This is not a firewall and not a malware scanner: keep a plugin made for that too.', 'wplus-addons' ) . '</p>';
 	echo '<form method="post" action="options.php">';
 	settings_fields( 'wplus_addons_shield' );

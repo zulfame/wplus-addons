@@ -64,6 +64,14 @@ After 5 failed logins within 15 minutes from one address, that address can not l
 - **Locked addresses** are listed on the page with an **Unlock** button (and **Unlock all**), for administrators.
 - If you lock yourself out: wait, or add `define( 'WPLUS_ADDONS_DISABLE_LOGIN_LIMIT', true );` to `wp-config.php`.
 
+### Security check
+
+The second tab of **Settings > WPlus Security** is a plain-language list of what is fine, what is worth a look and what needs attention, worst first, each with what it means and a button to the place where you fix it. It only reads and explains; it changes nothing by itself.
+
+It looks at: whether WordPress is up to date; the PHP version (red when it no longer gets security fixes, yellow in its last six months); plugins and themes waiting for an update; plugins that are installed but not used; an administrator called `admin`; the number of administrators; open registration with a role that can write; https; debug mode; the permissions of `wp-config.php`; the file editor; the login limit; whether a security plugin (Wordfence, Solid Security, Patchstack, Sucuri and others) and a backup plugin (UpdraftPlus, BackWPup, Duplicator and others) are active.
+
+The button **Check the files now** asks the address of the site itself (nothing else) whether a few leftovers can be opened by anyone: `.env`, `.git`, copies of `wp-config.php`, `debug.log`, database dumps, `phpinfo.php` and a folder listing of `uploads`. A page that answers "200" to everything is not taken for a leak: the start of the file must look like the real thing. The answer is kept for a day.
+
 ## Updates
 
 New versions appear under Plugins and Dashboard > Updates like any other plugin, with an Update button, a details window and optional automatic updates. They come from the releases of this repository: the plugin header has `Update URI: https://github.com/zulfame/wplus-addons`, so WordPress does not ask wordpress.org about it, and the zip is checked against the checksum GitHub published for it before it is installed. Settings > WPlus Addons shows your version and a Check now button. To turn it off: `define( 'WPLUS_ADDONS_DISABLE_UPDATES', true );` in `wp-config.php`. The request to GitHub carries only the address of your site and the plugin version.

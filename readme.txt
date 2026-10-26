@@ -29,6 +29,8 @@ Make a cover picture for a post from its title, excerpt, tags and your site, and
 
 Six safe switches under Settings > WPlus Security (switch the tool on in Settings > WPlus Addons first): hide the WordPress version, turn off the file editor, send safety headers, give one message for a failed login, hide the list of users from visitors, and turn off XML-RPC (off to start with, because some apps need it). It also limits failed logins: after 5 failed logins from one address (changeable), that address is locked for 15 minutes, with a list of locked addresses, an Unlock button, an allow list and a setting for sites behind Cloudflare or another proxy. It is not a firewall and not a malware scanner.
 
+The second tab, Security check, is a plain-language list of what is fine, worth a look or needs attention (WordPress, PHP, updates waiting, unused plugins, an administrator called admin, open registration, https, debug mode, wp-config.php permissions, the file editor, the login limit, a security plugin, a backup plugin), with a button to the place where you fix it. A button also checks whether files that should be secret (.env, .git, debug.log, database dumps and similar) can be opened by anyone; it asks only the address of your own site.
+
 == Installation ==
 
 1. Upload the zip in Plugins > Add New > Upload Plugin, or unpack it in `wp-content/plugins/`.

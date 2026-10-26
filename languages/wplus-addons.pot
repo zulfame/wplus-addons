@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPlus Addons 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
-"POT-Creation-Date: 2026-10-26 17:21+0700\n"
+"POT-Creation-Date: 2026-10-26 18:52+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Zulfadli Rizal\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,7 @@ msgstr ""
 msgid "WPlus Addons"
 msgstr ""
 
-#: includes/settings.php:60
+#: includes/settings.php:60 modules/shield/health.php:458
 msgid "Checked just now."
 msgstr ""
 
@@ -62,7 +62,8 @@ msgid ""
 "installed."
 msgstr ""
 
-#: includes/updater.php:299 modules/shield/login-limit.php:240
+#: includes/updater.php:299 modules/shield/health.php:145
+#: modules/shield/login-limit.php:240
 msgid "You are not allowed to do this."
 msgstr ""
 
@@ -183,6 +184,421 @@ msgstr ""
 msgid "<strong>Error:</strong> The user name or the password is not right."
 msgstr ""
 
+#. translators: 1: installed version, 2: new version
+#: modules/shield/health.php:257
+msgid "WordPress is not up to date"
+msgstr ""
+
+#: modules/shield/health.php:257
+#, php-format
+msgid ""
+"You have WordPress %1$s and %2$s is available. Updates close security holes "
+"that are already known."
+msgstr ""
+
+#: modules/shield/health.php:257
+msgid "Update WordPress"
+msgstr ""
+
+#. translators: %s: version
+#: modules/shield/health.php:260
+msgid "WordPress is up to date"
+msgstr ""
+
+#: modules/shield/health.php:260
+#, php-format
+msgid "You have WordPress %s and no newer version is waiting."
+msgstr ""
+
+#. translators: %s: PHP version
+#: modules/shield/health.php:266
+#, php-format
+msgid "Your server runs PHP %s."
+msgstr ""
+
+#: modules/shield/health.php:268
+msgid "PHP is no longer supported"
+msgstr ""
+
+#: modules/shield/health.php:268
+msgid ""
+"This version does not get security fixes any more. Ask your host to switch "
+"to a newer PHP."
+msgstr ""
+
+#: modules/shield/health.php:270
+msgid "PHP will stop being supported soon"
+msgstr ""
+
+#: modules/shield/health.php:270
+msgid ""
+"Its security fixes end within six months. Plan the switch to a newer PHP "
+"with your host."
+msgstr ""
+
+#: modules/shield/health.php:272
+msgid "PHP is supported"
+msgstr ""
+
+#. translators: %s: names of plugins and themes
+#: modules/shield/health.php:293
+msgid "Plugins or themes are waiting for an update"
+msgstr ""
+
+#: modules/shield/health.php:293
+#, php-format
+msgid ""
+"Waiting: %s. An old plugin is the most common way a site is broken into."
+msgstr ""
+
+#: modules/shield/health.php:293
+msgid "See the updates"
+msgstr ""
+
+#: modules/shield/health.php:295
+msgid "Plugins and themes are up to date"
+msgstr ""
+
+#: modules/shield/health.php:295
+msgid "None of them is waiting for an update."
+msgstr ""
+
+#. translators: 1: number of plugins, 2: their names
+#: modules/shield/health.php:305
+msgid "Plugins are installed but not used"
+msgstr ""
+
+#: modules/shield/health.php:305
+#, php-format
+msgid ""
+"%1$d not used: %2$s. A plugin that is switched off can still be attacked if "
+"it has a hole. Delete what you do not need."
+msgstr ""
+
+#: modules/shield/health.php:305
+msgid "Open Plugins"
+msgstr ""
+
+#: modules/shield/health.php:307
+msgid "No unused plugins"
+msgstr ""
+
+#: modules/shield/health.php:307
+msgid "Every installed plugin is in use."
+msgstr ""
+
+#: modules/shield/health.php:313
+msgid "An administrator is called \"admin\""
+msgstr ""
+
+#: modules/shield/health.php:313
+msgid ""
+"Everybody tries this name first when guessing passwords. Make a new "
+"administrator with another name, log in with it and delete the old one (give "
+"its posts to the new one)."
+msgstr ""
+
+#: modules/shield/health.php:313 modules/shield/health.php:327
+msgid "Open Users"
+msgstr ""
+
+#: modules/shield/health.php:315
+msgid "No administrator is called \"admin\""
+msgstr ""
+
+#: modules/shield/health.php:315
+msgid "The most guessed user name is not an administrator here."
+msgstr ""
+
+#. translators: %d: number of administrators
+#: modules/shield/health.php:327
+msgid "Many administrators"
+msgstr ""
+
+#: modules/shield/health.php:327
+#, php-format
+msgid ""
+"There are %d administrators. Each one is a way in. Give people the lowest "
+"role that lets them do their work."
+msgstr ""
+
+#. translators: %d: number of administrators
+#: modules/shield/health.php:330
+msgid "Few administrators"
+msgstr ""
+
+#: modules/shield/health.php:330
+#, php-format
+msgid "There are %d administrators."
+msgstr ""
+
+#. translators: %s: role name
+#: modules/shield/health.php:337
+msgid "Anyone can register as an editor or administrator"
+msgstr ""
+
+#: modules/shield/health.php:337
+#, php-format
+msgid ""
+"Registration is open and new people get the role \"%s\". Anyone could take "
+"over your site. Close registration or change the role to Subscriber."
+msgstr ""
+
+#: modules/shield/health.php:337 modules/shield/health.php:340
+#: modules/shield/health.php:351
+msgid "Open General settings"
+msgstr ""
+
+#. translators: %s: role name
+#: modules/shield/health.php:340
+msgid "Anyone can register and write"
+msgstr ""
+
+#: modules/shield/health.php:340
+#, php-format
+msgid ""
+"Registration is open and new people get the role \"%s\". Make it Subscriber "
+"unless you really want strangers to write."
+msgstr ""
+
+#: modules/shield/health.php:342
+msgid "Registration is closed or harmless"
+msgstr ""
+
+#: modules/shield/health.php:342
+msgid "People can register, but only as subscribers."
+msgstr ""
+
+#: modules/shield/health.php:342
+msgid "Nobody can register themselves."
+msgstr ""
+
+#: modules/shield/health.php:347
+msgid "The site uses https"
+msgstr ""
+
+#: modules/shield/health.php:347
+msgid "Visitors and you talk to the site over a secure connection."
+msgstr ""
+
+#: modules/shield/health.php:349
+msgid "https is not needed on this address"
+msgstr ""
+
+#: modules/shield/health.php:349
+msgid "This is a local address (for tests)."
+msgstr ""
+
+#: modules/shield/health.php:351
+msgid "The site does not use https"
+msgstr ""
+
+#: modules/shield/health.php:351
+msgid ""
+"Passwords and logins travel in the open. Ask your host for a certificate and "
+"set both addresses in General settings to https."
+msgstr ""
+
+#: modules/shield/health.php:357
+msgid "Errors are shown to visitors"
+msgstr ""
+
+#: modules/shield/health.php:357
+msgid ""
+"Debug mode is on and shows PHP errors on the pages. They can reveal paths "
+"and settings. Set WP_DEBUG to false in wp-config.php on a live site."
+msgstr ""
+
+#: modules/shield/health.php:359
+msgid "Debug mode is on"
+msgstr ""
+
+#: modules/shield/health.php:359
+msgid ""
+"Errors are not shown, but they are written to a log. Switch WP_DEBUG off on "
+"a live site when you are done testing."
+msgstr ""
+
+#: modules/shield/health.php:361
+msgid "Debug mode is off"
+msgstr ""
+
+#: modules/shield/health.php:361
+msgid "Nothing is written or shown for debugging."
+msgstr ""
+
+#: modules/shield/health.php:368
+msgid "wp-config.php can be changed by everyone"
+msgstr ""
+
+#: modules/shield/health.php:368
+msgid ""
+"Anyone with an account on the server can read or change the file that holds "
+"your database password. Set its permissions to 640 or 600."
+msgstr ""
+
+#: modules/shield/health.php:370
+msgid "wp-config.php is protected"
+msgstr ""
+
+#: modules/shield/health.php:370
+msgid ""
+"The file with the database password is not open to everyone on the server."
+msgstr ""
+
+#: modules/shield/health.php:382
+msgid "The file editor is closed"
+msgstr ""
+
+#: modules/shield/health.php:382
+msgid "Nobody can change theme or plugin code from the dashboard."
+msgstr ""
+
+#: modules/shield/health.php:384
+msgid "The file editor is open"
+msgstr ""
+
+#: modules/shield/health.php:384
+msgid ""
+"Someone who gets into an administrator account can change your code from the "
+"dashboard. Switch \"Turn off the file editor\" on."
+msgstr ""
+
+#: modules/shield/health.php:384 modules/shield/health.php:389
+msgid "Open the switches"
+msgstr ""
+
+#: modules/shield/health.php:387
+msgid "Failed logins are limited"
+msgstr ""
+
+#: modules/shield/health.php:387
+msgid "An address that fails to log in too often is locked for a while."
+msgstr ""
+
+#: modules/shield/health.php:389
+msgid "Failed logins are not limited"
+msgstr ""
+
+#: modules/shield/health.php:389
+msgid "Bots can try passwords for ever. Switch \"Limit failed logins\" on."
+msgstr ""
+
+#. translators: %s: plugin names
+#: modules/shield/health.php:394
+msgid "A security plugin is active"
+msgstr ""
+
+#: modules/shield/health.php:394
+#, php-format
+msgid "Active: %s."
+msgstr ""
+
+#: modules/shield/health.php:396
+msgid "No firewall or malware scanner found"
+msgstr ""
+
+#: modules/shield/health.php:396
+msgid ""
+"The switches here close common gaps, but they are not a firewall and not a "
+"scanner. Add a plugin made for that, such as Wordfence, Solid Security or "
+"Patchstack."
+msgstr ""
+
+#: modules/shield/health.php:396 modules/shield/health.php:403
+msgid "Find plugins"
+msgstr ""
+
+#. translators: %s: plugin names
+#: modules/shield/health.php:401
+msgid "A backup plugin is active"
+msgstr ""
+
+#: modules/shield/health.php:401
+#, php-format
+msgid ""
+"Active: %s. Check now and then that a recent backup exists and that you can "
+"restore it."
+msgstr ""
+
+#: modules/shield/health.php:403
+msgid "No backup plugin found"
+msgstr ""
+
+#: modules/shield/health.php:403
+msgid ""
+"If your host does not keep backups for you, one broken update or one attack "
+"can cost you the whole site. Add a backup plugin, or ask your host."
+msgstr ""
+
+#. translators: 1: addresses, 2: how long ago
+#: modules/shield/health.php:412
+msgid "Files that should be secret can be opened"
+msgstr ""
+
+#: modules/shield/health.php:412
+#, php-format
+msgid ""
+"Anyone can open: %1$s (checked %2$s ago). They can hold passwords or your "
+"data. Remove them from the server or block them, then check again."
+msgstr ""
+
+#: modules/shield/health.php:414
+msgid "The files could not be checked"
+msgstr ""
+
+#: modules/shield/health.php:414
+msgid ""
+"The site could not ask its own address (some servers do not allow that). Try "
+"again later."
+msgstr ""
+
+#. translators: %s: how long ago
+#: modules/shield/health.php:417
+msgid "No secret files can be opened"
+msgstr ""
+
+#: modules/shield/health.php:417
+#, php-format
+msgid ""
+"Common leftovers (.env, .git, copies of wp-config.php, debug.log, database "
+"dumps, phpinfo, a folder listing) are not reachable (checked %s ago)."
+msgstr ""
+
+#. translators: 1: number needing attention, 2: number worth a look, 3: number fine
+#: modules/shield/health.php:451
+#, php-format
+msgid "%1$d need attention, %2$d worth a look, %3$d fine."
+msgstr ""
+
+#: modules/shield/health.php:466
+msgid "Needs attention"
+msgstr ""
+
+#: modules/shield/health.php:467
+msgid "Worth a look"
+msgstr ""
+
+#: modules/shield/health.php:468
+msgid "Fine"
+msgstr ""
+
+#: modules/shield/health.php:477
+msgid "Files that should be secret"
+msgstr ""
+
+#: modules/shield/health.php:478
+msgid ""
+"Looks whether a few leftovers (.env, .git, copies of wp-config.php, "
+"debug.log, database dumps, phpinfo and a folder listing of uploads) can be "
+"opened by anyone. It only asks the address of this site, and only when you "
+"press the button."
+msgstr ""
+
+#: modules/shield/health.php:479
+msgid "Check the files now"
+msgstr ""
+
 #. translators: %d: minutes to wait
 #: modules/shield/login-limit.php:178
 #, php-format
@@ -216,7 +632,7 @@ msgstr ""
 msgid "Failed logins"
 msgstr ""
 
-#: modules/shield/settings.php:78 modules/shield/settings.php:119
+#: modules/shield/settings.php:78 modules/shield/settings.php:133
 msgid "Locked for"
 msgstr ""
 
@@ -234,68 +650,80 @@ msgstr ""
 msgid "Unlock all"
 msgstr ""
 
-#: modules/shield/settings.php:96
+#: modules/shield/settings.php:97
+msgid "Security"
+msgstr ""
+
+#: modules/shield/settings.php:99
+msgid "Switches"
+msgstr ""
+
+#: modules/shield/settings.php:100
+msgid "Security check"
+msgstr ""
+
+#: modules/shield/settings.php:110
 msgid ""
 "Safe switches that close common gaps. This is not a firewall and not a "
 "malware scanner: keep a plugin made for that too."
 msgstr ""
 
-#: modules/shield/settings.php:103 modules/shield/settings.php:116
+#: modules/shield/settings.php:117 modules/shield/settings.php:130
 msgid "On"
 msgstr ""
 
-#: modules/shield/settings.php:106
+#: modules/shield/settings.php:120
 msgid "Good to know:"
 msgstr ""
 
-#: modules/shield/settings.php:113
+#: modules/shield/settings.php:127
 msgid "Login attempts"
 msgstr ""
 
-#: modules/shield/settings.php:114
+#: modules/shield/settings.php:128
 msgid ""
 "After too many failed logins from one address, that address can not log in "
 "for a while, even with the right password. A good login starts the count "
 "again."
 msgstr ""
 
-#: modules/shield/settings.php:116
+#: modules/shield/settings.php:130
 msgid "Limit failed logins"
 msgstr ""
 
-#: modules/shield/settings.php:117
+#: modules/shield/settings.php:131
 msgid "Failed logins allowed"
 msgstr ""
 
-#: modules/shield/settings.php:117
+#: modules/shield/settings.php:131
 msgid "times"
 msgstr ""
 
-#: modules/shield/settings.php:118
+#: modules/shield/settings.php:132
 msgid "Counted within"
 msgstr ""
 
-#: modules/shield/settings.php:118 modules/shield/settings.php:119
+#: modules/shield/settings.php:132 modules/shield/settings.php:133
 msgid "minutes"
 msgstr ""
 
-#: modules/shield/settings.php:120
+#: modules/shield/settings.php:134
 msgid "Address of the visitor"
 msgstr ""
 
-#: modules/shield/settings.php:122
+#: modules/shield/settings.php:136
 msgid "The address of the connection (no proxy or CDN)"
 msgstr ""
 
-#: modules/shield/settings.php:123
+#: modules/shield/settings.php:137
 msgid "Cloudflare (header CF-Connecting-IP)"
 msgstr ""
 
-#: modules/shield/settings.php:124
+#: modules/shield/settings.php:138
 msgid "Another proxy (first address of X-Forwarded-For)"
 msgstr ""
 
-#: modules/shield/settings.php:129
+#: modules/shield/settings.php:143
 msgid ""
 "Behind a proxy or CDN every visitor can look like one address, and then one "
 "person could lock everybody out. Choose the header your proxy sets only if "
@@ -303,20 +731,20 @@ msgid ""
 msgstr ""
 
 #. translators: %s: an IP address
-#: modules/shield/settings.php:131
+#: modules/shield/settings.php:145
 #, php-format
 msgid "The plugin sees you as %s. Is that your own address?"
 msgstr ""
 
-#: modules/shield/settings.php:132
+#: modules/shield/settings.php:146
 msgid "Never lock these addresses"
 msgstr ""
 
-#: modules/shield/settings.php:132
+#: modules/shield/settings.php:146
 msgid "One address per line, for example your office."
 msgstr ""
 
-#: modules/shield/settings.php:134
+#: modules/shield/settings.php:148
 msgid ""
 "If you lock yourself out: wait for the time above, or add "
 "define( 'WPLUS_ADDONS_DISABLE_LOGIN_LIMIT', true ); to wp-config.php."

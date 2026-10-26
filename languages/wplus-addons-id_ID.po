@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPlus Addons 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
-"POT-Creation-Date: 2026-10-26 17:21+0700\n"
+"POT-Creation-Date: 2026-10-26 18:52+0700\n"
 "PO-Revision-Date: 2026-10-26 17:30+0700\n"
 "Last-Translator: Zulfadli Rizal\n"
 "Language-Team: Indonesian\n"
@@ -43,7 +43,7 @@ msgstr ""
 msgid "WPlus Addons"
 msgstr "WPlus Addons"
 
-#: includes/settings.php:60
+#: includes/settings.php:60 modules/shield/health.php:458
 msgid "Checked just now."
 msgstr "Baru saja diperiksa."
 
@@ -67,7 +67,8 @@ msgstr ""
 "Berkas plugin yang diunduh tidak cocok dengan checksum-nya, jadi tidak "
 "dipasang."
 
-#: includes/updater.php:299 modules/shield/login-limit.php:240
+#: includes/updater.php:299 modules/shield/health.php:145
+#: modules/shield/login-limit.php:240
 msgid "You are not allowed to do this."
 msgstr "Anda tidak diizinkan melakukan ini."
 
@@ -206,6 +207,475 @@ msgstr ""
 msgid "<strong>Error:</strong> The user name or the password is not right."
 msgstr "<strong>Galat:</strong> Nama pengguna atau kata sandi tidak tepat."
 
+#. translators: 1: installed version, 2: new version
+#: modules/shield/health.php:257
+msgid "WordPress is not up to date"
+msgstr "WordPress belum terbaru"
+
+#: modules/shield/health.php:257
+#, php-format
+msgid ""
+"You have WordPress %1$s and %2$s is available. Updates close security holes "
+"that are already known."
+msgstr ""
+"Anda memakai WordPress %1$s dan versi %2$s tersedia. Pembaruan menutup celah "
+"keamanan yang sudah diketahui."
+
+#: modules/shield/health.php:257
+msgid "Update WordPress"
+msgstr "Perbarui WordPress"
+
+#. translators: %s: version
+#: modules/shield/health.php:260
+msgid "WordPress is up to date"
+msgstr "WordPress sudah terbaru"
+
+#: modules/shield/health.php:260
+#, php-format
+msgid "You have WordPress %s and no newer version is waiting."
+msgstr "Anda memakai WordPress %s dan tidak ada versi yang lebih baru."
+
+#. translators: %s: PHP version
+#: modules/shield/health.php:266
+#, php-format
+msgid "Your server runs PHP %s."
+msgstr "Server Anda memakai PHP %s."
+
+#: modules/shield/health.php:268
+msgid "PHP is no longer supported"
+msgstr "PHP tidak lagi didukung"
+
+#: modules/shield/health.php:268
+msgid ""
+"This version does not get security fixes any more. Ask your host to switch "
+"to a newer PHP."
+msgstr ""
+"Versi ini tidak lagi mendapat perbaikan keamanan. Minta penyedia hosting "
+"Anda beralih ke PHP yang lebih baru."
+
+#: modules/shield/health.php:270
+msgid "PHP will stop being supported soon"
+msgstr "PHP akan segera tidak didukung"
+
+#: modules/shield/health.php:270
+msgid ""
+"Its security fixes end within six months. Plan the switch to a newer PHP "
+"with your host."
+msgstr ""
+"Perbaikan keamanannya berakhir dalam enam bulan. Rencanakan peralihan ke PHP "
+"yang lebih baru bersama penyedia hosting Anda."
+
+#: modules/shield/health.php:272
+msgid "PHP is supported"
+msgstr "PHP masih didukung"
+
+#. translators: %s: names of plugins and themes
+#: modules/shield/health.php:293
+msgid "Plugins or themes are waiting for an update"
+msgstr "Ada plugin atau tema yang menunggu pembaruan"
+
+#: modules/shield/health.php:293
+#, php-format
+msgid ""
+"Waiting: %s. An old plugin is the most common way a site is broken into."
+msgstr ""
+"Menunggu: %s. Plugin lama adalah cara yang paling sering dipakai untuk "
+"membobol situs."
+
+#: modules/shield/health.php:293
+msgid "See the updates"
+msgstr "Lihat pembaruan"
+
+#: modules/shield/health.php:295
+msgid "Plugins and themes are up to date"
+msgstr "Plugin dan tema sudah terbaru"
+
+#: modules/shield/health.php:295
+msgid "None of them is waiting for an update."
+msgstr "Tidak ada yang menunggu pembaruan."
+
+#. translators: 1: number of plugins, 2: their names
+#: modules/shield/health.php:305
+msgid "Plugins are installed but not used"
+msgstr "Ada plugin terpasang tetapi tidak dipakai"
+
+#: modules/shield/health.php:305
+#, php-format
+msgid ""
+"%1$d not used: %2$s. A plugin that is switched off can still be attacked if "
+"it has a hole. Delete what you do not need."
+msgstr ""
+"%1$d tidak dipakai: %2$s. Plugin yang dimatikan tetap bisa diserang jika "
+"punya celah. Hapus yang tidak Anda perlukan."
+
+#: modules/shield/health.php:305
+msgid "Open Plugins"
+msgstr "Buka Plugin"
+
+#: modules/shield/health.php:307
+msgid "No unused plugins"
+msgstr "Tidak ada plugin yang tidak dipakai"
+
+#: modules/shield/health.php:307
+msgid "Every installed plugin is in use."
+msgstr "Semua plugin yang terpasang dipakai."
+
+#: modules/shield/health.php:313
+msgid "An administrator is called \"admin\""
+msgstr "Ada administrator bernama \"admin\""
+
+#: modules/shield/health.php:313
+msgid ""
+"Everybody tries this name first when guessing passwords. Make a new "
+"administrator with another name, log in with it and delete the old one (give "
+"its posts to the new one)."
+msgstr ""
+"Nama ini yang pertama dicoba semua orang saat menebak kata sandi. Buat "
+"administrator baru dengan nama lain, login dengannya, lalu hapus yang lama "
+"(berikan tulisannya ke yang baru)."
+
+#: modules/shield/health.php:313 modules/shield/health.php:327
+msgid "Open Users"
+msgstr "Buka Pengguna"
+
+#: modules/shield/health.php:315
+msgid "No administrator is called \"admin\""
+msgstr "Tidak ada administrator bernama \"admin\""
+
+#: modules/shield/health.php:315
+msgid "The most guessed user name is not an administrator here."
+msgstr "Nama pengguna yang paling sering ditebak bukan administrator di sini."
+
+#. translators: %d: number of administrators
+#: modules/shield/health.php:327
+msgid "Many administrators"
+msgstr "Banyak administrator"
+
+#: modules/shield/health.php:327
+#, php-format
+msgid ""
+"There are %d administrators. Each one is a way in. Give people the lowest "
+"role that lets them do their work."
+msgstr ""
+"Ada %d administrator. Masing-masing adalah jalan masuk. Beri orang peran "
+"terendah yang cukup untuk pekerjaannya."
+
+#. translators: %d: number of administrators
+#: modules/shield/health.php:330
+msgid "Few administrators"
+msgstr "Administrator sedikit"
+
+#: modules/shield/health.php:330
+#, php-format
+msgid "There are %d administrators."
+msgstr "Ada %d administrator."
+
+#. translators: %s: role name
+#: modules/shield/health.php:337
+msgid "Anyone can register as an editor or administrator"
+msgstr "Siapa pun bisa mendaftar sebagai editor atau administrator"
+
+#: modules/shield/health.php:337
+#, php-format
+msgid ""
+"Registration is open and new people get the role \"%s\". Anyone could take "
+"over your site. Close registration or change the role to Subscriber."
+msgstr ""
+"Pendaftaran terbuka dan orang baru mendapat peran \"%s\". Siapa pun bisa "
+"mengambil alih situs Anda. Tutup pendaftaran atau ubah perannya menjadi "
+"Pelanggan."
+
+#: modules/shield/health.php:337 modules/shield/health.php:340
+#: modules/shield/health.php:351
+msgid "Open General settings"
+msgstr "Buka Pengaturan Umum"
+
+#. translators: %s: role name
+#: modules/shield/health.php:340
+msgid "Anyone can register and write"
+msgstr "Siapa pun bisa mendaftar dan menulis"
+
+#: modules/shield/health.php:340
+#, php-format
+msgid ""
+"Registration is open and new people get the role \"%s\". Make it Subscriber "
+"unless you really want strangers to write."
+msgstr ""
+"Pendaftaran terbuka dan orang baru mendapat peran \"%s\". Jadikan Pelanggan "
+"kecuali Anda memang ingin orang asing menulis."
+
+#: modules/shield/health.php:342
+msgid "Registration is closed or harmless"
+msgstr "Pendaftaran tertutup atau tidak berbahaya"
+
+#: modules/shield/health.php:342
+msgid "People can register, but only as subscribers."
+msgstr "Orang bisa mendaftar, tetapi hanya sebagai pelanggan."
+
+#: modules/shield/health.php:342
+msgid "Nobody can register themselves."
+msgstr "Tidak ada yang bisa mendaftar sendiri."
+
+#: modules/shield/health.php:347
+msgid "The site uses https"
+msgstr "Situs memakai https"
+
+#: modules/shield/health.php:347
+msgid "Visitors and you talk to the site over a secure connection."
+msgstr "Pengunjung dan Anda berhubungan dengan situs lewat sambungan aman."
+
+#: modules/shield/health.php:349
+msgid "https is not needed on this address"
+msgstr "https tidak diperlukan pada alamat ini"
+
+#: modules/shield/health.php:349
+msgid "This is a local address (for tests)."
+msgstr "Ini alamat lokal (untuk uji coba)."
+
+#: modules/shield/health.php:351
+msgid "The site does not use https"
+msgstr "Situs tidak memakai https"
+
+#: modules/shield/health.php:351
+msgid ""
+"Passwords and logins travel in the open. Ask your host for a certificate and "
+"set both addresses in General settings to https."
+msgstr ""
+"Kata sandi dan login berjalan tanpa penyandian. Minta sertifikat ke penyedia "
+"hosting Anda dan ubah kedua alamat di Pengaturan Umum menjadi https."
+
+#: modules/shield/health.php:357
+msgid "Errors are shown to visitors"
+msgstr "Galat ditampilkan kepada pengunjung"
+
+#: modules/shield/health.php:357
+msgid ""
+"Debug mode is on and shows PHP errors on the pages. They can reveal paths "
+"and settings. Set WP_DEBUG to false in wp-config.php on a live site."
+msgstr ""
+"Mode debug menyala dan menampilkan galat PHP di halaman. Galat itu bisa "
+"membuka lokasi berkas dan pengaturan. Setel WP_DEBUG ke false di wp-"
+"config.php pada situs yang sudah tayang."
+
+#: modules/shield/health.php:359
+msgid "Debug mode is on"
+msgstr "Mode debug menyala"
+
+#: modules/shield/health.php:359
+msgid ""
+"Errors are not shown, but they are written to a log. Switch WP_DEBUG off on "
+"a live site when you are done testing."
+msgstr ""
+"Galat tidak ditampilkan, tetapi dicatat ke log. Matikan WP_DEBUG pada situs "
+"yang sudah tayang setelah selesai menguji."
+
+#: modules/shield/health.php:361
+msgid "Debug mode is off"
+msgstr "Mode debug mati"
+
+#: modules/shield/health.php:361
+msgid "Nothing is written or shown for debugging."
+msgstr "Tidak ada yang dicatat atau ditampilkan untuk debug."
+
+#: modules/shield/health.php:368
+msgid "wp-config.php can be changed by everyone"
+msgstr "wp-config.php bisa diubah oleh semua orang"
+
+#: modules/shield/health.php:368
+msgid ""
+"Anyone with an account on the server can read or change the file that holds "
+"your database password. Set its permissions to 640 or 600."
+msgstr ""
+"Siapa pun yang punya akun di server bisa membaca atau mengubah berkas yang "
+"menyimpan kata sandi database Anda. Setel izinnya ke 640 atau 600."
+
+#: modules/shield/health.php:370
+msgid "wp-config.php is protected"
+msgstr "wp-config.php terlindungi"
+
+#: modules/shield/health.php:370
+msgid ""
+"The file with the database password is not open to everyone on the server."
+msgstr ""
+"Berkas berisi kata sandi database tidak terbuka untuk semua orang di server."
+
+#: modules/shield/health.php:382
+msgid "The file editor is closed"
+msgstr "Editor berkas tertutup"
+
+#: modules/shield/health.php:382
+msgid "Nobody can change theme or plugin code from the dashboard."
+msgstr "Tidak ada yang bisa mengubah kode tema atau plugin dari dasbor."
+
+#: modules/shield/health.php:384
+msgid "The file editor is open"
+msgstr "Editor berkas terbuka"
+
+#: modules/shield/health.php:384
+msgid ""
+"Someone who gets into an administrator account can change your code from the "
+"dashboard. Switch \"Turn off the file editor\" on."
+msgstr ""
+"Orang yang berhasil masuk ke akun administrator bisa mengubah kode Anda dari "
+"dasbor. Nyalakan \"Matikan editor berkas\"."
+
+#: modules/shield/health.php:384 modules/shield/health.php:389
+msgid "Open the switches"
+msgstr "Buka saklar"
+
+#: modules/shield/health.php:387
+msgid "Failed logins are limited"
+msgstr "Login gagal dibatasi"
+
+#: modules/shield/health.php:387
+msgid "An address that fails to log in too often is locked for a while."
+msgstr "Alamat yang terlalu sering gagal login dikunci untuk sementara."
+
+#: modules/shield/health.php:389
+msgid "Failed logins are not limited"
+msgstr "Login gagal tidak dibatasi"
+
+#: modules/shield/health.php:389
+msgid "Bots can try passwords for ever. Switch \"Limit failed logins\" on."
+msgstr ""
+"Bot bisa mencoba kata sandi tanpa henti. Nyalakan \"Batasi login yang "
+"gagal\"."
+
+#. translators: %s: plugin names
+#: modules/shield/health.php:394
+msgid "A security plugin is active"
+msgstr "Plugin keamanan aktif"
+
+#: modules/shield/health.php:394
+#, php-format
+msgid "Active: %s."
+msgstr "Aktif: %s."
+
+#: modules/shield/health.php:396
+msgid "No firewall or malware scanner found"
+msgstr "Firewall atau pemindai malware tidak ditemukan"
+
+#: modules/shield/health.php:396
+msgid ""
+"The switches here close common gaps, but they are not a firewall and not a "
+"scanner. Add a plugin made for that, such as Wordfence, Solid Security or "
+"Patchstack."
+msgstr ""
+"Saklar di sini menutup celah umum, tetapi bukan firewall dan bukan pemindai. "
+"Tambahkan plugin yang dibuat untuk itu, seperti Wordfence, Solid Security, "
+"atau Patchstack."
+
+#: modules/shield/health.php:396 modules/shield/health.php:403
+msgid "Find plugins"
+msgstr "Cari plugin"
+
+#. translators: %s: plugin names
+#: modules/shield/health.php:401
+msgid "A backup plugin is active"
+msgstr "Plugin cadangan aktif"
+
+#: modules/shield/health.php:401
+#, php-format
+msgid ""
+"Active: %s. Check now and then that a recent backup exists and that you can "
+"restore it."
+msgstr ""
+"Aktif: %s. Periksa sesekali bahwa ada cadangan terbaru dan Anda bisa "
+"memulihkannya."
+
+#: modules/shield/health.php:403
+msgid "No backup plugin found"
+msgstr "Plugin cadangan tidak ditemukan"
+
+#: modules/shield/health.php:403
+msgid ""
+"If your host does not keep backups for you, one broken update or one attack "
+"can cost you the whole site. Add a backup plugin, or ask your host."
+msgstr ""
+"Jika penyedia hosting Anda tidak menyimpan cadangan, satu pembaruan yang "
+"rusak atau satu serangan bisa membuat Anda kehilangan seluruh situs. "
+"Tambahkan plugin cadangan, atau tanyakan ke penyedia hosting Anda."
+
+#. translators: 1: addresses, 2: how long ago
+#: modules/shield/health.php:412
+msgid "Files that should be secret can be opened"
+msgstr "Berkas yang seharusnya rahasia bisa dibuka"
+
+#: modules/shield/health.php:412
+#, php-format
+msgid ""
+"Anyone can open: %1$s (checked %2$s ago). They can hold passwords or your "
+"data. Remove them from the server or block them, then check again."
+msgstr ""
+"Siapa pun bisa membuka: %1$s (diperiksa %2$s yang lalu). Berkas itu bisa "
+"berisi kata sandi atau data Anda. Hapus dari server atau blokir, lalu "
+"periksa lagi."
+
+#: modules/shield/health.php:414
+msgid "The files could not be checked"
+msgstr "Berkas tidak bisa diperiksa"
+
+#: modules/shield/health.php:414
+msgid ""
+"The site could not ask its own address (some servers do not allow that). Try "
+"again later."
+msgstr ""
+"Situs tidak bisa meminta alamatnya sendiri (beberapa server tidak "
+"mengizinkannya). Coba lagi nanti."
+
+#. translators: %s: how long ago
+#: modules/shield/health.php:417
+msgid "No secret files can be opened"
+msgstr "Tidak ada berkas rahasia yang bisa dibuka"
+
+#: modules/shield/health.php:417
+#, php-format
+msgid ""
+"Common leftovers (.env, .git, copies of wp-config.php, debug.log, database "
+"dumps, phpinfo, a folder listing) are not reachable (checked %s ago)."
+msgstr ""
+"Sisa-sisa yang umum (.env, .git, salinan wp-config.php, debug.log, dump "
+"database, phpinfo, daftar isi folder) tidak bisa dijangkau (diperiksa %s "
+"yang lalu)."
+
+#. translators: 1: number needing attention, 2: number worth a look, 3: number fine
+#: modules/shield/health.php:451
+#, php-format
+msgid "%1$d need attention, %2$d worth a look, %3$d fine."
+msgstr "%1$d perlu perhatian, %2$d layak dilihat, %3$d baik."
+
+#: modules/shield/health.php:466
+msgid "Needs attention"
+msgstr "Perlu perhatian"
+
+#: modules/shield/health.php:467
+msgid "Worth a look"
+msgstr "Layak dilihat"
+
+#: modules/shield/health.php:468
+msgid "Fine"
+msgstr "Baik"
+
+#: modules/shield/health.php:477
+msgid "Files that should be secret"
+msgstr "Berkas yang seharusnya rahasia"
+
+#: modules/shield/health.php:478
+msgid ""
+"Looks whether a few leftovers (.env, .git, copies of wp-config.php, "
+"debug.log, database dumps, phpinfo and a folder listing of uploads) can be "
+"opened by anyone. It only asks the address of this site, and only when you "
+"press the button."
+msgstr ""
+"Memeriksa apakah beberapa sisa (.env, .git, salinan wp-config.php, "
+"debug.log, dump database, phpinfo, dan daftar isi folder uploads) bisa "
+"dibuka siapa saja. Hanya menanyakan alamat situs ini sendiri, dan hanya saat "
+"tombol ditekan."
+
+#: modules/shield/health.php:479
+msgid "Check the files now"
+msgstr "Periksa berkas sekarang"
+
 #. translators: %d: minutes to wait
 #: modules/shield/login-limit.php:178
 #, php-format
@@ -239,7 +709,7 @@ msgstr "Alamat"
 msgid "Failed logins"
 msgstr "Login gagal"
 
-#: modules/shield/settings.php:78 modules/shield/settings.php:119
+#: modules/shield/settings.php:78 modules/shield/settings.php:133
 msgid "Locked for"
 msgstr "Dikunci selama"
 
@@ -257,7 +727,19 @@ msgstr "Buka kunci"
 msgid "Unlock all"
 msgstr "Buka semua kunci"
 
-#: modules/shield/settings.php:96
+#: modules/shield/settings.php:97
+msgid "Security"
+msgstr "Keamanan"
+
+#: modules/shield/settings.php:99
+msgid "Switches"
+msgstr "Saklar"
+
+#: modules/shield/settings.php:100
+msgid "Security check"
+msgstr "Pemeriksaan keamanan"
+
+#: modules/shield/settings.php:110
 msgid ""
 "Safe switches that close common gaps. This is not a firewall and not a "
 "malware scanner: keep a plugin made for that too."
@@ -265,19 +747,19 @@ msgstr ""
 "Saklar aman untuk menutup celah umum. Ini bukan firewall dan bukan pemindai "
 "malware: tetap pakai plugin yang dibuat untuk itu."
 
-#: modules/shield/settings.php:103 modules/shield/settings.php:116
+#: modules/shield/settings.php:117 modules/shield/settings.php:130
 msgid "On"
 msgstr "Nyala"
 
-#: modules/shield/settings.php:106
+#: modules/shield/settings.php:120
 msgid "Good to know:"
 msgstr "Perlu diketahui:"
 
-#: modules/shield/settings.php:113
+#: modules/shield/settings.php:127
 msgid "Login attempts"
 msgstr "Percobaan login"
 
-#: modules/shield/settings.php:114
+#: modules/shield/settings.php:128
 msgid ""
 "After too many failed logins from one address, that address can not log in "
 "for a while, even with the right password. A good login starts the count "
@@ -287,43 +769,43 @@ msgstr ""
 "login untuk sementara waktu, bahkan dengan kata sandi yang benar. Login yang "
 "berhasil memulai hitungan dari awal."
 
-#: modules/shield/settings.php:116
+#: modules/shield/settings.php:130
 msgid "Limit failed logins"
 msgstr "Batasi login yang gagal"
 
-#: modules/shield/settings.php:117
+#: modules/shield/settings.php:131
 msgid "Failed logins allowed"
 msgstr "Login gagal yang diizinkan"
 
-#: modules/shield/settings.php:117
+#: modules/shield/settings.php:131
 msgid "times"
 msgstr "kali"
 
-#: modules/shield/settings.php:118
+#: modules/shield/settings.php:132
 msgid "Counted within"
 msgstr "Dihitung dalam"
 
-#: modules/shield/settings.php:118 modules/shield/settings.php:119
+#: modules/shield/settings.php:132 modules/shield/settings.php:133
 msgid "minutes"
 msgstr "menit"
 
-#: modules/shield/settings.php:120
+#: modules/shield/settings.php:134
 msgid "Address of the visitor"
 msgstr "Alamat pengunjung"
 
-#: modules/shield/settings.php:122
+#: modules/shield/settings.php:136
 msgid "The address of the connection (no proxy or CDN)"
 msgstr "Alamat koneksi (tanpa proxy atau CDN)"
 
-#: modules/shield/settings.php:123
+#: modules/shield/settings.php:137
 msgid "Cloudflare (header CF-Connecting-IP)"
 msgstr "Cloudflare (header CF-Connecting-IP)"
 
-#: modules/shield/settings.php:124
+#: modules/shield/settings.php:138
 msgid "Another proxy (first address of X-Forwarded-For)"
 msgstr "Proxy lain (alamat pertama X-Forwarded-For)"
 
-#: modules/shield/settings.php:129
+#: modules/shield/settings.php:143
 msgid ""
 "Behind a proxy or CDN every visitor can look like one address, and then one "
 "person could lock everybody out. Choose the header your proxy sets only if "
@@ -335,20 +817,20 @@ msgstr ""
 "bisa dipalsukan."
 
 #. translators: %s: an IP address
-#: modules/shield/settings.php:131
+#: modules/shield/settings.php:145
 #, php-format
 msgid "The plugin sees you as %s. Is that your own address?"
 msgstr "Plugin melihat Anda sebagai %s. Apakah itu alamat Anda sendiri?"
 
-#: modules/shield/settings.php:132
+#: modules/shield/settings.php:146
 msgid "Never lock these addresses"
 msgstr "Jangan pernah kunci alamat ini"
 
-#: modules/shield/settings.php:132
+#: modules/shield/settings.php:146
 msgid "One address per line, for example your office."
 msgstr "Satu alamat per baris, misalnya kantor Anda."
 
-#: modules/shield/settings.php:134
+#: modules/shield/settings.php:148
 msgid ""
 "If you lock yourself out: wait for the time above, or add "
 "define( 'WPLUS_ADDONS_DISABLE_LOGIN_LIMIT', true ); to wp-config.php."
