@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 - Unreleased
+## 0.1.0 - 2026-10-26
 
 - New: English and Indonesian texts; the plugin follows the language of each user.
 - New: the settings page (Settings > WPlus Addons) with a switch for each tool.
