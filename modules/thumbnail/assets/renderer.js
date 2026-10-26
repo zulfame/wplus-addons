@@ -239,8 +239,14 @@
 		var cx = flip ? 70 * u : W - 70 * u, cy = 50 * u, R = 200 * u, r = 86 * u;
 		var ax = 1.05, ay = 0.55;
 		var cax = Math.cos( ax ), sax = Math.sin( ax ), cay = Math.cos( ay ), say = Math.sin( ay );
+		/* a wide, faint wash of the accent colour under the dots, so the ring melts into the background */
+		var wash = ctx.createRadialGradient( cx, cy, 0, cx, cy, 360 * u );
+		wash.addColorStop( 0, rgba( p.accent, dark ? 0.16 : 0.1 ) );
+		wash.addColorStop( 1, rgba( p.accent, 0 ) );
+		ctx.fillStyle = wash;
+		ctx.fillRect( 0, 0, W, o.height );
 		var pts = [];
-		var NU = 170, NV = 56, i, j;
+		var NU = 120, NV = 40, i, j;
 		for ( i = 0; i < NU; i++ ) {
 			var th = i / NU * Math.PI * 2;
 			for ( j = 0; j < NV; j++ ) {
@@ -251,21 +257,24 @@
 				var y1 = y * cax - z * sax, z1 = y * sax + z * cax;
 				var x2 = x * cay + z1 * say, z2 = -x * say + z1 * cay;
 				var persp = 900 * u / ( 900 * u - z2 );
-				pts.push( [ flip ? 2 * cx - ( cx + x2 * persp ) : cx + x2 * persp, cy + y1 * persp, z2 / ( R + r ) ] );
+				var sx = cx + x2 * persp, sy = cy + y1 * persp;
+				pts.push( [ flip ? 2 * cx - sx : sx, sy, z2 / ( R + r ), Math.hypot( sx - cx, sy - cy ) / ( ( R + r ) * 1.15 ) ] );
 			}
 		}
 		pts.sort( function ( m, n ) {
 			return m[ 2 ] - n[ 2 ];
 		} );
-		var ink = dark ? [ 205, 214, 235 ] : [ 38, 48, 68 ];
+		/* soft dots: the accent colour pulled towards the background, faint far away, a little stronger near */
+		var tint = mix( p.accent, dark ? [ 255, 255, 255 ] : [ 20, 30, 70 ], dark ? 0.35 : 0.18 );
 		pts.forEach( function ( q ) {
 			if ( q[ 0 ] < -10 || q[ 0 ] > W + 10 || q[ 1 ] < -10 || q[ 1 ] > o.height + 10 ) {
 				return;
 			}
 			var depth = ( q[ 2 ] + 1 ) / 2;
-			ctx.fillStyle = rgba( ink, 0.18 + 0.7 * depth );
+			var fade = 1 - Math.min( 1, q[ 3 ] ) * 0.55;
+			ctx.fillStyle = rgba( tint, ( 0.1 + 0.36 * depth ) * fade );
 			ctx.beginPath();
-			ctx.arc( q[ 0 ], q[ 1 ], ( 0.9 + 1.5 * depth ) * u, 0, Math.PI * 2 );
+			ctx.arc( q[ 0 ], q[ 1 ], ( 0.8 + 1.1 * depth ) * u, 0, Math.PI * 2 );
 			ctx.fill();
 		} );
 	}
@@ -287,13 +296,13 @@
 		var flip = ! framed && 'right' === o.align; // the ring moves to the left when the text is right-aligned
 		var gx = flip ? right - 52 * u : left + 52 * u, gy = topY + 26 * u;
 		var glow = ctx.createRadialGradient( gx, gy, 0, gx, gy, 280 * u );
-		glow.addColorStop( 0, rgba( p.accent, dark ? 0.3 : 0.2 ) );
+		glow.addColorStop( 0, rgba( p.accent, dark ? 0.22 : 0.13 ) );
 		glow.addColorStop( 1, rgba( p.accent, 0 ) );
 		ctx.fillStyle = glow;
 		ctx.fillRect( 0, 0, W, H );
 		if ( framed ) {
-			ctx.strokeStyle = rgba( p.accent, dark ? 0.22 : 0.13 );
-			ctx.lineWidth = 1.5 * u;
+			ctx.strokeStyle = rgba( p.accent, dark ? 0.16 : 0.09 );
+			ctx.lineWidth = 1.2 * u;
 			[ left, right ].forEach( function ( x ) {
 				ctx.beginPath();
 				ctx.moveTo( x, 0 );
@@ -359,7 +368,7 @@
 	/* Layout "panel": plain background, a dot pattern in the corner, an accent bar, brand and tags in a footer. */
 	function layoutPanel( ctx, o, p, u ) {
 		var W = o.width, H = o.height, pad = 72 * u;
-		ctx.fillStyle = rgb( p.bg );
+		ctx.fillStyle = rgb( 'dark' === o.mode ? mix( p.bg, p.accent, 0.09 ) : p.bg );
 		ctx.fillRect( 0, 0, W, H );
 		var gap = 26 * u, reach = 470 * u;
 		for ( var gx = W - gap / 2; gx > W - reach; gx -= gap ) {
@@ -367,7 +376,7 @@
 				var d = Math.hypot( W - gx, gy );
 				var a = 1 - d / reach;
 				if ( a > 0 ) {
-					ctx.fillStyle = rgba( p.accent, Math.min( 0.55, a * 0.7 ) );
+					ctx.fillStyle = rgba( p.accent, Math.min( 0.32, a * 0.42 ) );
 					ctx.beginPath();
 					ctx.arc( gx, gy, 3.2 * u, 0, Math.PI * 2 );
 					ctx.fill();
