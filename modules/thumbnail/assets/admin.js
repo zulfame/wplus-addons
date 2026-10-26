@@ -165,32 +165,81 @@
 		}, 1000 );
 	}
 
-	/* WebP is the default (lighter, better for page speed and SEO); a browser that cannot make it gets a PNG instead. */
-	function exportPicture() {
+	/*
+	 * Make the picture as a file: WebP when asked (the default, lighter and better for SEO), PNG otherwise or when the
+	 * browser cannot make WebP. Calls done( { blob, ext, fallback } ), or done( null ) when nothing could be made.
+	 */
+	function makePicture( done ) {
 		draw();
 		var wantWebp = 'webp' === state.format;
 		canvas.toBlob( function ( blob ) {
 			if ( blob && wantWebp && 'image/webp' === blob.type ) {
-				download( blob, 'webp' );
+				done( { blob: blob, ext: 'webp', fallback: false } );
 				return;
 			}
 			if ( blob && ! wantWebp && 'image/png' === blob.type ) {
-				download( blob, 'png' );
+				done( { blob: blob, ext: 'png', fallback: false } );
 				return;
 			}
 			if ( wantWebp ) {
 				canvas.toBlob( function ( png ) {
-					if ( png ) {
-						say( cfg.i18n.webpFallback );
-						download( png, 'png' );
-					} else {
-						say( cfg.i18n.exportFail );
-					}
+					done( png ? { blob: png, ext: 'png', fallback: true } : null );
 				}, 'image/png' );
 				return;
 			}
-			say( cfg.i18n.exportFail );
+			done( null );
 		}, wantWebp ? 'image/webp' : 'image/png', 0.9 );
+	}
+
+	function exportPicture() {
+		makePicture( function ( pic ) {
+			if ( ! pic ) {
+				say( cfg.i18n.exportFail );
+				return;
+			}
+			say( pic.fallback ? cfg.i18n.webpFallback : '' );
+			download( pic.blob, pic.ext );
+		} );
+	}
+
+	/* Save the picture with the REST API of WordPress itself (/wp/v2/media): it checks who may upload and what the file is. */
+	function saveToMedia() {
+		var button = $( 'wpa-save' );
+		makePicture( function ( pic ) {
+			if ( ! pic ) {
+				say( cfg.i18n.exportFail );
+				return;
+			}
+			var title = String( state.title || '' ).trim();
+			var form = new window.FormData();
+			form.append( 'file', pic.blob, slug( title ) + '-thumbnail.' + pic.ext );
+			form.append( 'title', title );
+			form.append( 'alt_text', title );
+			form.append( 'description', String( state.description || '' ).trim() );
+			button.disabled = true;
+			say( cfg.i18n.saving );
+			window.wp.apiFetch( { path: '/wp/v2/media', method: 'POST', body: form } ).then( function ( media ) {
+				var msg = $( 'wpa-message' );
+				msg.textContent = ( pic.fallback ? cfg.i18n.webpFallback + ' ' : '' ) + cfg.i18n.saved + ' ';
+				var edit = document.createElement( 'a' );
+				edit.href = cfg.editUrl + '?post=' + encodeURIComponent( media.id ) + '&action=edit';
+				edit.textContent = cfg.i18n.edit;
+				msg.appendChild( edit );
+				if ( media.source_url ) {
+					msg.appendChild( document.createTextNode( ' | ' ) );
+					var view = document.createElement( 'a' );
+					view.href = media.source_url;
+					view.target = '_blank';
+					view.rel = 'noopener';
+					view.textContent = cfg.i18n.view;
+					msg.appendChild( view );
+				}
+			} ).catch( function ( err ) {
+				say( cfg.i18n.saveFailed + ' ' + ( err && err.message ? err.message : '' ) );
+			} ).then( function () {
+				button.disabled = false;
+			} );
+		} );
 	}
 
 	fields.forEach( function ( k ) {
@@ -224,6 +273,7 @@
 		change();
 	} );
 	$( 'wpa-export' ).addEventListener( 'click', exportPicture );
+	$( 'wpa-save' ).addEventListener( 'click', saveToMedia );
 
 	var start = Object.assign( {}, cfg.defaults, read() );
 	apply( start );

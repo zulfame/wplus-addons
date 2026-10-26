@@ -118,7 +118,7 @@ function wplus_addons_thumbnail_assets( $hook ) {
 	wp_enqueue_media();
 	wp_enqueue_style( 'wplus-addons-thumbnail', $base . 'assets/admin.css', array(), WPLUS_ADDONS_VERSION );
 	wp_enqueue_script( 'wplus-addons-thumbnail-renderer', $base . 'assets/renderer.js', array(), WPLUS_ADDONS_VERSION, true );
-	wp_enqueue_script( 'wplus-addons-thumbnail-admin', $base . 'assets/admin.js', array( 'wplus-addons-thumbnail-renderer', 'media-editor' ), WPLUS_ADDONS_VERSION, true );
+	wp_enqueue_script( 'wplus-addons-thumbnail-admin', $base . 'assets/admin.js', array( 'wplus-addons-thumbnail-renderer', 'media-editor', 'wp-api-fetch' ), WPLUS_ADDONS_VERSION, true );
 	$fonts = array();
 	foreach ( wplus_addons_thumbnail_fonts() as $key => $font ) {
 		$fonts[ $key ] = array(
@@ -139,6 +139,7 @@ function wplus_addons_thumbnail_assets( $hook ) {
 		'wplusThumb',
 		array(
 			'fonts'    => $fonts,
+			'editUrl'  => admin_url( 'post.php' ),
 			'defaults' => array(
 				'layout'      => 'minimal',
 				'align'       => 'left',
@@ -161,6 +162,11 @@ function wplus_addons_thumbnail_assets( $hook ) {
 				'logoFailed'   => __( 'The logo could not be drawn. Choose a picture from the Media Library of this site.', 'wplus-addons' ),
 				'exportFail'   => __( 'The picture could not be created. Try another format.', 'wplus-addons' ),
 				'webpFallback' => __( 'This browser cannot make WebP, so the picture was saved as PNG.', 'wplus-addons' ),
+				'saving'       => __( 'Saving…', 'wplus-addons' ),
+				'saved'        => __( 'Saved to the Media Library.', 'wplus-addons' ),
+				'edit'         => __( 'Edit', 'wplus-addons' ),
+				'view'         => __( 'View', 'wplus-addons' ),
+				'saveFailed'   => __( 'The picture could not be saved:', 'wplus-addons' ),
 			),
 		)
 	);
@@ -273,6 +279,6 @@ function wplus_addons_thumbnail_render_page() {
 		'half'
 	);
 	echo '</div><div class="wpa-preview"><div class="wpa-canvas-wrap"><canvas id="wpa-canvas" aria-label="' . esc_attr__( 'Preview of the thumbnail', 'wplus-addons' ) . '"></canvas></div>';
-	echo '<p class="wpa-actions"><button type="button" class="button" id="wpa-reset">' . esc_html__( 'Reset', 'wplus-addons' ) . '</button> <button type="button" class="button button-primary" id="wpa-export">' . esc_html__( 'Export', 'wplus-addons' ) . '</button></p>';
+	echo '<p class="wpa-actions"><button type="button" class="button" id="wpa-reset">' . esc_html__( 'Reset', 'wplus-addons' ) . '</button> <button type="button" class="button" id="wpa-export">' . esc_html__( 'Export', 'wplus-addons' ) . '</button> <button type="button" class="button button-primary" id="wpa-save">' . esc_html__( 'Save to Media Library', 'wplus-addons' ) . '</button></p>';
 	echo '<p class="description" id="wpa-message" role="status"></p></div></div></div>';
 }
