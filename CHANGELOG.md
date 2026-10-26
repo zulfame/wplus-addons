@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 - 2026-10-26
 
 - New: updates from the WordPress dashboard. A new version shows up under Plugins and Dashboard > Updates with an Update button, a details window and optional automatic updates. The download is checked before it is installed. Settings > WPlus Addons shows your version and a Check now button.
 - New: light security hardening. Switch it on in Settings > WPlus Addons, then choose from six safe switches under Settings > WPlus Security: hide the WordPress version, turn off the file editor, send safety headers, give one message for a failed login, hide the list of users from visitors, and turn off XML-RPC.

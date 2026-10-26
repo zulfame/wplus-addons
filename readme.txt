@@ -4,7 +4,7 @@ Tags: thumbnail, featured image, webp, cover image, hardening
 Requires at least: 6.3
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -84,6 +84,16 @@ Its settings, presets and the counts of failed logins are removed. The pictures 
 The plugin includes the fonts DM Sans, Inter and Lora (Latin subset, regular and bold) under the SIL Open Font License 1.1. The licence files are in `modules/thumbnail/fonts/`.
 
 == Changelog ==
+
+= 0.2.0 =
+
+* New: updates from the WordPress dashboard, with an Update button, a details window and optional automatic updates. The download is checked before it is installed.
+* New: light security hardening: six safe switches (hide the WordPress version, turn off the file editor, safety headers, one message for a failed login, hide the list of users, turn off XML-RPC).
+* New: a limit on failed logins, with a list of locked addresses, an Unlock button, an allow list and a setting for sites behind Cloudflare or another proxy.
+* New: a Security check tab: a plain list of what is fine, worth a look or needs attention, and a check for secret files such as .env or debug.log.
+* New: suggested text for your privacy policy.
+* Changed: the settings page lists only the tools that exist.
+* Install this version by uploading the zip once (Replace current with uploaded); versions after it update from the dashboard.
 
 = 0.1.0 =
 

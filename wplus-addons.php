@@ -3,7 +3,7 @@
  * Plugin Name:       WPlus Addons
  * Plugin URI:        https://github.com/zulfame/wplus-addons
  * Description:       Small, optional tools for WPlus UI and any WordPress site: a thumbnail generator that makes cover pictures and light security hardening. Each tool can be switched off.
- * Version:           0.1.0
+ * Version:           0.2.0
  * Requires at least: 6.3
  * Requires PHP:      7.4
  * Author:            Zulfadli Rizal
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPLUS_ADDONS_VERSION', '0.1.0' );
+define( 'WPLUS_ADDONS_VERSION', '0.2.0' );
 define( 'WPLUS_ADDONS_FILE', __FILE__ );
 define( 'WPLUS_ADDONS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPLUS_ADDONS_URL', plugin_dir_url( __FILE__ ) );

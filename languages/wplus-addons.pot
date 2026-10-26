@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: WPlus Addons 0.1.0\n"
+"Project-Id-Version: WPlus Addons 0.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
-"POT-Creation-Date: 2026-10-26 19:33+0700\n"
+"POT-Creation-Date: 2026-10-26 20:15+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Zulfadli Rizal\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
