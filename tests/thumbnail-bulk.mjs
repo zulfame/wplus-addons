@@ -6,7 +6,8 @@ const author = makeUser('wpa_author_b', 'author');
 const mk = (title, status, extra = '') => parseInt(php(`echo wp_insert_post(["post_title"=>"${title}","post_status"=>"${status}","post_content"=>"<!-- wp:paragraph --><p>Isi ${title} yang cukup panjang untuk deskripsi otomatis.</p><!-- /wp:paragraph -->"${extra}]);`), 10);
 const p1 = mk('Uji Massal Satu', 'publish', ',"tags_input"=>["Alfa","Beta"]'), p2 = mk('Uji Massal Dua', 'publish'), p3 = mk('Uji Massal Tiga', 'draft'), p4 = mk('Uji Massal Empat', 'publish'), pNoTitle = mk('', 'draft'), pHas = mk('Uji Massal Sudah Ada', 'publish');
 const pAuthor = parseInt(php(`echo wp_insert_post(["post_title"=>"Uji Massal Milik Penulis","post_status"=>"draft","post_author"=>${author}]);`), 10);
-const existing = parseInt(php('$a=get_posts(["post_type"=>"attachment","numberposts"=>1,"post_status"=>"inherit","orderby"=>"ID"]); echo $a[0]->ID;'), 10);
+// a picture to give to a post (a clean site has none): made here, removed at the end because its title starts with "Uji Massal"
+const existing = parseInt(php('require_once ABSPATH."wp-admin/includes/file.php"; require_once ABSPATH."wp-admin/includes/media.php"; require_once ABSPATH."wp-admin/includes/image.php"; $t=wp_tempnam("x.png"); $im=imagecreatetruecolor(400,200); imagefill($im,0,0,imagecolorallocate($im,30,90,200)); imagepng($im,$t); $id=media_handle_sideload(["name"=>"uji-massal-contoh.png","tmp_name"=>$t,"type"=>"image/png","size"=>filesize($t),"error"=>0],0,"Uji Massal Gambar Contoh"); echo $id;'), 10);
 php(`set_post_thumbnail(${pHas}, ${existing});`);
 const thumb = (id) => parseInt(php(`echo (int) get_post_thumbnail_id(${id});`), 10);
 const { browser, open, errors } = await launch();

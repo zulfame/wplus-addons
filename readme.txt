@@ -25,10 +25,6 @@ Make a cover picture for a post from its title, excerpt, tags and your site, and
 * A Bulk tab makes the featured image of many posts that have none, with a progress bar and a Stop button. A post that already has a featured image is never changed.
 * Presets: named design choices shared by the whole site, one of them as the starting point.
 
-= Light security hardening =
-
-Planned: safe switches that close common gaps, a login attempt limit and a plain-language security check.
-
 == Installation ==
 
 1. Upload the zip in Plugins > Add New > Upload Plugin, or unpack it in `wp-content/plugins/`.
@@ -39,7 +35,11 @@ Planned: safe switches that close common gaps, a login attempt limit and a plain
 
 = Does it send my pictures or texts anywhere? =
 
-No. The picture is drawn in your browser and saved to your own Media Library. The fonts are part of the plugin and there is no request to another site.
+No. The picture is drawn in your browser and saved to your own Media Library. The fonts are part of the plugin. The only request to another site is the update check: it asks GitHub for the latest version and sends only the address of your site and the plugin version. Add `define( 'WPLUS_ADDONS_DISABLE_UPDATES', true );` to wp-config.php to turn it off.
+
+= How do I update? =
+
+Like any plugin: a new version appears under Plugins and Dashboard > Updates, with an Update button and optional automatic updates. Settings > WPlus Addons shows your version and has a Check now button.
 
 = Who can use it? =
 

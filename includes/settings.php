@@ -56,15 +56,22 @@ function wplus_addons_render_settings() {
 		return;
 	}
 	echo '<div class="wrap"><h1>' . esc_html__( 'WPlus Addons', 'wplus-addons' ) . '</h1>';
+	if ( isset( $_GET['checked'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only message.
+		echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Checked just now.', 'wplus-addons' ) . '</p></div>';
+	}
+	wplus_addons_render_update_box();
 	echo '<form method="post" action="options.php">';
 	settings_fields( 'wplus_addons' );
 	echo '<table class="form-table" role="presentation"><tbody>';
 	$texts = wplus_addons_module_texts();
 	foreach ( wplus_addons_modules() as $slug => $module ) {
+		if ( ! $module['available'] ) {
+			continue; // a tool that is not built yet is not shown.
+		}
 		$id = 'wplus-addons-' . $slug;
 		echo '<tr><th scope="row">' . esc_html( $texts[ $slug ]['title'] ) . '</th><td>';
-		echo '<label for="' . esc_attr( $id ) . '"><input type="checkbox" id="' . esc_attr( $id ) . '" name="wplus_addons_modules[' . esc_attr( $slug ) . ']" value="1"' . checked( $module['available'] && wplus_addons_module_enabled( $slug ), true, false ) . disabled( ! $module['available'], true, false ) . ' /> ';
-		echo esc_html( $module['available'] ? __( 'Switched on', 'wplus-addons' ) : __( 'Coming later', 'wplus-addons' ) ) . '</label>';
+		echo '<label for="' . esc_attr( $id ) . '"><input type="checkbox" id="' . esc_attr( $id ) . '" name="wplus_addons_modules[' . esc_attr( $slug ) . ']" value="1"' . checked( wplus_addons_module_enabled( $slug ), true, false ) . ' /> ';
+		echo esc_html__( 'Switched on', 'wplus-addons' ) . '</label>';
 		echo '<p class="description">' . esc_html( $texts[ $slug ]['description'] ) . '</p></td></tr>';
 	}
 	echo '</tbody></table>';

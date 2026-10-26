@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPlus Addons 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
-"POT-Creation-Date: 2026-10-26 15:57+0700\n"
+"POT-Creation-Date: 2026-10-26 16:41+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Zulfadli Rizal\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,26 +27,74 @@ msgid ""
 "as the featured image."
 msgstr ""
 
-#: includes/modules.php:43
-msgid "Light security hardening"
-msgstr ""
-
-#: includes/modules.php:44
-msgid ""
-"Safe switches that close common gaps, a login attempt limit and a plain-"
-"language security check."
-msgstr ""
-
 #: includes/settings.php:47 includes/settings.php:58
 msgid "WPlus Addons"
 msgstr ""
 
-#: includes/settings.php:67
+#: includes/settings.php:60
+msgid "Checked just now."
+msgstr ""
+
+#: includes/settings.php:74
 msgid "Switched on"
 msgstr ""
 
-#: includes/settings.php:67
-msgid "Coming later"
+#: includes/updater.php:260
+msgid ""
+"Small, optional tools for WPlus UI and any WordPress site. Each tool can be "
+"switched off."
+msgstr ""
+
+#: includes/updater.php:288
+msgid ""
+"The downloaded plugin file does not match its checksum, so it was not "
+"installed."
+msgstr ""
+
+#: includes/updater.php:299
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: includes/updater.php:319
+msgid "Update checks are turned off for this site."
+msgstr ""
+
+#. translators: %s: version number
+#: includes/updater.php:326
+#, php-format
+msgid "Version %s is available"
+msgstr ""
+
+#. translators: %s: version number
+#: includes/updater.php:328
+#, php-format
+msgid "You have version %s."
+msgstr ""
+
+#. translators: %s: version number
+#: includes/updater.php:331
+#, php-format
+msgid "You have the latest version (%s)"
+msgstr ""
+
+#. translators: %s: version number
+#: includes/updater.php:334
+#, php-format
+msgid "Version %s. The latest version could not be checked right now."
+msgstr ""
+
+#: includes/updater.php:339
+msgid "Update now"
+msgstr ""
+
+#: includes/updater.php:341
+msgid "Check now"
+msgstr ""
+
+#. translators: %s: how long ago, for example "5 minutes"
+#: includes/updater.php:344
+#, php-format
+msgid "Last checked %s ago."
 msgstr ""
 
 #: modules/thumbnail/bulk.php:38

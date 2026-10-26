@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPlus Addons 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
-"POT-Creation-Date: 2026-10-26 15:57+0700\n"
+"POT-Creation-Date: 2026-10-26 16:41+0700\n"
 "PO-Revision-Date: 2026-10-26 16:00+0700\n"
 "Last-Translator: Zulfadli Rizal\n"
 "Language-Team: Indonesian\n"
@@ -26,29 +26,79 @@ msgstr "Pembuat thumbnail"
 msgid ""
 "Make a cover picture for a post from its title and description, and use it "
 "as the featured image."
-msgstr "Buat gambar sampul untuk pos dari judul dan deskripsinya, lalu pakai sebagai gambar unggulan."
-
-#: includes/modules.php:43
-msgid "Light security hardening"
-msgstr "Pengerasan keamanan ringan"
-
-#: includes/modules.php:44
-msgid ""
-"Safe switches that close common gaps, a login attempt limit and a plain-"
-"language security check."
-msgstr "Saklar aman untuk menutup celah umum, batas percobaan login, dan pemeriksaan keamanan dengan bahasa sederhana."
+msgstr ""
+"Buat gambar sampul untuk pos dari judul dan deskripsinya, lalu pakai sebagai "
+"gambar unggulan."
 
 #: includes/settings.php:47 includes/settings.php:58
 msgid "WPlus Addons"
 msgstr "WPlus Addons"
 
-#: includes/settings.php:67
+#: includes/settings.php:60
+msgid "Checked just now."
+msgstr "Baru saja diperiksa."
+
+#: includes/settings.php:74
 msgid "Switched on"
 msgstr "Menyala"
 
-#: includes/settings.php:67
-msgid "Coming later"
-msgstr "Segera hadir"
+#: includes/updater.php:260
+msgid ""
+"Small, optional tools for WPlus UI and any WordPress site. Each tool can be "
+"switched off."
+msgstr "Alat kecil dan opsional untuk WPlus UI dan situs WordPress mana pun. Setiap alat bisa dimatikan."
+
+#: includes/updater.php:288
+msgid ""
+"The downloaded plugin file does not match its checksum, so it was not "
+"installed."
+msgstr "Berkas plugin yang diunduh tidak cocok dengan checksum-nya, jadi tidak dipasang."
+
+#: includes/updater.php:299
+msgid "You are not allowed to do this."
+msgstr "Anda tidak diizinkan melakukan ini."
+
+#: includes/updater.php:319
+msgid "Update checks are turned off for this site."
+msgstr "Pemeriksaan pembaruan dimatikan untuk situs ini."
+
+#. translators: %s: version number
+#: includes/updater.php:326
+#, php-format
+msgid "Version %s is available"
+msgstr "Versi %s tersedia"
+
+#. translators: %s: version number
+#: includes/updater.php:328
+#, php-format
+msgid "You have version %s."
+msgstr "Anda memakai versi %s."
+
+#. translators: %s: version number
+#: includes/updater.php:331
+#, php-format
+msgid "You have the latest version (%s)"
+msgstr "Anda memakai versi terbaru (%s)"
+
+#. translators: %s: version number
+#: includes/updater.php:334
+#, php-format
+msgid "Version %s. The latest version could not be checked right now."
+msgstr "Versi %s. Versi terbaru tidak bisa diperiksa saat ini."
+
+#: includes/updater.php:339
+msgid "Update now"
+msgstr "Perbarui sekarang"
+
+#: includes/updater.php:341
+msgid "Check now"
+msgstr "Periksa sekarang"
+
+#. translators: %s: how long ago, for example "5 minutes"
+#: includes/updater.php:344
+#, php-format
+msgid "Last checked %s ago."
+msgstr "Terakhir diperiksa %s yang lalu."
 
 #: modules/thumbnail/bulk.php:38
 msgid "Generator"
@@ -103,7 +153,9 @@ msgstr "Selesai."
 msgid ""
 "Make a picture for each ticked post and set it as its featured image? The "
 "posts are not changed in any other way."
-msgstr "Buat gambar untuk setiap pos yang dicentang dan pasang sebagai gambar unggulannya? Pos tidak diubah dengan cara lain."
+msgstr ""
+"Buat gambar untuk setiap pos yang dicentang dan pasang sebagai gambar "
+"unggulannya? Pos tidak diubah dengan cara lain."
 
 #: modules/thumbnail/bulk.php:141
 msgid "Tick at least one post."
@@ -142,7 +194,11 @@ msgid ""
 "Posts that have no featured image. Tick the ones you want; each gets its own "
 "picture made from its title, excerpt and tags, with the design you choose "
 "below. Posts that already have a featured image are never changed."
-msgstr "Pos yang belum punya gambar unggulan. Centang yang Anda mau; masing-masing mendapat gambar sendiri dari judul, ringkasan, dan tag-nya, dengan desain yang Anda pilih di bawah. Pos yang sudah punya gambar unggulan tidak pernah diubah."
+msgstr ""
+"Pos yang belum punya gambar unggulan. Centang yang Anda mau; masing-masing "
+"mendapat gambar sendiri dari judul, ringkasan, dan tag-nya, dengan desain "
+"yang Anda pilih di bawah. Pos yang sudah punya gambar unggulan tidak pernah "
+"diubah."
 
 #: modules/thumbnail/bulk.php:165
 msgid "Every post you can edit already has a featured image."
@@ -372,7 +428,9 @@ msgstr "Tulis judul dulu."
 msgid ""
 "The picture was saved and set as the featured image. Update the post to keep "
 "it."
-msgstr "Gambar disimpan dan dipasang sebagai gambar unggulan. Perbarui pos agar tersimpan."
+msgstr ""
+"Gambar disimpan dan dipasang sebagai gambar unggulan. Perbarui pos agar "
+"tersimpan."
 
 #: modules/thumbnail/module.php:284
 msgid "This browser cannot make WebP, so a PNG was used."
@@ -390,7 +448,9 @@ msgstr "Opsi lain (logo, font, perataan)"
 msgid ""
 "Make a cover picture for a post. It is drawn in your browser; nothing is "
 "sent to another site."
-msgstr "Buat gambar sampul untuk pos. Gambar dibuat di browser Anda; tidak ada yang dikirim ke situs lain."
+msgstr ""
+"Buat gambar sampul untuk pos. Gambar dibuat di browser Anda; tidak ada yang "
+"dikirim ke situs lain."
 
 #: modules/thumbnail/module.php:341
 msgid "Manage presets"
@@ -401,7 +461,10 @@ msgid ""
 "A preset keeps the design choices (layout, alignment, color, mode, font, "
 "size, logo, organization), not the texts. Everyone who makes thumbnails on "
 "this site can use it."
-msgstr "Preset menyimpan pilihan desain (tata letak, perataan, warna, mode, font, ukuran, logo, organisasi), bukan teksnya. Semua orang yang membuat thumbnail di situs ini bisa memakainya."
+msgstr ""
+"Preset menyimpan pilihan desain (tata letak, perataan, warna, mode, font, "
+"ukuran, logo, organisasi), bukan teksnya. Semua orang yang membuat thumbnail "
+"di situs ini bisa memakainya."
 
 #: modules/thumbnail/module.php:343
 msgid "Preset name"
@@ -499,3 +562,15 @@ msgstr "Ekspor"
 msgid "Save to Media Library"
 msgstr "Simpan ke Pustaka Media"
 
+#~ msgid "Light security hardening"
+#~ msgstr "Pengerasan keamanan ringan"
+
+#~ msgid ""
+#~ "Safe switches that close common gaps, a login attempt limit and a plain-"
+#~ "language security check."
+#~ msgstr ""
+#~ "Saklar aman untuk menutup celah umum, batas percobaan login, dan "
+#~ "pemeriksaan keamanan dengan bahasa sederhana."
+
+#~ msgid "Coming later"
+#~ msgstr "Segera hadir"

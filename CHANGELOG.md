@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- New: updates from the WordPress dashboard. A new version shows up under Plugins and Dashboard > Updates with an Update button, a details window and optional automatic updates. The download is checked before it is installed. Settings > WPlus Addons shows your version and a Check now button.
+- Changed: the settings page lists only the tools that exist.
+- Install this version by uploading the zip once (Plugins > Add New > Upload Plugin, then Replace current with uploaded); versions after it update from the dashboard.
+
 ## 0.1.0 - 2026-10-26
 
 - New: English and Indonesian texts; the plugin follows the language of each user.

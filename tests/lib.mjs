@@ -14,7 +14,13 @@ const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Conte
 const HOST = new URL(BASE).hostname;
 
 /** Run PHP inside WordPress and return what it prints. */
-export const php = (code) => execFileSync('php', ['-r', 'require "wp-load.php"; ' + code], { cwd: WP_ROOT, stdio: ['ignore', 'pipe', 'pipe'] }).toString();
+export const php = (code) => {
+  try {
+    return execFileSync('php', ['-r', 'require "wp-load.php"; ' + code], { cwd: WP_ROOT, stdio: ['ignore', 'pipe', 'pipe'] }).toString();
+  } catch (e) {
+    throw new Error('php failed: ' + (e.stdout || '').toString().trim().slice(0, 400) + ' ' + (e.stderr || '').toString().trim().slice(0, 400));
+  }
+};
 
 const results = [];
 export const ok = (name, pass, info = '') => { results.push(!!pass); console.log((pass ? 'PASS ' : 'FAIL ') + name + (info ? '  -> ' + info : '')); };

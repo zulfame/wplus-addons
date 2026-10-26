@@ -1,11 +1,6 @@
 # WPlus Addons
 
-Small, optional tools for [WPlus UI](https://github.com/zulfame/wplus-ui) and any other WordPress theme. Each tool can be switched off in **Settings > WPlus Addons**, and WordPress works the same without the plugin.
-
-| Tool | Status |
-| --- | --- |
-| Thumbnail generator | ready |
-| Light security hardening | planned |
+Small, optional tools for [WPlus UI](https://github.com/zulfame/wplus-ui) and any other WordPress theme. Each tool can be switched off in **Settings > WPlus Addons**, and WordPress works the same without the plugin. Today there is one tool: the thumbnail generator.
 
 Requires WordPress 6.3 and PHP 7.4. Licence: GPL-2.0-or-later (the bundled fonts are under the SIL Open Font License, see below).
 
@@ -44,6 +39,10 @@ A preset is a named set of design choices (layout, alignment, color, mode, font,
 
 Saving goes through the REST API of WordPress itself (`/wp/v2/media`, `/wp/v2/posts`, `/wp/v2/settings`), so WordPress checks who may do what and what the file is. The plugin adds no endpoint of its own.
 
+## Updates
+
+New versions appear under Plugins and Dashboard > Updates like any other plugin, with an Update button, a details window and optional automatic updates. They come from the releases of this repository: the plugin header has `Update URI: https://github.com/zulfame/wplus-addons`, so WordPress does not ask wordpress.org about it, and the zip is checked against the checksum GitHub published for it before it is installed. Settings > WPlus Addons shows your version and a Check now button. To turn it off: `define( 'WPLUS_ADDONS_DISABLE_UPDATES', true );` in `wp-config.php`. The request to GitHub carries only the address of your site and the plugin version.
+
 ## Privacy
 
 - No request to any other site. The fonts are part of the plugin.
@@ -68,7 +67,7 @@ node tests/run-all.mjs      # every test, one after the other
 - PHP follows the WordPress coding standards (`phpcs --standard=WordPress-Extra,WordPress-Docs`); CI runs it, builds the zip and checks the syntax on every push.
 - The tests drive a real WordPress with Chrome. See `tests/README.md`.
 - Strings: `bin/make-pot.sh` rebuilds `languages/wplus-addons.pot`, updates every `.po` and compiles the `.mo` files (needs gettext). Translate the new entries in `languages/wplus-addons-id_ID.po`, then run it again.
-- Releases: update the version in `wplus-addons.php`, `readme.txt` and `CHANGELOG.md`, then push a `v*` tag; the Release workflow builds the zip and publishes it with the changelog section as its text.
+- Releases: follow the checklist in `CONTRIBUTING.md` (it includes `tests/release-gate.sh`, which installs the zip into a new WordPress and runs everything).
 
 ## Layout of the code
 

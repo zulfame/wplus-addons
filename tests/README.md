@@ -27,5 +27,10 @@ or one file, for example `node tests/thumbnail-bulk.mjs`. Every test prints `PAS
 | `thumbnail-bulk.mjs` | the Bulk tab: list, make, skip, stop, permissions, narrow screen |
 | `lifecycle.mjs` | tools on and off, unavailable tool, deactivate and activate, uninstall |
 | `i18n.mjs` | Indonesian and English |
+| `updater.mjs` | the answers WordPress gets from the update check: newer, same, older, bad releases, cache, GitHub down, checksum, version details |
+| `updater-screens.mjs` | the update screens a person uses (Update now, Plugins screen, Check now, version details, wrong checksum); clean site only, last |
+| `upload-over-installed.mjs` | uploading a new zip over the installed plugin (needs `NEW_ZIP`); clean site only |
 
 The tests create their own posts, users and pictures and remove them at the end, and put the administrator's language back.
+
+**The release gate:** `tests/release-gate.sh dist/wplus-addons-<version>.zip` builds a throw-away WordPress (`tests/clean-site.sh`: new files, new database `wpa_clean`), installs that zip, runs everything and requires an empty PHP debug log. Run the tests that replace the plugin folder (`updater-screens`, `upload-over-installed`) only there.

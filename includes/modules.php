@@ -39,10 +39,6 @@ function wplus_addons_module_texts() {
 			'title'       => __( 'Thumbnail generator', 'wplus-addons' ),
 			'description' => __( 'Make a cover picture for a post from its title and description, and use it as the featured image.', 'wplus-addons' ),
 		),
-		'shield'    => array(
-			'title'       => __( 'Light security hardening', 'wplus-addons' ),
-			'description' => __( 'Safe switches that close common gaps, a login attempt limit and a plain-language security check.', 'wplus-addons' ),
-		),
 	);
 }
 
