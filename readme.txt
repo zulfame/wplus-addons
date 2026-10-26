@@ -27,7 +27,7 @@ Make a cover picture for a post from its title, excerpt, tags and your site, and
 
 = Light security hardening =
 
-Six safe switches under Settings > WPlus Security (switch the tool on in Settings > WPlus Addons first): hide the WordPress version, turn off the file editor, send safety headers, give one message for a failed login, hide the list of users from visitors, and turn off XML-RPC (off to start with, because some apps need it). It is not a firewall and not a malware scanner.
+Six safe switches under Settings > WPlus Security (switch the tool on in Settings > WPlus Addons first): hide the WordPress version, turn off the file editor, send safety headers, give one message for a failed login, hide the list of users from visitors, and turn off XML-RPC (off to start with, because some apps need it). It also limits failed logins: after 5 failed logins from one address (changeable), that address is locked for 15 minutes, with a list of locked addresses, an Unlock button, an allow list and a setting for sites behind Cloudflare or another proxy. It is not a firewall and not a malware scanner.
 
 == Installation ==
 
@@ -48,6 +48,10 @@ Like any plugin: a new version appears under Plugins and Dashboard > Updates, wi
 = Is it a security plugin? =
 
 Only a light one: the switches close common gaps and every switch is explained on its page. It does not scan for malware and is not a firewall, so keep a plugin made for that too. Nothing changes until you switch the tool on.
+
+= I locked myself out of my site. What now? =
+
+Wait for the lock time (15 minutes to start with), or add `define( 'WPLUS_ADDONS_DISABLE_LOGIN_LIMIT', true );` to wp-config.php. Another administrator can also press Unlock under Settings > WPlus Security. If your site is behind Cloudflare or another proxy, choose it on that page so that visitors are told apart.
 
 = Who can use it? =
 

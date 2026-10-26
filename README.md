@@ -54,6 +54,16 @@ Six safe switches under **Settings > WPlus Security** (the tool is off until you
 
 A switch that is off changes nothing. Logged-in users keep the user list in the REST API (the block editor needs it).
 
+### Login attempts
+
+After 5 failed logins within 15 minutes from one address, that address can not log in for 15 minutes, even with the right password (the message is the same for a user name that does not exist). All numbers can be changed on the page.
+
+- Counted per **address**, never per user name, so nobody can lock another person out by typing their name. A good login starts the count again; an empty form is not a failed login.
+- **Behind a proxy or CDN** every visitor can look like one address, and then one person could lock everybody out. Choose **Cloudflare** (`CF-Connecting-IP`) or **Another proxy** (first address of `X-Forwarded-For`) on the page only if you really use one: with *The address of the connection* chosen, headers sent by a visitor are ignored, so they can not be used to escape the lock. The page shows the address the plugin sees for you, so you can check it.
+- **Never lock these addresses:** a list of addresses (your office) that are never counted.
+- **Locked addresses** are listed on the page with an **Unlock** button (and **Unlock all**), for administrators.
+- If you lock yourself out: wait, or add `define( 'WPLUS_ADDONS_DISABLE_LOGIN_LIMIT', true );` to `wp-config.php`.
+
 ## Updates
 
 New versions appear under Plugins and Dashboard > Updates like any other plugin, with an Update button, a details window and optional automatic updates. They come from the releases of this repository: the plugin header has `Update URI: https://github.com/zulfame/wplus-addons`, so WordPress does not ask wordpress.org about it, and the zip is checked against the checksum GitHub published for it before it is installed. Settings > WPlus Addons shows your version and a Check now button. To turn it off: `define( 'WPLUS_ADDONS_DISABLE_UPDATES', true );` in `wp-config.php`. The request to GitHub carries only the address of your site and the plugin version.

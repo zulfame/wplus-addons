@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const tests = ['updater', 'thumbnail-render', 'thumbnail-media', 'thumbnail-presets', 'thumbnail-editor', 'thumbnail-bulk', 'shield-hardening', 'lifecycle', 'i18n', 'updater-screens'];
+const tests = ['updater', 'thumbnail-render', 'thumbnail-media', 'thumbnail-presets', 'thumbnail-editor', 'thumbnail-bulk', 'shield-hardening', 'shield-login', 'lifecycle', 'i18n', 'updater-screens'];
 let failed = 0;
 for (const t of tests) {
   const r = spawnSync('node', [path.join(here, t + '.mjs')], { encoding: 'utf8', timeout: 600000 });

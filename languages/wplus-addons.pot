@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPlus Addons 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
-"POT-Creation-Date: 2026-10-26 17:03+0700\n"
+"POT-Creation-Date: 2026-10-26 17:21+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Zulfadli Rizal\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: includes/modules.php:39 modules/thumbnail/bulk.php:161
 #: modules/thumbnail/module.php:19 modules/thumbnail/module.php:335
@@ -61,7 +62,7 @@ msgid ""
 "installed."
 msgstr ""
 
-#: includes/updater.php:299
+#: includes/updater.php:299 modules/shield/login-limit.php:240
 msgid "You are not allowed to do this."
 msgstr ""
 
@@ -182,22 +183,143 @@ msgstr ""
 msgid "<strong>Error:</strong> The user name or the password is not right."
 msgstr ""
 
-#: modules/shield/settings.php:32 modules/shield/settings.php:43
+#. translators: %d: minutes to wait
+#: modules/shield/login-limit.php:178
+#, php-format
+msgid "<strong>Error:</strong> Too many failed logins. Try again in %d minute."
+msgid_plural ""
+"<strong>Error:</strong> Too many failed logins. Try again in %d minutes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: modules/shield/settings.php:41 modules/shield/settings.php:95
 msgid "WPlus Security"
 msgstr ""
 
-#: modules/shield/settings.php:44
+#: modules/shield/settings.php:70
+msgid "Locked addresses"
+msgstr ""
+
+#: modules/shield/settings.php:72
+msgid "Unlocked."
+msgstr ""
+
+#: modules/shield/settings.php:75
+msgid "No address is locked now."
+msgstr ""
+
+#: modules/shield/settings.php:78
+msgid "Address"
+msgstr ""
+
+#: modules/shield/settings.php:78
+msgid "Failed logins"
+msgstr ""
+
+#: modules/shield/settings.php:78 modules/shield/settings.php:119
+msgid "Locked for"
+msgstr ""
+
+#. translators: %s: how long, for example "12 minutes"
+#: modules/shield/settings.php:82
+#, php-format
+msgid "%s more"
+msgstr ""
+
+#: modules/shield/settings.php:82
+msgid "Unlock"
+msgstr ""
+
+#: modules/shield/settings.php:85
+msgid "Unlock all"
+msgstr ""
+
+#: modules/shield/settings.php:96
 msgid ""
 "Safe switches that close common gaps. This is not a firewall and not a "
 "malware scanner: keep a plugin made for that too."
 msgstr ""
 
-#: modules/shield/settings.php:51
+#: modules/shield/settings.php:103 modules/shield/settings.php:116
 msgid "On"
 msgstr ""
 
-#: modules/shield/settings.php:54
+#: modules/shield/settings.php:106
 msgid "Good to know:"
+msgstr ""
+
+#: modules/shield/settings.php:113
+msgid "Login attempts"
+msgstr ""
+
+#: modules/shield/settings.php:114
+msgid ""
+"After too many failed logins from one address, that address can not log in "
+"for a while, even with the right password. A good login starts the count "
+"again."
+msgstr ""
+
+#: modules/shield/settings.php:116
+msgid "Limit failed logins"
+msgstr ""
+
+#: modules/shield/settings.php:117
+msgid "Failed logins allowed"
+msgstr ""
+
+#: modules/shield/settings.php:117
+msgid "times"
+msgstr ""
+
+#: modules/shield/settings.php:118
+msgid "Counted within"
+msgstr ""
+
+#: modules/shield/settings.php:118 modules/shield/settings.php:119
+msgid "minutes"
+msgstr ""
+
+#: modules/shield/settings.php:120
+msgid "Address of the visitor"
+msgstr ""
+
+#: modules/shield/settings.php:122
+msgid "The address of the connection (no proxy or CDN)"
+msgstr ""
+
+#: modules/shield/settings.php:123
+msgid "Cloudflare (header CF-Connecting-IP)"
+msgstr ""
+
+#: modules/shield/settings.php:124
+msgid "Another proxy (first address of X-Forwarded-For)"
+msgstr ""
+
+#: modules/shield/settings.php:129
+msgid ""
+"Behind a proxy or CDN every visitor can look like one address, and then one "
+"person could lock everybody out. Choose the header your proxy sets only if "
+"you really use one: a header from a visitor can be faked."
+msgstr ""
+
+#. translators: %s: an IP address
+#: modules/shield/settings.php:131
+#, php-format
+msgid "The plugin sees you as %s. Is that your own address?"
+msgstr ""
+
+#: modules/shield/settings.php:132
+msgid "Never lock these addresses"
+msgstr ""
+
+#: modules/shield/settings.php:132
+msgid "One address per line, for example your office."
+msgstr ""
+
+#: modules/shield/settings.php:134
+msgid ""
+"If you lock yourself out: wait for the time above, or add "
+"define( 'WPLUS_ADDONS_DISABLE_LOGIN_LIMIT', true ); to wp-config.php."
 msgstr ""
 
 #: modules/thumbnail/bulk.php:38

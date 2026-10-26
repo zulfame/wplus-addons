@@ -36,6 +36,29 @@ create)
 	THEME="$(ls -d "$SOURCE_WP"/wp-content/themes/twenty* 2>/dev/null | tail -1 || true)"
 	[[ -n "$THEME" ]] && cp -R "$THEME" "$DIR/wp-content/themes/"
 	ln -s "$SOURCE_WP/node_modules" "$DIR/node_modules"
+	# the tests never depend on the internet: what WordPress asks wordpress.org is answered here, the rest is refused
+	mkdir -p "$DIR/wp-content/mu-plugins"
+	cat > "$DIR/wp-content/mu-plugins/wpa-offline.php" <<'PHP'
+<?php // test site only: no request leaves this machine for wordpress.org, gravatar or the like
+add_filter( 'pre_http_request', function ( $pre, $args, $url ) {
+	if ( ! preg_match( '#^https?://([a-z0-9-]+\.)*(wordpress\.org|w\.org|gravatar\.com|wp\.com)/#i', $url ) ) {
+		return $pre;
+	}
+	$body = array();
+	if ( false !== strpos( $url, '/core/version-check/' ) ) {
+		$body = array( 'offers' => array(), 'translations' => array() );
+	} elseif ( false !== strpos( $url, '/plugins/update-check/' ) ) {
+		$body = array( 'plugins' => new stdClass(), 'translations' => array(), 'no_update' => new stdClass() );
+	} elseif ( false !== strpos( $url, '/themes/update-check/' ) ) {
+		$body = array( 'themes' => new stdClass(), 'translations' => array(), 'no_update' => new stdClass() );
+	} elseif ( false !== strpos( $url, '/translations/' ) ) {
+		$body = array( 'translations' => array() );
+	} else {
+		return new WP_Error( 'wpa_offline', 'blocked on purpose in the test site' );
+	}
+	return array( 'headers' => array(), 'body' => wp_json_encode( $body ), 'response' => array( 'code' => 200, 'message' => 'OK' ), 'cookies' => array(), 'filename' => null );
+}, 5, 3 );
+PHP
 	mysql -u root -e "DROP DATABASE IF EXISTS \`$DB\`; CREATE DATABASE \`$DB\` CHARACTER SET utf8mb4;"
 	cat > "$DIR/wp-config.php" <<PHP
 <?php
@@ -54,6 +77,8 @@ define( 'WP_DEBUG', true );
 define( 'WP_DEBUG_LOG', true );
 define( 'WP_DEBUG_DISPLAY', false );
 define( 'FS_METHOD', 'direct' );
+define( 'DISABLE_WP_CRON', true );
+define( 'WP_AUTO_UPDATE_CORE', false );
 if ( ! defined( 'ABSPATH' ) ) { define( 'ABSPATH', __DIR__ . '/' ); }
 require_once ABSPATH . 'wp-settings.php';
 PHP

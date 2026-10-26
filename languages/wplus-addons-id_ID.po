@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPlus Addons 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
-"POT-Creation-Date: 2026-10-26 17:01+0700\n"
+"POT-Creation-Date: 2026-10-26 17:21+0700\n"
 "PO-Revision-Date: 2026-10-26 17:30+0700\n"
 "Last-Translator: Zulfadli Rizal\n"
 "Language-Team: Indonesian\n"
@@ -67,7 +67,7 @@ msgstr ""
 "Berkas plugin yang diunduh tidak cocok dengan checksum-nya, jadi tidak "
 "dipasang."
 
-#: includes/updater.php:299
+#: includes/updater.php:299 modules/shield/login-limit.php:240
 msgid "You are not allowed to do this."
 msgstr "Anda tidak diizinkan melakukan ini."
 
@@ -206,11 +206,58 @@ msgstr ""
 msgid "<strong>Error:</strong> The user name or the password is not right."
 msgstr "<strong>Galat:</strong> Nama pengguna atau kata sandi tidak tepat."
 
-#: modules/shield/settings.php:32 modules/shield/settings.php:43
+#. translators: %d: minutes to wait
+#: modules/shield/login-limit.php:178
+#, php-format
+msgid "<strong>Error:</strong> Too many failed logins. Try again in %d minute."
+msgid_plural ""
+"<strong>Error:</strong> Too many failed logins. Try again in %d minutes."
+msgstr[0] ""
+"<strong>Galat:</strong> Terlalu banyak login gagal. Coba lagi dalam %d menit."
+
+#: modules/shield/settings.php:41 modules/shield/settings.php:95
 msgid "WPlus Security"
 msgstr "WPlus Security"
 
-#: modules/shield/settings.php:44
+#: modules/shield/settings.php:70
+msgid "Locked addresses"
+msgstr "Alamat yang terkunci"
+
+#: modules/shield/settings.php:72
+msgid "Unlocked."
+msgstr "Kunci dibuka."
+
+#: modules/shield/settings.php:75
+msgid "No address is locked now."
+msgstr "Tidak ada alamat yang terkunci sekarang."
+
+#: modules/shield/settings.php:78
+msgid "Address"
+msgstr "Alamat"
+
+#: modules/shield/settings.php:78
+msgid "Failed logins"
+msgstr "Login gagal"
+
+#: modules/shield/settings.php:78 modules/shield/settings.php:119
+msgid "Locked for"
+msgstr "Dikunci selama"
+
+#. translators: %s: how long, for example "12 minutes"
+#: modules/shield/settings.php:82
+#, php-format
+msgid "%s more"
+msgstr "%s lagi"
+
+#: modules/shield/settings.php:82
+msgid "Unlock"
+msgstr "Buka kunci"
+
+#: modules/shield/settings.php:85
+msgid "Unlock all"
+msgstr "Buka semua kunci"
+
+#: modules/shield/settings.php:96
 msgid ""
 "Safe switches that close common gaps. This is not a firewall and not a "
 "malware scanner: keep a plugin made for that too."
@@ -218,13 +265,96 @@ msgstr ""
 "Saklar aman untuk menutup celah umum. Ini bukan firewall dan bukan pemindai "
 "malware: tetap pakai plugin yang dibuat untuk itu."
 
-#: modules/shield/settings.php:51
+#: modules/shield/settings.php:103 modules/shield/settings.php:116
 msgid "On"
 msgstr "Nyala"
 
-#: modules/shield/settings.php:54
+#: modules/shield/settings.php:106
 msgid "Good to know:"
 msgstr "Perlu diketahui:"
+
+#: modules/shield/settings.php:113
+msgid "Login attempts"
+msgstr "Percobaan login"
+
+#: modules/shield/settings.php:114
+msgid ""
+"After too many failed logins from one address, that address can not log in "
+"for a while, even with the right password. A good login starts the count "
+"again."
+msgstr ""
+"Setelah terlalu banyak login gagal dari satu alamat, alamat itu tidak bisa "
+"login untuk sementara waktu, bahkan dengan kata sandi yang benar. Login yang "
+"berhasil memulai hitungan dari awal."
+
+#: modules/shield/settings.php:116
+msgid "Limit failed logins"
+msgstr "Batasi login yang gagal"
+
+#: modules/shield/settings.php:117
+msgid "Failed logins allowed"
+msgstr "Login gagal yang diizinkan"
+
+#: modules/shield/settings.php:117
+msgid "times"
+msgstr "kali"
+
+#: modules/shield/settings.php:118
+msgid "Counted within"
+msgstr "Dihitung dalam"
+
+#: modules/shield/settings.php:118 modules/shield/settings.php:119
+msgid "minutes"
+msgstr "menit"
+
+#: modules/shield/settings.php:120
+msgid "Address of the visitor"
+msgstr "Alamat pengunjung"
+
+#: modules/shield/settings.php:122
+msgid "The address of the connection (no proxy or CDN)"
+msgstr "Alamat koneksi (tanpa proxy atau CDN)"
+
+#: modules/shield/settings.php:123
+msgid "Cloudflare (header CF-Connecting-IP)"
+msgstr "Cloudflare (header CF-Connecting-IP)"
+
+#: modules/shield/settings.php:124
+msgid "Another proxy (first address of X-Forwarded-For)"
+msgstr "Proxy lain (alamat pertama X-Forwarded-For)"
+
+#: modules/shield/settings.php:129
+msgid ""
+"Behind a proxy or CDN every visitor can look like one address, and then one "
+"person could lock everybody out. Choose the header your proxy sets only if "
+"you really use one: a header from a visitor can be faked."
+msgstr ""
+"Di balik proxy atau CDN, semua pengunjung bisa tampak berasal dari satu "
+"alamat, lalu satu orang bisa mengunci semua orang. Pilih header yang diatur "
+"proxy Anda hanya jika Anda benar-benar memakainya: header dari pengunjung "
+"bisa dipalsukan."
+
+#. translators: %s: an IP address
+#: modules/shield/settings.php:131
+#, php-format
+msgid "The plugin sees you as %s. Is that your own address?"
+msgstr "Plugin melihat Anda sebagai %s. Apakah itu alamat Anda sendiri?"
+
+#: modules/shield/settings.php:132
+msgid "Never lock these addresses"
+msgstr "Jangan pernah kunci alamat ini"
+
+#: modules/shield/settings.php:132
+msgid "One address per line, for example your office."
+msgstr "Satu alamat per baris, misalnya kantor Anda."
+
+#: modules/shield/settings.php:134
+msgid ""
+"If you lock yourself out: wait for the time above, or add "
+"define( 'WPLUS_ADDONS_DISABLE_LOGIN_LIMIT', true ); to wp-config.php."
+msgstr ""
+"Jika Anda terkunci sendiri: tunggu sesuai waktu di atas, atau tambahkan "
+"define( 'WPLUS_ADDONS_DISABLE_LOGIN_LIMIT', true ); ke wp-config.php."
 
 #: modules/thumbnail/bulk.php:38
 msgid "Generator"

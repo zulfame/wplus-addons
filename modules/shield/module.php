@@ -11,4 +11,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once __DIR__ . '/hardening.php';
+require_once __DIR__ . '/login-limit.php';
 require_once __DIR__ . '/settings.php';

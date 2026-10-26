@@ -56,7 +56,10 @@ export const launch = async () => {
   const errors = [];
   /** Open a page as a user (id) at a path; accepts confirm dialogs; collects uncaught page errors. */
   const open = async (uid, url, { width = 1280, height = 1000, wait = 1200 } = {}) => {
-    const page = await browser.newPage();
+    // every page gets its own cookie jar: the cookies of two users have the same names and would overwrite each other
+    const context = await (browser.createBrowserContext ? browser.createBrowserContext() : browser.createIncognitoBrowserContext());
+    const page = await context.newPage();
+    page.once('close', () => { context.close().catch(() => {}); });
     await page.setViewport({ width, height });
     page.on('pageerror', (e) => errors.push(e.message));
     page.on('dialog', (d) => d.accept());

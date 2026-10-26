@@ -15,7 +15,7 @@ try {
   await p.reload({ waitUntil: 'load' }); await sleep(1200);
   ok('WebP is the default file type', (await p.evaluate(() => document.getElementById('wpa-format').value)) === 'webp');
   ok('the tabs are there', (await p.evaluate(() => [...document.querySelectorAll('.wpa-tabs a')].map((a) => a.textContent).join())) === 'Generator,Bulk');
-  const cdp = await p.createCDPSession(); await cdp.send('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: dl });
+  const cdp = await p.createCDPSession(); await cdp.send('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: dl, browserContextId: p.browserContext().id });
   await setField(p, 'title', 'Uji Ekspor Media'); await setField(p, 'description', 'Deskripsi uji untuk gambar.'); await sleep(500);
   await p.click('#wpa-export'); await sleep(1500);
   await p.select('#wpa-format', 'png'); await p.click('#wpa-export'); await sleep(1500);

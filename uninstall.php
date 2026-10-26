@@ -12,3 +12,5 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 delete_option( 'wplus_addons_modules' );
 delete_option( 'wplus_addons_thumbnail_presets' );
 delete_option( 'wplus_addons_shield' );
+delete_option( 'wplus_addons_login' );
+delete_option( 'wplus_addons_login_state' );
