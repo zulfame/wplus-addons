@@ -1,0 +1,25 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build zip
+        run: bin/build-zip.sh
+      - name: Release notes from the changelog
+        run: |
+          bin/release-notes.sh "${GITHUB_REF_NAME}" > dist/release-notes.md
+          test -s dist/release-notes.md || { echo "No CHANGELOG.md section for ${GITHUB_REF_NAME}" >&2; exit 1; }
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          body_path: dist/release-notes.md
