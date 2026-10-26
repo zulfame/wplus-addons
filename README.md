@@ -1,6 +1,6 @@
 # WPlus Addons
 
-Small, optional tools for [WPlus UI](https://github.com/zulfame/wplus-ui) and any other WordPress theme. Each tool can be switched off in **Settings > WPlus Addons**, and WordPress works the same without the plugin. Today there is one tool: the thumbnail generator.
+Small, optional tools for [WPlus UI](https://github.com/zulfame/wplus-ui) and any other WordPress theme. Each tool can be switched off in **Settings > WPlus Addons**, and WordPress works the same without the plugin. Two tools: the thumbnail generator and light security hardening.
 
 Requires WordPress 6.3 and PHP 7.4. Licence: GPL-2.0-or-later (the bundled fonts are under the SIL Open Font License, see below).
 
@@ -38,6 +38,21 @@ A preset is a named set of design choices (layout, alignment, color, mode, font,
 | Save, update or delete presets | permission to manage options (administrators) |
 
 Saving goes through the REST API of WordPress itself (`/wp/v2/media`, `/wp/v2/posts`, `/wp/v2/settings`), so WordPress checks who may do what and what the file is. The plugin adds no endpoint of its own.
+
+## Light security hardening
+
+Six safe switches under **Settings > WPlus Security** (the tool is off until you switch it on in Settings > WPlus Addons). It is not a firewall and not a malware scanner; keep a plugin made for that too.
+
+| Switch | What it does | Starts |
+| --- | --- | --- |
+| Hide the WordPress version | removes the generator tag from pages and feeds | on |
+| Turn off the file editor | no theme or plugin code editor in the dashboard, for anyone | on |
+| Send safety headers | `X-Content-Type-Options`, `X-Frame-Options` (same site only), `Referrer-Policy` | on |
+| One message for a failed login | the login page no longer says whether the user name exists | on |
+| Hide the list of users from visitors | `?author=1`, the REST API users routes and the sitemap show no user names to people who are not logged in | on |
+| Turn off XML-RPC | every XML-RPC request is refused; the mobile app, Jetpack and some publishing tools need it | off |
+
+A switch that is off changes nothing. Logged-in users keep the user list in the REST API (the block editor needs it).
 
 ## Updates
 

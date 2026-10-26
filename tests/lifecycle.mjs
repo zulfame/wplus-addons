@@ -7,7 +7,7 @@ const { browser, open, errors } = await launch();
 let postId = 0;
 try {
   postId = parseInt(php('echo wp_insert_post(["post_title"=>"Lifecycle test","post_status"=>"draft"]);'), 10);
-  const state = async (url) => { const p = await open(1, url, { wait: 600 }); const t = await p.evaluate(() => document.body.innerText.slice(0, 6000)); const menu = await p.evaluate(() => !![...document.querySelectorAll('#adminmenu a')].find((a) => /page=wplus-thumbnail/.test(a.getAttribute('href') || ''))); await p.close(); return { text: t, menu }; };
+  const state = async (url) => { const p = await open(1, url, { wait: 600 }); const t = await p.evaluate(() => document.body.innerText.slice(0, 6000)); const menu = await p.evaluate(() => !![...document.querySelectorAll('#adminmenu a')].find((a) => /page=wplus-thumbnail/.test(a.getAttribute('href') || ''))); await p.close(); return { text: t, menu, menu0: menu }; };
   php('delete_option("wplus_addons_modules");');
   let s = await state(TOOLS);
   ok('on a fresh install the thumbnail tool is on (Tools menu and page)', s.menu && /Thumbnail generator/.test(s.text), s.text.slice(0, 60).replace(/\n/g, " "));
@@ -24,7 +24,12 @@ try {
   ok('switched on again: the editor panel is back', (await e2.evaluate(() => typeof window.wplusThumbEditor)) === 'object');
   await e2.close();
   const clean = JSON.parse(php('echo json_encode(wplus_addons_sanitize_modules(["thumbnail"=>"1","shield"=>"1","evil"=>"1"]));'));
-  ok('an unavailable tool can not be switched on, unknown tools are dropped', clean.thumbnail === true && clean.shield === false && !('evil' in clean), JSON.stringify(clean));
+  ok('unknown tools are dropped, the known ones follow the ticks', clean.thumbnail === true && clean.shield === true && !('evil' in clean), JSON.stringify(clean));
+  php('update_option("wplus_addons_modules", ["thumbnail"=>true,"shield"=>false]);');
+  const none = await state('/wp-admin/options-general.php?page=wplus-security');
+  ok('the Security tool starts switched off, and its page is closed until it is switched on', !none.menu0 && /not allowed|tak diizinkan/i.test(none.text));
+  const defaults = php('delete_option("wplus_addons_modules"); echo json_encode([wplus_addons_module_enabled("thumbnail"), wplus_addons_module_enabled("shield")]);');
+  ok('on a fresh install the thumbnail tool is on and the security tool is off', defaults === '[true,false]', defaults);
   const cycle = php('require_once ABSPATH."wp-admin/includes/plugin.php"; deactivate_plugins("wplus-addons/wplus-addons.php"); $off=is_plugin_active("wplus-addons/wplus-addons.php"); $r=activate_plugin("wplus-addons/wplus-addons.php"); echo json_encode([$off,is_wp_error($r),is_plugin_active("wplus-addons/wplus-addons.php")]);');
   ok('deactivating and activating gives no error', cycle === '[false,false,true]', cycle);
   const gone = php('update_option("wplus_addons_modules",["thumbnail"=>true]); update_option("wplus_addons_thumbnail_presets",["default"=>"a","items"=>[["id"=>"a","name"=>"A","settings"=>[]]]]); define("WP_UNINSTALL_PLUGIN","wplus-addons/wplus-addons.php"); include WP_PLUGIN_DIR."/wplus-addons/uninstall.php"; echo json_encode([get_option("wplus_addons_modules",null),get_option("wplus_addons_thumbnail_presets",null)]);');

@@ -22,7 +22,7 @@ function wplus_addons_modules() {
 			'default'   => true,
 		),
 		'shield'    => array(
-			'available' => false,
+			'available' => true,
 			'default'   => false,
 		),
 	);
@@ -38,6 +38,10 @@ function wplus_addons_module_texts() {
 		'thumbnail' => array(
 			'title'       => __( 'Thumbnail generator', 'wplus-addons' ),
 			'description' => __( 'Make a cover picture for a post from its title and description, and use it as the featured image.', 'wplus-addons' ),
+		),
+		'shield'    => array(
+			'title'       => __( 'Light security hardening', 'wplus-addons' ),
+			'description' => __( 'Safe switches that close common gaps (see Settings > WPlus Security once it is on).', 'wplus-addons' ),
 		),
 	);
 }

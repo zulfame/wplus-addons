@@ -16,7 +16,12 @@ PORT="${CLEAN_PORT:-8099}"
 DB="wpa_clean"
 MARK="$DIR/.wpa-clean-site"
 
-stop_server() { [[ -f "$DIR/server.pid" ]] && kill "$(cat "$DIR/server.pid")" 2>/dev/null || true; }
+# php -S with workers leaves child processes behind when only its main process is stopped, so stop everything that serves our port
+stop_server() {
+	[[ -f "$DIR/server.pid" ]] && kill "$(cat "$DIR/server.pid")" 2>/dev/null || true
+	pkill -f "php -S 127.0.0.1:$PORT" 2>/dev/null || true
+	sleep 1
+}
 
 case "${1:-}" in
 create)
@@ -55,9 +60,22 @@ PHP
 	(cd "$DIR" && php -r 'define("WP_INSTALLING", true); require "wp-load.php"; require ABSPATH . "wp-admin/includes/upgrade.php"; wp_install("WPA clean site", "admin", "admin@example.invalid", true, "", "x-Test-9aQ!zz");' >/dev/null)
 	unzip -q -o "$ZIP" -d "$DIR/wp-content/plugins/"
 	(cd "$DIR" && php -r 'require "wp-load.php"; require_once ABSPATH . "wp-admin/includes/plugin.php"; $r = activate_plugin("wplus-addons/wplus-addons.php"); if (is_wp_error($r)) { fwrite(STDERR, $r->get_error_message() . "\n"); exit(1); }')
+	# a router so that pretty permalinks (and files like /wp-sitemap.xml) work like on a real server: a file or folder that exists is served
+	# as it is, everything else goes to WordPress
+	cat > "$DIR/router.php" <<'PHP'
+<?php
+$path = rawurldecode( (string) parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) );
+$file = __DIR__ . $path;
+if ( '/' !== $path && ( is_file( $file ) || ( is_dir( $file ) && is_file( rtrim( $file, '/' ) . '/index.php' ) ) ) ) {
+	return false;
+}
+$_SERVER['SCRIPT_NAME']     = '/index.php';
+$_SERVER['SCRIPT_FILENAME'] = __DIR__ . '/index.php';
+require __DIR__ . '/index.php';
+PHP
 	# the server must not keep the output of this script open, or whoever runs the script would wait for it for ever
 	cd "$DIR"
-	PHP_CLI_SERVER_WORKERS=4 nohup php -S "127.0.0.1:$PORT" -t . > "$DIR/server.log" 2>&1 < /dev/null &
+	PHP_CLI_SERVER_WORKERS=4 nohup php -S "127.0.0.1:$PORT" -t . "$DIR/router.php" > "$DIR/server.log" 2>&1 < /dev/null &
 	echo $! > "$DIR/server.pid"
 	sleep 2
 	echo "clean site ready: $DIR (http://127.0.0.1:$PORT)"

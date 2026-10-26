@@ -1,6 +1,6 @@
 === WPlus Addons ===
 Contributors: zulfame
-Tags: thumbnail, featured image, webp, cover image, bulk
+Tags: thumbnail, featured image, webp, cover image, hardening
 Requires at least: 6.3
 Tested up to: 7.0
 Requires PHP: 7.4
@@ -8,7 +8,7 @@ Stable tag: 0.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-Small, optional tools for WPlus UI and any WordPress site. Each tool can be switched off.
+Small, optional tools for WPlus UI and any WordPress site: a thumbnail generator and light security hardening. Each tool can be switched off.
 
 == Description ==
 
@@ -25,6 +25,10 @@ Make a cover picture for a post from its title, excerpt, tags and your site, and
 * A Bulk tab makes the featured image of many posts that have none, with a progress bar and a Stop button. A post that already has a featured image is never changed.
 * Presets: named design choices shared by the whole site, one of them as the starting point.
 
+= Light security hardening =
+
+Six safe switches under Settings > WPlus Security (switch the tool on in Settings > WPlus Addons first): hide the WordPress version, turn off the file editor, send safety headers, give one message for a failed login, hide the list of users from visitors, and turn off XML-RPC (off to start with, because some apps need it). It is not a firewall and not a malware scanner.
+
 == Installation ==
 
 1. Upload the zip in Plugins > Add New > Upload Plugin, or unpack it in `wp-content/plugins/`.
@@ -40,6 +44,10 @@ No. The picture is drawn in your browser and saved to your own Media Library. Th
 = How do I update? =
 
 Like any plugin: a new version appears under Plugins and Dashboard > Updates, with an Update button and optional automatic updates. Settings > WPlus Addons shows your version and has a Check now button.
+
+= Is it a security plugin? =
+
+Only a light one: the switches close common gaps and every switch is explained on its page. It does not scan for malware and is not a firewall, so keep a plugin made for that too. Nothing changes until you switch the tool on.
 
 = Who can use it? =
 

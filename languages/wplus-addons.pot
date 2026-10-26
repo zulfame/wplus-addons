@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPlus Addons 0.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/zulfame/wplus-addons/issues\n"
-"POT-Creation-Date: 2026-10-26 16:41+0700\n"
+"POT-Creation-Date: 2026-10-26 17:03+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Zulfadli Rizal\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,16 @@ msgstr ""
 msgid ""
 "Make a cover picture for a post from its title and description, and use it "
 "as the featured image."
+msgstr ""
+
+#: includes/modules.php:43
+msgid "Light security hardening"
+msgstr ""
+
+#: includes/modules.php:44
+msgid ""
+"Safe switches that close common gaps (see Settings > WPlus Security once it "
+"is on)."
 msgstr ""
 
 #: includes/settings.php:47 includes/settings.php:58
@@ -95,6 +105,99 @@ msgstr ""
 #: includes/updater.php:344
 #, php-format
 msgid "Last checked %s ago."
+msgstr ""
+
+#: modules/shield/hardening.php:37
+msgid "Hide the WordPress version"
+msgstr ""
+
+#: modules/shield/hardening.php:38
+msgid ""
+"Removes the generator tag from the pages and the feeds, so bots that look "
+"for sites with an old version learn less about yours."
+msgstr ""
+
+#: modules/shield/hardening.php:42
+msgid "Turn off the file editor"
+msgstr ""
+
+#: modules/shield/hardening.php:43
+msgid ""
+"Removes the theme and plugin code editors from the dashboard. Someone who "
+"gets into an account can not change your code from there."
+msgstr ""
+
+#: modules/shield/hardening.php:47
+msgid "Send safety headers"
+msgstr ""
+
+#: modules/shield/hardening.php:48
+msgid ""
+"Asks browsers not to guess file types, not to show your pages inside frames "
+"of other sites, and to share less of the address when a visitor leaves."
+msgstr ""
+
+#: modules/shield/hardening.php:49
+msgid "Other sites can no longer show your pages in a frame."
+msgstr ""
+
+#: modules/shield/hardening.php:52
+msgid "Give one message for a failed login"
+msgstr ""
+
+#: modules/shield/hardening.php:53
+msgid ""
+"The login page no longer says whether the user name exists or the password "
+"was wrong, so nobody can find out which user names are real."
+msgstr ""
+
+#: modules/shield/hardening.php:57
+msgid "Hide the list of users from visitors"
+msgstr ""
+
+#: modules/shield/hardening.php:58
+msgid ""
+"Visitors who are not logged in can not list user names through ?author=1, "
+"the REST API or the sitemap. Author pages with the name in the address keep "
+"working."
+msgstr ""
+
+#: modules/shield/hardening.php:62
+msgid "Turn off XML-RPC"
+msgstr ""
+
+#: modules/shield/hardening.php:63
+msgid ""
+"XML-RPC is an old way for apps to talk to WordPress, often used by bots to "
+"guess passwords in bulk. Turning it off closes that door."
+msgstr ""
+
+#: modules/shield/hardening.php:64
+msgid ""
+"The WordPress mobile app, Jetpack and some publishing tools need it. Leave "
+"it off if you use one of them."
+msgstr ""
+
+#: modules/shield/hardening.php:209
+msgid "<strong>Error:</strong> The user name or the password is not right."
+msgstr ""
+
+#: modules/shield/settings.php:32 modules/shield/settings.php:43
+msgid "WPlus Security"
+msgstr ""
+
+#: modules/shield/settings.php:44
+msgid ""
+"Safe switches that close common gaps. This is not a firewall and not a "
+"malware scanner: keep a plugin made for that too."
+msgstr ""
+
+#: modules/shield/settings.php:51
+msgid "On"
+msgstr ""
+
+#: modules/shield/settings.php:54
+msgid "Good to know:"
 msgstr ""
 
 #: modules/thumbnail/bulk.php:38

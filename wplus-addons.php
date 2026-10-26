@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       WPlus Addons
  * Plugin URI:        https://github.com/zulfame/wplus-addons
- * Description:       Small, optional tools for WPlus UI and any WordPress site: a thumbnail generator that makes cover pictures. Each tool can be switched off.
+ * Description:       Small, optional tools for WPlus UI and any WordPress site: a thumbnail generator that makes cover pictures and light security hardening. Each tool can be switched off.
  * Version:           0.1.0
  * Requires at least: 6.3
  * Requires PHP:      7.4
