@@ -217,15 +217,18 @@
 		return { width: width, height: o.logo ? box : 28 * u, empty: ! logoW && ! name };
 	}
 
+	/* Every colour comes from the chosen theme color and mode: even the "neutral" text colours lean a little towards the theme color. */
 	function palette( o ) {
 		var accent = hexToRgb( o.accent );
 		var dark = 'dark' === o.mode;
+		var ink = dark ? mix( accent, [ 246, 248, 253 ], 0.93 ) : mix( accent, [ 10, 14, 34 ], 0.9 );
+		var muted = dark ? mix( accent, [ 172, 180, 202 ], 0.85 ) : mix( accent, [ 72, 82, 104 ], 0.86 );
 		return {
 			accent: accent,
-			bg: dark ? [ 15, 18, 28 ] : [ 255, 255, 255 ],
-			ink: dark ? '#f4f6fb' : '#10142a',
-			muted: dark ? '#a8b0c6' : '#4b5563',
-			line: dark ? 'rgba(255,255,255,0.12)' : 'rgba(16,20,42,0.12)',
+			bg: dark ? mix( accent, [ 14, 17, 28 ], 0.93 ) : [ 255, 255, 255 ],
+			ink: rgb( ink ),
+			muted: rgb( muted ),
+			line: rgba( ink, 0.12 ),
 		};
 	}
 
